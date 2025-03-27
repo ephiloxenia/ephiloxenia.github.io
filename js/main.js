@@ -52,10 +52,12 @@ function preventScrollForInternalTabs() {
 }
 
 function addSidebarToggle() {
-    // Only add sidebar toggle to hotel management pages, not guest app
+    // Only add sidebar toggle to hotel management pages, not guest app or login pages
     const currentPath = window.location.pathname;
-    if (currentPath.includes('guest-app.html')) {
-        return; // Don't add sidebar toggle to guest app
+    if (currentPath.includes('guest-app.html') || 
+        currentPath.includes('guest-login.html') || 
+        currentPath.includes('hotel-login.html')) {
+        return; // Don't add sidebar toggle to guest app or login pages
     }
     
     // Create sidebar toggle button

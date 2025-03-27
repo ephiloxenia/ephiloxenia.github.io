@@ -335,6 +335,10 @@ body {
     .brand-logo {
         display: none;
     }
+
+    .hero-title {
+        font-size: 3.2rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -356,6 +360,20 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
     }
 }
 
@@ -1283,4 +1301,14 @@ body {
 .section-nav .btn.active {
     background-color: var(--primary);
     color: white;
+}
+
+.hero-title {
+    font-weight: 800;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #ffffff, #a0d8ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
 } 
