@@ -438,34 +438,7 @@ body {
     transition: width 1s ease;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--light);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
-}
-
-/* Disable custom scrollbar for specific pages */
-.index-page ::-webkit-scrollbar {
-    width: auto;
-}
-.index-page ::-webkit-scrollbar-track,
-.index-page ::-webkit-scrollbar-thumb,
-.index-page ::-webkit-scrollbar-thumb:hover {
-    background: initial;
-    border-radius: 0;
-}
+/* Custom Scrollbar - Removed to use default browser scrollbar */
 
 .text-primary {
     color: var(--primary) !important;
@@ -873,15 +846,9 @@ body {
 }
 
 .suggestion-chips {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     overflow-x: auto;
     padding-bottom: 3px;
     padding-top: 3px;
-}
-
-.suggestion-chips::-webkit-scrollbar {
-    display: none;
 }
 
 .suggestion-chips .suggestion-btn {
