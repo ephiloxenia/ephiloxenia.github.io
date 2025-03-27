@@ -300,11 +300,26 @@ function initializeGuestApp() {
     initializeHotelMap();
     initializeVirtualTour();
     initializeServiceTracker();
+    initializeNotificationControls();
     
     // Initially hide the global chat bar
     const globalChatBar = document.querySelector('.global-chat-bar');
     if (globalChatBar) {
         globalChatBar.style.display = 'none';
+    }
+}
+
+function initializeNotificationControls() {
+    // Initialize the notifications switch
+    const notificationsSwitch = document.getElementById('notificationsSwitch');
+    if (notificationsSwitch) {
+        // Set the initial state to match the checkbox
+        enableHomeButtonNotifications = notificationsSwitch.checked;
+        
+        // Add event listener to update the flag when changed
+        notificationsSwitch.addEventListener('change', function() {
+            enableHomeButtonNotifications = this.checked;
+        });
     }
 }
 
@@ -405,7 +420,8 @@ function initializeRoomControls() {
                     roomLights.checked = true;
                 }
                 
-                // Show a notification
+                // Set notification source and show a notification
+                window.currentNotificationSource = 'homeButton';
                 showNotification('Room scene changed to ' + this.dataset.scene);
             });
         });
@@ -462,6 +478,9 @@ function initializeRoomControls() {
                         const repeatDaily = document.getElementById('repeatDaily').checked;
                         const controlName = document.getElementById('controlName').textContent;
                         const message = `${controlName} scheduled for ${scheduleTime}${repeatDaily ? ' (repeats daily)' : ''}`;
+                        
+                        // Set notification source and show the notification
+                        window.currentNotificationSource = 'homeButton';
                         showNotification(message, 'success');
                         
                         // Close modal after delay
@@ -498,6 +517,7 @@ function initializeRoomControls() {
                         break;
                 }
                 
+                window.currentNotificationSource = 'homeButton';
                 showNotification(`${name} turned ${status}`);
             });
         }
@@ -510,6 +530,7 @@ function initializeRoomControls() {
             // The actual modal is already handled by Bootstrap
             // This is just for additional functionality
             setTimeout(() => {
+                window.currentNotificationSource = 'homeButton';
                 showNotification('Room key ready for use');
             }, 1000);
         });
@@ -532,6 +553,7 @@ function initializeRoomControls() {
                     this.innerHTML = originalHTML;
                 }, 1500);
                 
+                window.currentNotificationSource = 'homeButton';
                 showNotification('Copied to clipboard');
             });
         }
@@ -546,6 +568,7 @@ function initializeRoomControls() {
             
             setTimeout(() => {
                 this.innerHTML = '<i class="bi bi-check-circle"></i> Connected';
+                window.currentNotificationSource = 'homeButton';
                 showNotification('Connected to hotel WiFi');
             }, 2000);
         });
@@ -842,7 +865,7 @@ function initializeServiceRequests() {
     }
     
     // Handle quick action buttons
-    const quickActionButtons = document.querySelectorAll('.quick-action-btn');
+    const quickActionButtons = document.querySelectorAll('.quick-action-btn[data-service]');
     if (quickActionButtons.length > 0) {
         quickActionButtons.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -1105,14 +1128,22 @@ function initializeServiceRequests() {
     }
 }
 
+// Global flag to control notifications from home tab buttons
+let enableHomeButtonNotifications = false;
+
 function setupNotifications() {
     // Simulate initial notification after a delay
     setTimeout(() => {
-        showNotification('Welcome to Sunset Resort! Your room is ready.', 'primary');
+        showNotification('Welcome to Sunset Resort! Your room is ready.', 'primary', true); // Force this notification
     }, 3000);
 }
 
-function showNotification(message, type = 'primary') {
+function showNotification(message, type = 'primary', force = false) {
+    // Skip notification if it's from home tab buttons and notifications are disabled
+    if (!force && !enableHomeButtonNotifications && window.currentNotificationSource === 'homeButton') {
+        return;
+    }
+    
     const toastContainer = document.querySelector('.toast-container');
     if (!toastContainer) return;
     
@@ -1151,6 +1182,9 @@ function showNotification(message, type = 'primary') {
     toast.addEventListener('hidden.bs.toast', function() {
         toast.remove();
     });
+    
+    // Reset the notification source after showing
+    window.currentNotificationSource = null;
 }
 
 function setupHelpLinks() {
