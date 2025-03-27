@@ -386,6 +386,75 @@ function loadRecommendations() {
         `;
         recommendationsContainer.appendChild(card);
     });
+    
+    // Add event listeners to the newly added Book Now buttons
+    const bookNowButtons = recommendationsContainer.querySelectorAll('.book-now-btn');
+    const bookingModal = document.getElementById('bookingModal');
+    
+    if (bookNowButtons.length > 0 && bookingModal) {
+        bookNowButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Prevent any event propagation issues
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Get experience details from the card
+                const card = this.closest('.card');
+                const title = card.querySelector('.card-title').textContent;
+                
+                // Use default date and time since recommendations don't have date/time selectors
+                let date = 'June 18, 2023'; // Default
+                let time = '18:30'; // Default
+                
+                // Update booking modal with experience details
+                const bookingTitle = bookingModal.querySelector('.booking-title');
+                const bookingDate = bookingModal.querySelector('.booking-date');
+                const bookingTime = bookingModal.querySelector('.booking-time');
+                
+                if (bookingTitle) bookingTitle.textContent = title;
+                if (bookingDate) bookingDate.textContent = date;
+                if (bookingTime) bookingTime.textContent = time;
+                
+                // First check if there's an existing modal instance and dispose it
+                const existingModal = bootstrap.Modal.getInstance(bookingModal);
+                if (existingModal) {
+                    existingModal.dispose();
+                }
+                
+                // Create and show a new modal instance with a slight delay
+                setTimeout(() => {
+                    const bsModal = new bootstrap.Modal(bookingModal);
+                    console.log('Opening booking modal...', bookingModal);
+                    bsModal.show();
+                }, 50);
+            });
+        });
+    }
+    
+    // Add event listeners to favorite buttons
+    const favoriteButtons = recommendationsContainer.querySelectorAll('.favorite-btn');
+    if (favoriteButtons.length > 0) {
+        favoriteButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isFavorite = this.classList.contains('btn-danger');
+                
+                if (isFavorite) {
+                    this.classList.remove('btn-danger');
+                    this.classList.add('btn-outline-secondary');
+                    this.innerHTML = '<i class="bi bi-heart"></i>';
+                    showNotification('Removed from favorites');
+                } else {
+                    this.classList.remove('btn-outline-secondary');
+                    this.classList.add('btn-danger');
+                    this.innerHTML = '<i class="bi bi-heart-fill"></i>';
+                    showNotification('Added to favorites');
+                }
+            });
+        });
+    }
 }
 
 function initializeRoomControls() {
@@ -677,7 +746,11 @@ function initializeExperienceBooking() {
     
     if (bookNowButtons.length > 0 && bookingModal) {
         bookNowButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                // Prevent any event propagation issues
+                e.preventDefault();
+                e.stopPropagation();
+                
                 // Get experience details from the card
                 const card = this.closest('.card');
                 const title = card.querySelector('.card-title').textContent;
@@ -707,9 +780,18 @@ function initializeExperienceBooking() {
                 if (bookingDate) bookingDate.textContent = date;
                 if (bookingTime) bookingTime.textContent = time;
                 
-                // Show the modal
-                const bsModal = new bootstrap.Modal(bookingModal);
-                bsModal.show();
+                // First check if there's an existing modal instance and dispose it
+                const existingModal = bootstrap.Modal.getInstance(bookingModal);
+                if (existingModal) {
+                    existingModal.dispose();
+                }
+                
+                // Create and show a new modal instance with a slight delay
+                setTimeout(() => {
+                    const bsModal = new bootstrap.Modal(bookingModal);
+                    console.log('Opening booking modal...', bookingModal);
+                    bsModal.show();
+                }, 50);
             });
         });
     }
@@ -719,7 +801,14 @@ function initializeExperienceBooking() {
     if (confirmBookingBtn) {
         confirmBookingBtn.addEventListener('click', function() {
             const bsModal = bootstrap.Modal.getInstance(bookingModal);
-            bsModal.hide();
+            if (bsModal) {
+                bsModal.hide();
+                
+                // Clean up modal after it's hidden
+                bookingModal.addEventListener('hidden.bs.modal', function () {
+                    bsModal.dispose();
+                }, { once: true });
+            }
             
             // Show confirmation notification
             showNotification('Booking confirmed! Check your email for details.', 'success');
