@@ -119,7 +119,9 @@ e-philoxenia/
 │   └── recommendations.js
 ├── img/
 │   └── [various images]
-├── index.html (login page)
+├── index.html (landing page)
+├── hotel-login.html
+├── guest-login.html
 ├── guest-app.html
 ├── hotel-dashboard.html
 ├── dynamic-pricing.html
