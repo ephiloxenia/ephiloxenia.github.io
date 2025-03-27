@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Philoxenia | Smart Hospitality Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #0c3b80 0%, #001e52 100%);
+            color: white;
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url('img/hero-pattern.png');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-weight: 800;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #ffffff, #a0d8ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            opacity: 0.9;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #0056b3;
+            background: rgba(0, 86, 179, 0.1);
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-card {
+            transition: all 0.4s ease;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(135deg, #0c3b80 0%, #0056b3 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            font-size: 2.5rem;
+        }
+        
+        .section-subtitle {
+            color: #0056b3;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #0056b3, #0c3b80);
+            border-radius: 2px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 30px 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 120px;
+            color: rgba(0, 86, 179, 0.1);
+            font-family: Georgia, serif;
+            line-height: 0.8;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 4px solid rgba(0, 86, 179, 0.1);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #0c3b80 0%, #001e52 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            right: -150px;
+            bottom: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            left: -150px;
+            top: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .footer {
+            background-color: #0a1f3c;
+            color: #adb5bd;
+            padding: 80px 0 20px;
+            position: relative;
+        }
+        
+        .footer-link {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+            display: inline-block;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 20px;
+        }
+        
+        .footer-link:hover::before {
+            opacity: 1;
+        }
+        
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-icon:hover {
+            background-color: #0056b3;
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .module-preview {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.5s ease;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .module-preview:hover {
+            transform: scale(1.03) perspective(1500px) rotateY(-5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .demo-btn {
+            border-radius: 50px;
+            padding: 15px 40px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .demo-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .demo-btn:hover::before {
+            width: 100%;
+        }
+        
+        .navbar-landing {
+            background-color: transparent !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 25px 0;
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-scrolled {
+            background-color: white !important;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-scrolled .nav-link, 
+        .navbar-scrolled .navbar-brand {
+            color: #333 !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-scrolled .nav-link::after {
+            background: #0056b3;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .form-control {
+            border-radius: 12px;
+            padding: 12px 20px;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0056b3;
+        }
+        
+        .form-select {
+            border-radius: 12px;
+            padding: 12px 20px;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+        }
+        
+        .form-select:focus {
+            box-shadow: none;
+            border-color: #0056b3;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .benefit-card {
+            border: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #0c3b80, #0056b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-container {
+            position: relative;
+            padding: 80px 0;
+            background: rgba(0, 86, 179, 0.03);
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .navbar-toggler {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 0.5rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        
+        /* Mobile menu styling */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: rgba(0, 30, 82, 0.95);
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .navbar-scrolled .navbar-collapse {
+                background-color: white;
+            }
+            
+            .nav-link {
+                padding: 15px 20px;
+                border-radius: 8px;
+                margin: 8px 0;
+                text-align: center;
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+            
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .navbar-scrolled .nav-link:hover {
+                background-color: rgba(0, 86, 179, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-landing">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" height="40" class="me-2">
+                e-Philoxenia
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title animated fadeInUp">The New Era of Smart Hospitality</h1>
+                    <p class="hero-subtitle animated fadeInUp delay-1">e-Philoxenia combines AI-driven dynamic pricing, personalized guest experiences, and sustainable practices to revolutionize hotel management.</p>
+                    <div class="d-flex flex-wrap gap-3 animated fadeInUp delay-2">
+                        <a href="hotel-login.html" class="btn btn-light btn-lg demo-btn">
+                            <i class="bi bi-building me-2"></i>Hotel Demo
+                        </a>
+                        <a href="guest-login.html" class="btn btn-outline-light btn-lg demo-btn">
+                            <i class="bi bi-person me-2"></i>Guest Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block animated fadeInUp delay-3">
+                    <div class="position-relative">
+                        <img src="img/dashboard-preview.png" alt="e-Philoxenia Dashboard" class="img-fluid module-preview">
+                        <div class="position-absolute" style="bottom: -20px; right: -40px; width: 180px; transform: rotate(10deg); z-index: 10;">
+                            <div class="phone-mockup position-relative">
+                                <!-- Modern SVG Mobile Phone Frame -->
+                                <svg viewBox="0 0 300 600" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.3));">
+                                    <!-- Phone Body -->
+                                    <rect x="12" y="12" width="276" height="496" rx="36" fill="#333" />
+                                    <rect x="16" y="16" width="268" height="488" rx="32" fill="#111" />
+                                    <!-- Modern Full-Screen Display (no home button) -->
+                                    <rect x="20" y="20" width="260" height="480" rx="28" fill="#222" />
+                                    <!-- Notch -->
+                                    <path d="M140,20 L160,20 C175,20 180,25 180,35 L180,40 L120,40 L120,35 C120,25 125,20 140,20 Z" fill="#111" />
+                                    <!-- Front Camera in Notch -->
+                                    <circle cx="155" cy="30" r="4" fill="#444" />
+                                </svg>
+                                
+                                <!-- Guest App Screenshot placed inside the phone - now taking up full screen -->
+                                <div class="position-absolute" style="top: -30px; left: 15px; right: 17px; bottom: 20px; overflow: hidden; border-radius: 15px;">
+                                    <img src="img/guest-demo.png" alt="Guest App" class="w-100 h-100" style="object-fit: contain;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined Key Features & Modules Section -->
+    <section class="py-5" id="features">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <p class="section-subtitle animated fadeInUp">Platform Features</p>
+                <h2 class="section-title animated fadeInUp">Transform Your Hospitality Business</h2>
+                <p class="text-muted animated fadeInUp delay-1 mx-auto" style="max-width: 700px;">Discover how e-Philoxenia's powerful suite of tools can elevate your guest experience, optimize operations, and boost your bottom line.</p>
+            </div>
+            
+            <div class="row g-5">
+                <!-- Dynamic Pricing Module -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                            <h4 class="mb-3">AI-Driven Dynamic Pricing</h4>
+                            <p>Maximize revenue with smart algorithms that adjust room prices based on demand, competition, and market trends.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Automated price adjustments</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Competitor rate monitoring</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Demand forecasting</li>
+                            </ul>
+                            <a href="dynamic-pricing.html" class="btn btn-outline-primary mt-3">View Demo</a>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 p-0">
+                            <img src="img/pricing-preview.png" alt="Dynamic Pricing" class="img-fluid rounded-bottom">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Guest Insights Module -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h4 class="mb-3">Guest Insights & Analytics</h4>
+                            <p>Understand your guests better with deep analytics and personalized recommendations to enhance their experience.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Personalized guest profiles</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Preference tracking</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Sentiment analysis</li>
+                            </ul>
+                            <a href="guest-insights.html" class="btn btn-outline-primary mt-3">View Demo</a>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 p-0">
+                            <img src="img/guest-insights.png" alt="Guest Insights" class="img-fluid rounded-bottom">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Operations Management Module -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-gear"></i>
+                            </div>
+                            <h4 class="mb-3">Smart Operations</h4>
+                            <p>Streamline housekeeping, maintenance, and staff management with AI-optimized task scheduling and automation.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Smart task management</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Inventory tracking</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Staff scheduling optimization</li>
+                            </ul>
+                            <a href="operations.html" class="btn btn-outline-primary mt-3">View Demo</a>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 p-0">
+                            <img src="img/operations-preview.png" alt="Operations Management" class="img-fluid rounded-bottom">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sustainability Module -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-tree-fill"></i>
+                            </div>
+                            <h4 class="mb-3">Sustainability Tracking</h4>
+                            <p>Monitor and improve your eco-friendly initiatives with comprehensive sustainability metrics and certifications.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Resource consumption monitoring</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Carbon footprint tracking</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Eco-certification progress</li>
+                            </ul>
+                            <a href="sustainability.html" class="btn btn-outline-primary mt-3">View Demo</a>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 p-0">
+                            <img src="img/sustainability-preview.png" alt="Sustainability" class="img-fluid rounded-bottom">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile App -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <h4 class="mb-3">Mobile Guest App</h4>
+                            <p>Provide a seamless digital experience with mobile check-in/out, room keys, and personalized concierge services.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Mobile check-in/check-out</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Digital room key</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>In-app service requests</li>
+                            </ul>
+                            <a href="guest-app.html" class="btn btn-outline-primary mt-3">View Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PMS Integration -->
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-plug"></i>
+                            </div>
+                            <h4 class="mb-3">PMS Integration</h4>
+                            <p>Easily integrate with your existing Property Management System as a powerful plug-and-play extension.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Seamless data synchronization</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Major PMS compatibility</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>API-driven architecture</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-5" id="benefits">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <p class="section-subtitle animated fadeInUp">Business Benefits</p>
+                <h2 class="section-title animated fadeInUp">Maximize Your Potential</h2>
+                <p class="text-muted animated fadeInUp delay-1 mx-auto" style="max-width: 700px;">Transform your hotel operations and boost your bottom line</p>
+            </div>
+            
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card h-100 benefit-card">
+                        <div class="card-body text-center p-4">
+                            <div class="benefit-icon mb-4">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h4>Increased Revenue</h4>
+                            <p class="text-muted">Our dynamic pricing algorithms analyze market conditions in real-time to maximize your revenue potential across all room types and seasons.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 benefit-card">
+                        <div class="card-body text-center p-4">
+                            <div class="benefit-icon mb-4">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <h4>Reduced Costs</h4>
+                            <p class="text-muted">Optimize resource allocation, automate routine tasks, and eliminate operational inefficiencies to significantly lower your operating expenses.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 benefit-card">
+                        <div class="card-body text-center p-4">
+                            <div class="benefit-icon mb-4">
+                                <i class="bi bi-emoji-smile"></i>
+                            </div>
+                            <h4>Guest Satisfaction</h4>
+                            <p class="text-muted">Deliver personalized experiences that delight guests, increase positive reviews, and build lasting loyalty to your property.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5 g-4">
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Reduced Empty Nights</h5>
+                            <p class="text-muted">Optimize occupancy rates with real-time market-responsive pricing.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Staff Efficiency</h5>
+                            <p class="text-muted">AI-powered task management optimizes staff allocation and productivity.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Eco-Friendly Reputation</h5>
+                            <p class="text-muted">Attract environmentally conscious travelers with sustainable practices.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Competitive Advantage</h5>
+                            <p class="text-muted">Stay ahead with cutting-edge hospitality technology and insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">Ready to Transform Your Hospitality Business?</h2>
+                    <p class="mb-5">Join the new era of smart hospitality with e-Philoxenia's AI-driven platform. Schedule a demo today.</p>
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <form>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control form-control-lg" placeholder="Your Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="email" class="form-control form-control-lg" placeholder="Email Address" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control form-control-lg" placeholder="Hotel/Company Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <select class="form-select form-select-lg">
+                                                <option selected>Interested in...</option>
+                                                <option>Complete Platform</option>
+                                                <option>Dynamic Pricing Module</option>
+                                                <option>Operations Management</option>
+                                                <option>Sustainability Module</option>
+                                                <option>Guest Mobile App</option>
+                                            </select>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary btn-lg demo-btn">Request Demo</button>
+                                        </div>
+                                    </form>
+                                    <div class="d-flex justify-content-center gap-3 mt-4">
+                                        <a href="hotel-login.html" class="btn btn-outline-primary">
+                                            <i class="bi bi-building me-2"></i>Hotel Demo
+                                        </a>
+                                        <a href="guest-login.html" class="btn btn-outline-secondary">
+                                            <i class="bi bi-person me-2"></i>Guest Demo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" height="40" class="me-2">
+                        <h4 class="text-white mb-0">e-Philoxenia</h4>
+                    </div>
+                    <p>Transforming hospitality with AI-driven solutions that enhance guest experiences, optimize operations, and promote sustainability.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon footer-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon footer-link"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon footer-link"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon footer-link"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4">
+                    <h5 class="text-white mb-4">Platform</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="hotel-dashboard.html" class="footer-link">Dashboard</a></li>
+                        <li class="mb-2"><a href="dynamic-pricing.html" class="footer-link">Dynamic Pricing</a></li>
+                        <li class="mb-2"><a href="guest-insights.html" class="footer-link">Guest Insights</a></li>
+                        <li class="mb-2"><a href="operations.html" class="footer-link">Operations</a></li>
+                        <li class="mb-2"><a href="sustainability.html" class="footer-link">Sustainability</a></li>
+                        <li class="mb-2"><a href="guest-app.html" class="footer-link">Guest App</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 col-lg-2 mb-4">
+                    <h5 class="text-white mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="footer-link">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Our Team</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Partners</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 col-lg-4 mb-4">
+                    <h5 class="text-white mb-4">Contact Us</h5>
+                    <div class="mb-3">
+                        <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> 123 Hospitality Avenue, Athens, Greece</p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-0"><i class="bi bi-envelope me-2"></i> info@e-philoxenia.com</p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-0"><i class="bi bi-telephone me-2"></i> +30 210 1234567</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#contact" class="btn btn-outline-light">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2025 e-Philoxenia. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="footer-link me-3">Privacy Policy</a>
+                    <a href="#" class="footer-link me-3">Terms of Service</a>
+                    <a href="#" class="footer-link">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll behavior
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-landing');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        
+        // Animation for elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fadeInUp', 'animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.section-title, .section-subtitle, .feature-card, .benefit-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Stats counter animation
+        const counterAnimation = () => {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000; // ms
+                const step = target / (duration / 16); // 60fps
+                
+                let current = 0;
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.round(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        };
+        
+        // Initialize counter when stats section comes into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                counterAnimation();
+                statsObserver.unobserve(entries[0].target);
+            }
+        });
+        
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) {
+            statsObserver.observe(statsContainer);
+        }
+        
+        // Update Demo account credentials handling to redirect to login page
+        document.querySelector('.btn-demo')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.setItem('demo-access', 'true');
+            window.location.href = 'hotel-login.html';
+        });
+    </script>
+</body>
+</html>

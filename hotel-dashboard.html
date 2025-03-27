@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Dashboard | e-Philoxenia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Ensure sustainability icon is visible */
+        .nav-link[href="sustainability.html"] i.bi-tree-fill {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        .search-container {
+            max-width: 360px;
+            width: 100%;
+        }
+        
+        /* Header layout styling */
+        @media (min-width: 992px) {
+            .search-container {
+                min-width: 300px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .search-container {
+                min-width: 360px;
+            }
+        }
+        
+        .search-results {
+            width: 100%;
+            max-height: 350px;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 0.375rem;
+            z-index: 1050;
+            top: 100%;
+            left: 0;
+            margin-top: 0.25rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .search-result-item.selected {
+            background-color: #e8f5f3;
+            color: var(--primary);
+        }
+        .search-result-item .result-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .search-result-item .result-category {
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .search-result-item .category-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.25rem;
+        }
+        .clear-search {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9E9E9E;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+            font-size: 1rem;
+        }
+        .clear-search.visible {
+            opacity: 0.8;
+        }
+        .clear-search.visible:hover {
+            opacity: 1;
+            color: #666;
+        }
+        .input-with-clear-btn {
+            position: relative;
+        }
+        .dashboard-search-input {
+            border: none !important;
+            padding: 10px 40px 10px 5px;
+            height: 44px;
+            background-color: white;
+        }
+        .dashboard-search-input:focus {
+            box-shadow: none !important;
+        }
+        .dashboard-search-icon {
+            color: #9E9E9E;
+            font-size: 0.9rem;
+        }
+        .dashboard-search-prefix {
+            border: none !important;
+            background-color: white !important;
+            padding-left: 18px;
+            padding-right: 5px;
+        }
+        .input-group:focus-within .dashboard-search-icon {
+            color: var(--primary);
+        }
+        .input-group {
+            border-radius: 9999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            background-color: white;
+            padding: 0;
+            overflow: hidden;
+        }
+        .input-group:focus-within {
+            box-shadow: 0 4px 12px rgba(58, 143, 133, 0.15);
+        }
+        .highlight-card {
+            animation: highlight-pulse 2s ease-in-out;
+            box-shadow: 0 0 15px rgba(58, 143, 133, 0.5) !important;
+        }
+        @keyframes highlight-pulse {
+            0% { box-shadow: 0 0 5px rgba(58, 143, 133, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(58, 143, 133, 0.7); }
+            100% { box-shadow: 0 0 15px rgba(58, 143, 133, 0.5); }
+        }
+        
+        /* New search box styling */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 9999px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            height: 44px;
+            width: 100%;
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 4px 12px rgba(58, 143, 133, 0.15);
+        }
+        
+        .search-icon {
+            color: #9E9E9E;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        
+        .search-box:focus-within .search-icon {
+            color: var(--primary);
+        }
+        
+        .search-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 0;
+            background-color: transparent;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .clear-icon {
+            color: #9E9E9E;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .clear-icon.visible {
+            opacity: 0.8;
+        }
+        
+        .clear-icon.visible:hover {
+            opacity: 1;
+            color: #666;
+        }
+        
+        /* Navigation buttons styling - using global section-nav styles */
+        
+        /* Card highlight animation */
+        .card.highlight {
+            animation: highlightCard 2s ease-out;
+        }
+        
+        @keyframes highlightCard {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 86, 179, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0);
+            }
+        }
+        
+        /* Add IDs to sections */
+        .section-id {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center">
+                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="sidebar-logo me-2">
+                <h4 class="brand-logo mb-0">e-Philoxenia</h4>
+            </div>
+        </div>
+        <div class="pt-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="hotel-dashboard.html">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dynamic-pricing.html">
+                        <i class="bi bi-currency-euro"></i>
+                        <span>Dynamic Pricing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="guest-insights.html">
+                        <i class="bi bi-people"></i>
+                        <span>Guest Insights</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="operations.html">
+                        <i class="bi bi-gear"></i>
+                        <span>Operations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sustainability.html">
+                        <i class="bi bi-tree-fill"></i>
+                        <span>Sustainability</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-5">
+                    <a class="nav-link" href="settings.html">
+                        <i class="bi bi-sliders"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-0">Dashboard</h2>
+                <p class="text-muted">Overview of your hotel's performance</p>
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <div class="search-container me-3">
+                    <div class="position-relative">
+                        <div class="search-box">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" class="search-input" id="dashboardSearch" placeholder="search for rooms, metrics, reports" autocomplete="off">
+                            <i class="bi bi-x clear-icon" id="clearSearch"></i>
+                        </div>
+                        <div id="searchResults" class="search-results shadow-sm position-absolute d-none"></div>
+                    </div>
+                </div>
+                
+                <div class="dropdown flex-shrink-0">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="timeRangeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Last 30 Days
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+                        <li><a class="dropdown-item" href="#">Today</a></li>
+                        <li><a class="dropdown-item" href="#">Last 7 Days</a></li>
+                        <li><a class="dropdown-item active" href="#">Last 30 Days</a></li>
+                        <li><a class="dropdown-item" href="#">Last 90 Days</a></li>
+                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                        <li><a class="dropdown-item" href="#">Custom Range</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Navigation -->
+        <div class="section-nav">
+            <div class="d-flex flex-wrap justify-content-center">
+                <button class="btn btn-outline-primary" data-section="key-metrics">Key Metrics</button>
+                <button class="btn btn-outline-primary" data-section="charts">Charts</button>
+                <button class="btn btn-outline-primary" data-section="forecast">Forecast</button>
+                <button class="btn btn-outline-primary" data-section="recent-activity">Recent Activity</button>
+                <button class="btn btn-outline-primary" data-section="room-status">Room Status</button>
+                <button class="btn btn-outline-primary" data-section="tasks">Tasks</button>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="row mb-4 section-id" id="key-metrics">
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Occupancy Rate</div>
+                        <div class="stat-value" id="occupancy-rate">78%</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 5%</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Average Daily Rate</div>
+                        <div class="stat-value" id="avg-daily-rate">€142</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> €8</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Revenue Per Available Room</div>
+                        <div class="stat-value" id="revenue-per-room">€110</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> €12</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Guest Satisfaction</div>
+                        <div class="stat-value" id="guest-satisfaction">4.7</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 0.2</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mb-4 section-id" id="charts">
+            <div class="col-lg-8 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Occupancy Trends</h5>
+                        <div class="chart-container">
+                            <canvas id="occupancy-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking Sources</h5>
+                        <div class="chart-container">
+                            <canvas id="booking-source-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Revenue Breakdown</h5>
+                        <div class="chart-container">
+                            <canvas id="revenue-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Guest Satisfaction Metrics</h5>
+                        <div class="chart-container">
+                            <canvas id="guest-satisfaction-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast Section -->
+        <div class="card dashboard-card mb-4 section-id" id="forecast">
+            <div class="card-body">
+                <h5 class="card-title">30-Day Forecast</h5>
+                <p class="text-muted">AI-driven predictions for the next 30 days</p>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="forecast-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card dashboard-card mb-4 section-id" id="recent-activity">
+            <div class="card-body">
+                <h5 class="card-title">Recent Activity</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Time</th>
+                                <th scope="col">Event</th>
+                                <th scope="col">Details</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Today, 10:23 AM</td>
+                                <td>New Booking</td>
+                                <td>Reservation #12345 - John Doe, 3 nights, Deluxe Room</td>
+                                <td><span class="badge bg-success">Confirmed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Today, 09:45 AM</td>
+                                <td>Price Optimization</td>
+                                <td>AI adjusted price for Standard Rooms (+€15) for next weekend</td>
+                                <td><span class="badge bg-info">Applied</span></td>
+                            </tr>
+                            <tr>
+                                <td>Today, 08:30 AM</td>
+                                <td>Check-out</td>
+                                <td>Guest Maria Johnson, Room 302, 4-night stay</td>
+                                <td><span class="badge bg-secondary">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday, 11:15 PM</td>
+                                <td>System Alert</td>
+                                <td>Unusual booking pattern detected for next month</td>
+                                <td><span class="badge bg-warning">Attention</span></td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday, 04:20 PM</td>
+                                <td>Review</td>
+                                <td>New 5-star review from David Wilson</td>
+                                <td><span class="badge bg-primary">New</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-outline-primary">View All Activity</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW SECTIONS -->
+        <!-- Room Status Overview -->
+        <div class="card dashboard-card mb-4 section-id" id="room-status">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title mb-0">Room Status Overview</h5>
+                    <button class="btn btn-sm btn-outline-primary">View All Rooms</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="room-status-grid mb-3">
+                            <canvas id="room-status-chart" height="250"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="status-summary">
+                            <div class="status-item d-flex justify-content-between align-items-center mb-3">
+                                <span><i class="bi bi-circle-fill text-success me-2"></i> Occupied</span>
+                                <span class="fw-bold">42</span>
+                            </div>
+                            <div class="status-item d-flex justify-content-between align-items-center mb-3">
+                                <span><i class="bi bi-circle-fill text-danger me-2"></i> Available</span>
+                                <span class="fw-bold">15</span>
+                            </div>
+                            <div class="status-item d-flex justify-content-between align-items-center mb-3">
+                                <span><i class="bi bi-circle-fill text-warning me-2"></i> Maintenance</span>
+                                <span class="fw-bold">3</span>
+                            </div>
+                            <div class="status-item d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-circle-fill text-info me-2"></i> Reserved</span>
+                                <span class="fw-bold">10</span>
+                            </div>
+                            <div class="status-item d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-circle-fill text-secondary me-2"></i> Cleaning</span>
+                                <span class="fw-bold">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-actions mt-3">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-plus-circle me-1"></i> Add Room Block</button>
+                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-tools me-1"></i> Schedule Maintenance</button>
+                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-check-circle me-1"></i> Confirm Availability</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Management & Upcoming Check-ins/Check-outs Row -->
+        <div class="row mb-4 section-id" id="tasks">
+            <!-- Task Management -->
+            <div class="col-md-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Task Management</h5>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal"><i class="bi bi-plus-lg"></i> Add Task</button>
+                        </div>
+                        <ul class="list-group task-list">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="task1">
+                                    <label class="form-check-label" for="task1">Review weekend staffing schedule</label>
+                                </div>
+                                <span class="badge bg-danger rounded-pill">High</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="task2">
+                                    <label class="form-check-label" for="task2">Prepare for VIP arrival - Room 501</label>
+                                </div>
+                                <span class="badge bg-danger rounded-pill">High</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="task3">
+                                    <label class="form-check-label" for="task3">Contact vendor about delayed delivery</label>
+                                </div>
+                                <span class="badge bg-warning rounded-pill">Medium</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="task4">
+                                    <label class="form-check-label" for="task4">Approve weekly kitchen inventory</label>
+                                </div>
+                                <span class="badge bg-info rounded-pill">Low</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="task5">
+                                    <label class="form-check-label" for="task5">Follow up on maintenance request for Room 302</label>
+                                </div>
+                                <span class="badge bg-warning rounded-pill">Medium</span>
+                            </li>
+                        </ul>
+                        <div class="text-center mt-3">
+                            <a href="#" class="btn btn-outline-primary">View All Tasks</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Check-ins/Check-outs -->
+            <div class="col-md-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Today's Arrivals & Departures</h5>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-primary active">Today</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary">Tomorrow</button>
+                            </div>
+                        </div>
+                        
+                        <div class="arrivals-departures">
+                            <h6 class="text-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Check-ins (5)</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Guest</th>
+                                            <th>Room</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Emma Rodriguez</td>
+                                            <td>401</td>
+                                            <td>14:00</td>
+                                            <td><span class="badge bg-info">Expected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thomas Smith</td>
+                                            <td>205</td>
+                                            <td>15:30</td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lisa Johnson</td>
+                                            <td>310</td>
+                                            <td>16:00</td>
+                                            <td><span class="badge bg-warning">Early</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h6 class="text-danger mt-3"><i class="bi bi-box-arrow-right me-2"></i>Check-outs (7)</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Guest</th>
+                                            <th>Room</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>James Wilson</td>
+                                            <td>512</td>
+                                            <td>11:00</td>
+                                            <td><span class="badge bg-secondary">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sarah Chen</td>
+                                            <td>305</td>
+                                            <td>12:00</td>
+                                            <td><span class="badge bg-info">In Progress</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Robert Davis</td>
+                                            <td>210</td>
+                                            <td>12:00</td>
+                                            <td><span class="badge bg-warning">Late</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weather & Staff Schedule Row -->
+        <div class="row mb-4">
+            <!-- Weather Forecast -->
+            <div class="col-md-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Local Weather Forecast</h5>
+                        <div class="weather-section">
+                            <div class="current-weather d-flex align-items-center mb-3">
+                                <div class="weather-icon me-3">
+                                    <i class="bi bi-brightness-high-fill fs-1 text-warning"></i>
+                                </div>
+                                <div class="weather-info">
+                                    <h2 class="mb-0">24°C</h2>
+                                    <p class="text-muted mb-0">Sunny, Athens</p>
+                                </div>
+                                <div class="weather-details ms-auto text-end">
+                                    <div><i class="bi bi-moisture me-1"></i> Humidity: 45%</div>
+                                    <div><i class="bi bi-wind me-1"></i> Wind: 10 km/h</div>
+                                </div>
+                            </div>
+                            <div class="forecast-days">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <div class="forecast-day">
+                                            <div class="day">Tue</div>
+                                            <div><i class="bi bi-sun fs-4 text-warning"></i></div>
+                                            <div class="temp">25°C</div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div class="forecast-day">
+                                            <div class="day">Wed</div>
+                                            <div><i class="bi bi-cloud-sun fs-4 text-primary"></i></div>
+                                            <div class="temp">23°C</div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div class="forecast-day">
+                                            <div class="day">Thu</div>
+                                            <div><i class="bi bi-cloud fs-4 text-secondary"></i></div>
+                                            <div class="temp">21°C</div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div class="forecast-day">
+                                            <div class="day">Fri</div>
+                                            <div><i class="bi bi-cloud-drizzle fs-4 text-primary"></i></div>
+                                            <div class="temp">19°C</div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div class="forecast-day">
+                                            <div class="day">Sat</div>
+                                            <div><i class="bi bi-sun fs-4 text-warning"></i></div>
+                                            <div class="temp">22°C</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-muted mb-0 small">Weather may affect guest activities and outdoor events. <a href="#" class="text-primary">See local attractions</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Staff Schedule -->
+            <div class="col-md-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Staff Schedule</h5>
+                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-calendar3"></i> Full Schedule</button>
+                        </div>
+                        <div class="schedule-content">
+                            <div class="schedule-section mb-3">
+                                <h6 class="text-primary">Front Desk</h6>
+                                <div class="staff-schedule-items">
+                                    <div class="staff-item d-flex align-items-center mb-2">
+                                        <img src="img/avatar-1.jpg" alt="Staff Avatar" class="staff-avatar me-2">
+                                        <div>
+                                            <div class="staff-name">Maria Papadopoulou</div>
+                                            <div class="staff-schedule text-muted small">08:00 - 16:00</div>
+                                        </div>
+                                        <div class="staff-status ms-auto">
+                                            <span class="badge bg-success">On Duty</span>
+                                        </div>
+                                    </div>
+                                    <div class="staff-item d-flex align-items-center mb-2">
+                                        <img src="img/avatar-2.jpg" alt="Staff Avatar" class="staff-avatar me-2">
+                                        <div>
+                                            <div class="staff-name">Nikos Georgiou</div>
+                                            <div class="staff-schedule text-muted small">16:00 - 00:00</div>
+                                        </div>
+                                        <div class="staff-status ms-auto">
+                                            <span class="badge bg-secondary">Off Duty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-section">
+                                <h6 class="text-primary">Housekeeping</h6>
+                                <div class="staff-schedule-items">
+                                    <div class="staff-item d-flex align-items-center mb-2">
+                                        <img src="img/avatar-3.jpg" alt="Staff Avatar" class="staff-avatar me-2">
+                                        <div>
+                                            <div class="staff-name">Sofia Antoniadis</div>
+                                            <div class="staff-schedule text-muted small">07:00 - 15:00</div>
+                                        </div>
+                                        <div class="staff-status ms-auto">
+                                            <span class="badge bg-success">On Duty</span>
+                                        </div>
+                                    </div>
+                                    <div class="staff-item d-flex align-items-center mb-2">
+                                        <img src="img/avatar-4.jpg" alt="Staff Avatar" class="staff-avatar me-2">
+                                        <div>
+                                            <div class="staff-name">Andreas Dimitriou</div>
+                                            <div class="staff-schedule text-muted small">07:00 - 15:00</div>
+                                        </div>
+                                        <div class="staff-status ms-auto">
+                                            <span class="badge bg-warning">On Break</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-primary"><i class="bi bi-person-plus"></i> Manage Staff</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="taskTitle" class="form-label">Task Title</label>
+                            <input type="text" class="form-control" id="taskTitle" placeholder="Enter task title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task details"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="taskPriority" class="form-label">Priority</label>
+                                <select class="form-select" id="taskPriority">
+                                    <option value="high">High</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="taskDueDate" class="form-label">Due Date</label>
+                                <input type="date" class="form-control" id="taskDueDate">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskAssignee" class="form-label">Assign To</label>
+                            <select class="form-select" id="taskAssignee">
+                                <option value="">Select Staff Member</option>
+                                <option value="maria">Maria Papadopoulou</option>
+                                <option value="nikos">Nikos Georgiou</option>
+                                <option value="sofia">Sofia Antoniadis</option>
+                                <option value="andreas">Andreas Dimitriou</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/card-navigation.js"></script>
+    
+    <!-- Dashboard Search Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboardSearch();
+            initializePlaceholderAnimation();
+            
+            // Handle hash-based navigation
+            handleHashNavigation();
+            
+            // Initialize section navigation
+            initializeSectionNavigation();
+        });
+        
+        function initializePlaceholderAnimation() {
+            const searchInput = document.getElementById('dashboardSearch');
+            if (!searchInput) return;
+            
+            // Set a static placeholder instead of animated ones
+            searchInput.placeholder = "search for rooms, metrics, reports";
+        }
+        
+        function initializeDashboardSearch() {
+            const searchInput = document.getElementById('dashboardSearch');
+            const searchResults = document.getElementById('searchResults');
+            const clearSearch = document.getElementById('clearSearch');
+            
+            if (!searchInput || !searchResults) return;
+            
+            // Collect all card titles and their elements
+            const cardData = collectCardData();
+            let selectedResultIndex = -1;
+            
+            // Search input event
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                selectedResultIndex = -1;
+                
+                // Toggle clear button visibility
+                if (searchTerm.length > 0) {
+                    clearSearch.classList.add('visible');
+                } else {
+                    clearSearch.classList.remove('visible');
+                }
+                
+                if (searchTerm.length < 2) {
+                    searchResults.classList.add('d-none');
+                    return;
+                }
+                
+                // Find matching cards
+                const matches = cardData.filter(card => 
+                    card.title.toLowerCase().includes(searchTerm)
+                );
+                
+                // Display results
+                displaySearchResults(matches);
+            });
+            
+            // Clear search button
+            clearSearch.addEventListener('click', function() {
+                searchInput.value = '';
+                searchResults.classList.add('d-none');
+                clearSearch.classList.remove('visible');
+                searchInput.focus();
+            });
+            
+            // Hide search results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target) && !e.target.closest('.search-box')) {
+                    searchResults.classList.add('d-none');
+                }
+            });
+            
+            // Show results on focus
+            searchInput.addEventListener('focus', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                if (searchTerm.length >= 2) {
+                    searchResults.classList.remove('d-none');
+                }
+                
+                // Show clear button if there's text
+                if (searchTerm.length > 0) {
+                    clearSearch.classList.add('visible');
+                }
+            });
+            
+            // Hide clear button on blur (unless focus is still within the search area)
+            searchInput.addEventListener('blur', function(e) {
+                if (!e.relatedTarget || !e.relatedTarget.closest('.search-box')) {
+                    setTimeout(() => {
+                        clearSearch.classList.remove('visible');
+                    }, 200);
+                }
+            });
+            
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                const resultItems = searchResults.querySelectorAll('.search-result-item');
+                
+                if (resultItems.length === 0 || searchResults.classList.contains('d-none')) {
+                    return;
+                }
+                
+                // Down arrow
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedResultIndex = Math.min(selectedResultIndex + 1, resultItems.length - 1);
+                    updateSelectedResult(resultItems, selectedResultIndex);
+                } 
+                // Up arrow
+                else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedResultIndex = Math.max(selectedResultIndex - 1, -1);
+                    updateSelectedResult(resultItems, selectedResultIndex);
+                } 
+                // Enter key
+                else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedResultIndex >= 0 && selectedResultIndex < resultItems.length) {
+                        resultItems[selectedResultIndex].click();
+                    }
+                } 
+                // Escape key
+                else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    searchResults.classList.add('d-none');
+                    searchInput.blur();
+                }
+            });
+        }
+        
+        function updateSelectedResult(resultItems, selectedIndex) {
+            // Remove selected class from all items
+            resultItems.forEach(item => item.classList.remove('selected'));
+            
+            // Add selected class to current item
+            if (selectedIndex >= 0) {
+                resultItems[selectedIndex].classList.add('selected');
+                resultItems[selectedIndex].scrollIntoView({ block: 'nearest' });
+            }
+        }
+        
+        function collectCardData() {
+            // This will hold card data from all pages
+            const cardData = [];
+            
+            // Add local dashboard cards first
+            const dashboardCards = document.querySelectorAll('.dashboard-card');
+            dashboardCards.forEach((card, index) => {
+                const titleElement = card.querySelector('.card-title, .stat-label');
+                if (titleElement) {
+                    // Create a specific ID for this card if it doesn't have one
+                    if (!card.id) {
+                        card.id = 'card-' + index;
+                    }
+                    
+                    cardData.push({
+                        id: card.id,
+                        element: card,
+                        title: titleElement.textContent.trim(),
+                        type: titleElement.classList.contains('stat-label') ? 'stat' : 'card',
+                        page: 'dashboard',
+                        pageUrl: 'hotel-dashboard.html#' + card.id
+                    });
+                }
+            });
+            
+            // Add cards from other pages (this data would normally come from an API or localStorage)
+            const otherPagesCardData = [
+                // Dynamic Pricing page cards
+                {
+                    id: 'pricing-1',
+                    title: 'Price Optimization',
+                    type: 'card',
+                    page: 'pricing',
+                    pageUrl: 'dynamic-pricing.html#pricing-1'
+                },
+                {
+                    id: 'pricing-2',
+                    title: 'Competitor Analysis',
+                    type: 'card',
+                    page: 'pricing',
+                    pageUrl: 'dynamic-pricing.html#pricing-2'
+                },
+                {
+                    id: 'pricing-3',
+                    title: 'Revenue Forecasting',
+                    type: 'card',
+                    page: 'pricing',
+                    pageUrl: 'dynamic-pricing.html#pricing-3'
+                },
+                {
+                    id: 'pricing-4',
+                    title: 'Seasonal Pricing Strategy',
+                    type: 'card',
+                    page: 'pricing',
+                    pageUrl: 'dynamic-pricing.html#pricing-4'
+                },
+                
+                // Guest Insights page cards
+                {
+                    id: 'insights-1',
+                    title: 'Guest Demographics',
+                    type: 'card',
+                    page: 'insights',
+                    pageUrl: 'guest-insights.html#insights-1'
+                },
+                {
+                    id: 'insights-2',
+                    title: 'Guest Feedback Analysis',
+                    type: 'card',
+                    page: 'insights',
+                    pageUrl: 'guest-insights.html#insights-2'
+                },
+                {
+                    id: 'insights-3',
+                    title: 'Loyalty Program Performance',
+                    type: 'card',
+                    page: 'insights',
+                    pageUrl: 'guest-insights.html#insights-3'
+                },
+                {
+                    id: 'insights-4',
+                    title: 'Booking Patterns',
+                    type: 'card',
+                    page: 'insights',
+                    pageUrl: 'guest-insights.html#insights-4'
+                },
+                
+                // Operations page cards
+                {
+                    id: 'operations-1',
+                    title: 'Housekeeping Status',
+                    type: 'card',
+                    page: 'operations',
+                    pageUrl: 'operations.html#operations-1'
+                },
+                {
+                    id: 'operations-2',
+                    title: 'Maintenance Requests',
+                    type: 'card',
+                    page: 'operations',
+                    pageUrl: 'operations.html#operations-2'
+                },
+                {
+                    id: 'operations-3',
+                    title: 'Staff Scheduling',
+                    type: 'card',
+                    page: 'operations',
+                    pageUrl: 'operations.html#operations-3'
+                },
+                
+                // Sustainability page cards
+                {
+                    id: 'sustainability-1',
+                    title: 'Energy Consumption',
+                    type: 'card',
+                    page: 'sustainability',
+                    pageUrl: 'sustainability.html#sustainability-1'
+                },
+                {
+                    id: 'sustainability-2',
+                    title: 'Water Conservation',
+                    type: 'card',
+                    page: 'sustainability',
+                    pageUrl: 'sustainability.html#sustainability-2'
+                },
+                {
+                    id: 'sustainability-3',
+                    title: 'Waste Management',
+                    type: 'card',
+                    page: 'sustainability',
+                    pageUrl: 'sustainability.html#sustainability-3'
+                }
+            ];
+            
+            // Add other pages' cards to the data
+            cardData.push(...otherPagesCardData);
+            
+            return cardData;
+        }
+        
+        function displaySearchResults(matches) {
+            const searchResults = document.getElementById('searchResults');
+            
+            if (matches.length === 0) {
+                searchResults.innerHTML = '<div class="p-3 text-muted">No matching cards found</div>';
+                searchResults.classList.remove('d-none');
+                return;
+            }
+            
+            searchResults.innerHTML = '';
+            
+            // Group matches by page
+            const groupedMatches = matches.reduce((acc, match) => {
+                const page = match.page || 'dashboard';
+                if (!acc[page]) {
+                    acc[page] = [];
+                }
+                acc[page].push(match);
+                return acc;
+            }, {});
+            
+            // Color map for category indicators
+            const categoryColors = {
+                dashboard: '#3A8F85',  // primary color
+                pricing: '#D19C32',    // secondary color
+                insights: '#4CAF50',   // success color
+                operations: '#FFC107', // warning color
+                sustainability: '#5DADE2' // a blue shade
+            };
+            
+            // Display results grouped by page
+            Object.keys(groupedMatches).forEach(page => {
+                const pageMatches = groupedMatches[page];
+                const pageName = page.charAt(0).toUpperCase() + page.slice(1);
+                const color = categoryColors[page] || '#9E9E9E';
+                
+                // Add category header if there are multiple categories
+                if (Object.keys(groupedMatches).length > 1) {
+                    const categoryHeader = document.createElement('div');
+                    categoryHeader.className = 'px-3 py-2 bg-light border-bottom small fw-bold text-muted';
+                    categoryHeader.textContent = pageName;
+                    searchResults.appendChild(categoryHeader);
+                }
+                
+                // Add items for this category
+                pageMatches.forEach(match => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    
+                    resultItem.innerHTML = `
+                        <div class="result-title">${match.title}</div>
+                        <div class="result-category text-muted">
+                            <span class="category-icon" style="background-color: ${color};"></span>
+                            ${pageName}
+                        </div>
+                    `;
+                    
+                    resultItem.dataset.cardId = match.id;
+                    resultItem.dataset.pageUrl = match.pageUrl || '';
+                    
+                    // Add click handler
+                    resultItem.addEventListener('click', () => {
+                        // If it's an external page card
+                        if (match.pageUrl && !match.element) {
+                            window.location.href = match.pageUrl;
+                        } else {
+                            navigateToCard(match.id);
+                            searchResults.classList.add('d-none');
+                            document.getElementById('dashboardSearch').value = match.title;
+                            document.getElementById('clearSearch').classList.add('visible');
+                        }
+                    });
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            });
+            
+            searchResults.classList.remove('d-none');
+        }
+        
+        function handleHashNavigation() {
+            // Check if there's a hash in the URL (e.g., #card-id)
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1); // Remove the # symbol
+                
+                // Wait a short time for the page to fully render
+                setTimeout(() => {
+                    const targetCard = document.getElementById(targetId);
+                    
+                    if (targetCard) {
+                        // Highlight and scroll to the card
+                        highlightAndScrollToCard(targetCard);
+                    }
+                }, 300);
+            }
+        }
+        
+        function highlightAndScrollToCard(card) {
+            // Remove existing highlights
+            document.querySelectorAll('.highlight-card').forEach(el => {
+                el.classList.remove('highlight-card');
+            });
+            
+            // Add highlight to the target card
+            card.classList.add('highlight-card');
+            
+            // Scroll to the card with smooth animation
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Remove highlight after animation completes
+            setTimeout(() => {
+                card.classList.remove('highlight-card');
+            }, 3000);
+        }
+        
+        function navigateToCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            
+            highlightAndScrollToCard(card);
+        }
+        
+        function initializeSectionNavigation() {
+            const navButtons = document.querySelectorAll('.section-nav .btn');
+            const sections = document.querySelectorAll('.section-id');
+            
+            // Handle button clicks
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetSection = button.getAttribute('data-section');
+                    const section = document.getElementById(targetSection);
+                    
+                    if (section) {
+                        // Remove active class from all buttons
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked button
+                        button.classList.add('active');
+                        
+                        // Scroll to section
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Highlight the section
+                        section.classList.add('highlight');
+                        setTimeout(() => {
+                            section.classList.remove('highlight');
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Update active button based on scroll position
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        const sectionId = section.id;
+                        navButtons.forEach(btn => {
+                            if (btn.getAttribute('data-section') === sectionId) {
+                                btn.classList.add('active');
+                            } else {
+                                btn.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html> 

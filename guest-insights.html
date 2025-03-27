@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Insights | e-Philoxenia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Ensure sustainability icon is visible */
+        .nav-link[href="sustainability.html"] i.bi-tree-fill {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Card highlight animation */
+        .card.highlight {
+            animation: highlightCard 2s ease-out;
+        }
+        
+        @keyframes highlightCard {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 86, 179, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0);
+            }
+        }
+        
+        /* Add IDs to sections */
+        .section-id {
+            scroll-margin-top: 350px;
+            padding-top: 20px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center">
+                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="sidebar-logo me-2">
+                <h4 class="brand-logo mb-0">e-Philoxenia</h4>
+            </div>
+        </div>
+        <div class="pt-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="hotel-dashboard.html">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dynamic-pricing.html">
+                        <i class="bi bi-currency-euro"></i>
+                        <span>Dynamic Pricing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="guest-insights.html">
+                        <i class="bi bi-people"></i>
+                        <span>Guest Insights</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="operations.html">
+                        <i class="bi bi-gear"></i>
+                        <span>Operations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sustainability.html">
+                        <i class="bi bi-tree-fill"></i>
+                        <span>Sustainability</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-5">
+                    <a class="nav-link" href="settings.html">
+                        <i class="bi bi-sliders"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-0">Guest Insights</h2>
+                <p class="text-muted">Understand your guests better with data-driven insights</p>
+            </div>
+            <div>
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+                    <i class="bi bi-download me-1"></i> Export Data
+                </button>
+            </div>
+        </div>
+
+        <!-- Section Navigation -->
+        <div class="section-nav">
+            <div class="d-flex flex-wrap justify-content-center">
+                <button class="btn btn-outline-primary" data-section="guest-intelligence">Guest Intelligence</button>
+                <button class="btn btn-outline-primary" data-section="analytics">Analytics</button>
+                <button class="btn btn-outline-primary" data-section="alerts">Alerts</button>
+                <button class="btn btn-outline-primary" data-section="insights">Insights</button>
+                <button class="btn btn-outline-primary" data-section="personalization">Personalization</button>
+            </div>
+        </div>
+
+        <!-- Live Feedback Dashboard -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Live Guest Feedback</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="feedbackFilterDropdown" data-bs-toggle="dropdown">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="feedbackFilterDropdown">
+                        <li><a class="dropdown-item active" href="#">All Feedback</a></li>
+                        <li><a class="dropdown-item" href="#">Needs Response</a></li>
+                        <li><a class="dropdown-item" href="#">Negative Feedback</a></li>
+                        <li><a class="dropdown-item" href="#">Resolved</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="feedback-container" id="feedback-container">
+                    <!-- Feedback items will be populated here -->
+                    <div class="feedback-item" data-feedback-id="1">
+                        <div class="feedback-header">
+                            <div class="d-flex align-items-center">
+                                <div class="feedback-avatar">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div class="ms-2">
+                                    <div class="feedback-name">Sarah Johnson</div>
+                                    <div class="feedback-meta">
+                                        <span class="feedback-room">Room 302</span> · 
+                                        <span class="feedback-time">10 minutes ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feedback-rating">
+                                <span class="rating-value">4.5</span>
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feedback-content">
+                            <p>The room is beautiful with an amazing view! The housekeeping staff was very attentive. However, I found the check-in process a bit slow.</p>
+                        </div>
+                        <div class="feedback-sentiment">
+                            <div class="sentiment-tag positive">
+                                <i class="bi bi-emoji-smile"></i> Beautiful Room
+                            </div>
+                            <div class="sentiment-tag positive">
+                                <i class="bi bi-emoji-smile"></i> Good Staff
+                            </div>
+                            <div class="sentiment-tag negative">
+                                <i class="bi bi-emoji-frown"></i> Slow Check-in
+                            </div>
+                        </div>
+                        <div class="feedback-actions">
+                            <button class="btn btn-sm btn-primary feedback-reply-btn">
+                                <i class="bi bi-reply"></i> Reply
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary feedback-task-btn">
+                                <i class="bi bi-check2-square"></i> Create Task
+                            </button>
+                        </div>
+                        <div class="feedback-reply-form d-none">
+                            <form>
+                                <textarea class="form-control mb-2" placeholder="Write your response..." rows="2"></textarea>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="send-email-1">
+                                        <label class="form-check-label" for="send-email-1">Send as email</label>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary me-1 feedback-cancel-btn">Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="feedback-item" data-feedback-id="2">
+                        <div class="feedback-header">
+                            <div class="d-flex align-items-center">
+                                <div class="feedback-avatar">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div class="ms-2">
+                                    <div class="feedback-name">Michael Brown</div>
+                                    <div class="feedback-meta">
+                                        <span class="feedback-room">Room 415</span> · 
+                                        <span class="feedback-time">1 hour ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feedback-rating">
+                                <span class="rating-value">2.0</span>
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feedback-content">
+                            <p>The air conditioning in my room isn't working properly, and it's too hot to sleep comfortably. I called the front desk twice but still waiting for someone to come fix it.</p>
+                        </div>
+                        <div class="feedback-sentiment">
+                            <div class="sentiment-tag negative">
+                                <i class="bi bi-emoji-frown"></i> AC Issues
+                            </div>
+                            <div class="sentiment-tag negative">
+                                <i class="bi bi-emoji-angry"></i> Slow Response Time
+                            </div>
+                        </div>
+                        <div class="feedback-flag">
+                            <span class="badge bg-danger"><i class="bi bi-exclamation-triangle"></i> Urgent</span>
+                        </div>
+                        <div class="feedback-actions">
+                            <button class="btn btn-sm btn-primary feedback-reply-btn">
+                                <i class="bi bi-reply"></i> Reply
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary feedback-task-btn">
+                                <i class="bi bi-check2-square"></i> Create Task
+                            </button>
+                        </div>
+                        <div class="feedback-reply-form d-none">
+                            <form>
+                                <textarea class="form-control mb-2" placeholder="Write your response..." rows="2"></textarea>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="send-email-2">
+                                        <label class="form-check-label" for="send-email-2">Send as email</label>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary me-1 feedback-cancel-btn">Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="feedback-item feedback-resolved" data-feedback-id="3">
+                        <div class="feedback-header">
+                            <div class="d-flex align-items-center">
+                                <div class="feedback-avatar">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div class="ms-2">
+                                    <div class="feedback-name">Elena Rodriguez</div>
+                                    <div class="feedback-meta">
+                                        <span class="feedback-room">Room 208</span> · 
+                                        <span class="feedback-time">Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feedback-rating">
+                                <span class="rating-value">5.0</span>
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feedback-content">
+                            <p>Exceptional service! The restaurant staff remembered my dietary preferences from yesterday. The breakfast selection is amazing and so fresh.</p>
+                        </div>
+                        <div class="feedback-sentiment">
+                            <div class="sentiment-tag positive">
+                                <i class="bi bi-emoji-smile"></i> Exceptional Service
+                            </div>
+                            <div class="sentiment-tag positive">
+                                <i class="bi bi-emoji-smile"></i> Great Breakfast
+                            </div>
+                        </div>
+                        <div class="feedback-response">
+                            <div class="response-header">
+                                <span class="response-icon"><i class="bi bi-reply-fill"></i></span>
+                                <span class="response-name">Front Desk Manager</span>
+                                <span class="response-time">Yesterday</span>
+                            </div>
+                            <div class="response-content">
+                                <p>Thank you for your wonderful feedback, Elena! We're delighted to hear that our restaurant team provided such personalized service. We pride ourselves on remembering the little details that matter to our guests. We look forward to serving you again soon!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <small class="text-muted">Showing 3 of 27 feedback items</small>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary">View All Feedback</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Create Feedback Task Modal -->
+        <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createTaskModalLabel">Create Task from Feedback</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="create-task-form">
+                            <div class="mb-3">
+                                <label for="task-title" class="form-label">Task Title</label>
+                                <input type="text" class="form-control" id="task-title" value="" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="task-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="task-description" rows="3" required></textarea>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="task-priority" class="form-label">Priority</label>
+                                    <select class="form-select" id="task-priority" required>
+                                        <option value="low">Low</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="task-department" class="form-label">Department</label>
+                                    <select class="form-select" id="task-department" required>
+                                        <option>Front Desk</option>
+                                        <option>Housekeeping</option>
+                                        <option>Maintenance</option>
+                                        <option>Food & Beverage</option>
+                                        <option>Management</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="task-due-date" class="form-label">Due Date</label>
+                                <input type="datetime-local" class="form-control" id="task-due-date" required>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="notify-guest">
+                                <label class="form-check-label" for="notify-guest">
+                                    Notify guest when task is completed
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="create-task-form" class="btn btn-primary">Create Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Key Guest Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Total Guests</div>
+                        <div class="stat-value">1,248</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 12%</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Avg. Stay Duration</div>
+                        <div class="stat-value">3.8 <small>nights</small></div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 0.5</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Repeat Guests</div>
+                        <div class="stat-value">22<small>%</small></div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 3%</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="stat-label">Avg. Guest Spending</div>
+                        <div class="stat-value">€185</div>
+                        <div class="d-flex align-items-center">
+                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> €15</span>
+                            <small class="text-muted">vs last period</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guest Demographics -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Guest Origin & Demographics</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Country of Origin</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Country</th>
+                                                <th>Guests</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/de.png" alt="Germany" class="me-1">
+                                                    Germany
+                                                </td>
+                                                <td>324</td>
+                                                <td>26%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/gb.png" alt="UK" class="me-1">
+                                                    United Kingdom
+                                                </td>
+                                                <td>287</td>
+                                                <td>23%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/fr.png" alt="France" class="me-1">
+                                                    France
+                                                </td>
+                                                <td>187</td>
+                                                <td>15%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/us.png" alt="USA" class="me-1">
+                                                    USA
+                                                </td>
+                                                <td>162</td>
+                                                <td>13%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/it.png" alt="Italy" class="me-1">
+                                                    Italy
+                                                </td>
+                                                <td>137</td>
+                                                <td>11%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://flagcdn.com/16x12/ca.png" alt="Canada" class="me-1">
+                                                    Other
+                                                </td>
+                                                <td>151</td>
+                                                <td>12%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Age Distribution</h6>
+                                <canvas id="age-distribution-chart" style="height: 250px; max-height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Guest Preferences</h5>
+                        <h6 class="mt-4 mb-2">Travel Purpose</h6>
+                        <canvas id="travel-purpose-chart" style="height: 150px; max-height: 150px;"></canvas>
+                        
+                        <h6 class="mt-4 mb-2">Traveling Parties</h6>
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Couples</div>
+                            <div>45%</div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-primary" style="width: 45%"></div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Families</div>
+                            <div>28%</div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-primary" style="width: 28%"></div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Solo Travelers</div>
+                            <div>15%</div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-primary" style="width: 15%"></div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Groups</div>
+                            <div>12%</div>
+                        </div>
+                        <div class="progress mb-3" style="height: 8px;">
+                            <div class="progress-bar bg-primary" style="width: 12%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guest Feedback Analysis -->
+        <div class="card dashboard-card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Sentiment Analysis & Reviews</h5>
+                <p class="text-muted">AI-powered analysis of guest feedback</p>
+                
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <h6 class="mb-3">Sentiment Trends (Last 6 Months)</h6>
+                        <canvas id="sentiment-chart" style="height: 250px; max-height: 250px;"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="mb-3">Overall Sentiment</h6>
+                        <div class="sentiment-gauge text-center mb-3">
+                            <div class="progress" style="height: 12px;">
+                                <div class="progress-bar bg-danger" style="width: 10%"></div>
+                                <div class="progress-bar bg-warning" style="width: 15%"></div>
+                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-danger">Negative (10%)</small>
+                                <small class="text-warning">Neutral (15%)</small>
+                                <small class="text-success">Positive (75%)</small>
+                            </div>
+                        </div>
+                        
+                        <h6 class="mt-4 mb-3">Key Sentiment Topics</h6>
+                        <div class="d-flex flex-wrap">
+                            <span class="badge bg-success me-2 mb-2 p-2">Staff Service (93% +)</span>
+                            <span class="badge bg-success me-2 mb-2 p-2">Room Cleanliness (89% +)</span>
+                            <span class="badge bg-success me-2 mb-2 p-2">Breakfast Quality (86% +)</span>
+                            <span class="badge bg-warning me-2 mb-2 p-2">WiFi Speed (65% +)</span>
+                            <span class="badge bg-warning me-2 mb-2 p-2">Room Size (62% +)</span>
+                            <span class="badge bg-danger me-2 mb-2 p-2">Bathroom Size (42% +)</span>
+                            <span class="badge bg-danger me-2 mb-2 p-2">Noise Level (40% +)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h6 class="mb-3">Recent Reviews</h6>
+                <div class="reviews-container">
+                    <div class="review-item p-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-0">Jennifer S.</h6>
+                                <div class="small text-muted">Stayed June 12-15, 2023</div>
+                            </div>
+                            <div class="rating text-warning">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="mb-0">The staff was incredibly helpful and attentive throughout our stay. The room was spotless and the view from our balcony was breathtaking. Breakfast had many options and everything was fresh. Would definitely recommend!</p>
+                        <div class="mt-2 d-flex">
+                            <span class="badge bg-success me-2">Staff Service</span>
+                            <span class="badge bg-success me-2">Room Cleanliness</span>
+                            <span class="badge bg-success me-2">Breakfast Quality</span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item p-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-0">Richard M.</h6>
+                                <div class="small text-muted">Stayed June 5-8, 2023</div>
+                            </div>
+                            <div class="rating text-warning">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                            </div>
+                        </div>
+                        <p class="mb-0">Great location and excellent service. The room was comfortable, although a bit small. The WiFi was a bit slow during peak hours. Overall, a pleasant stay and I would return.</p>
+                        <div class="mt-2 d-flex">
+                            <span class="badge bg-success me-2">Staff Service</span>
+                            <span class="badge bg-warning me-2">Room Size</span>
+                            <span class="badge bg-warning me-2">WiFi Speed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-0">Maria G.</h6>
+                                <div class="small text-muted">Stayed May 28-June 2, 2023</div>
+                            </div>
+                            <div class="rating text-warning">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            </div>
+                        </div>
+                        <p class="mb-0">The hotel staff was friendly and helpful. However, we could hear noise from the street and neighboring rooms. The bathroom was quite small and not very practical. Breakfast was great though!</p>
+                        <div class="mt-2 d-flex">
+                            <span class="badge bg-success me-2">Staff Service</span>
+                            <span class="badge bg-success me-2">Breakfast Quality</span>
+                            <span class="badge bg-danger me-2">Noise Level</span>
+                            <span class="badge bg-danger me-2">Bathroom Size</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-primary">View All Reviews</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Guest Intelligence and Recommendations -->
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Guest Intelligence</h5>
+                        <p class="text-muted">AI insights for personalized experiences</p>
+                        
+                        <div class="alert alert-primary">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <i class="bi bi-lightbulb fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="alert-heading">Profile Enhancement</h6>
+                                    <p class="mb-0">Guests from Germany show high interest in outdoor activities. Consider adding more hiking and cycling options to your experiences section.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-primary">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <i class="bi bi-lightbulb fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="alert-heading">Spending Pattern</h6>
+                                    <p class="mb-0">Family guests spend 35% more on in-hotel dining during their stay compared to couples. Consider creating family dinner packages.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-primary">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <i class="bi bi-lightbulb fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="alert-heading">Booking Behavior</h6>
+                                    <p class="mb-0">Business travelers book 73% of the time through direct channels rather than OTAs. Consider a dedicated business booking portal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Action Recommendations</h5>
+                        <p class="text-muted">AI-generated suggestions to improve guest satisfaction</p>
+                        
+                        <div class="recommendation-item p-3 border rounded mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="recommendation-priority bg-danger text-white">
+                                    <small>High</small>
+                                </div>
+                                <h6 class="mb-0 ms-3">Address Noise Issues</h6>
+                            </div>
+                            <p class="mb-2 small">Based on recurring negative feedback about noise levels, consider implementing soundproofing measures in rooms 201-208 which face the street.</p>
+                            <div class="small text-muted">
+                                <i class="bi bi-graph-up me-1"></i> Estimated impact: +12% in satisfaction scores.
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item p-3 border rounded mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="recommendation-priority bg-warning text-white">
+                                    <small>Medium</small>
+                                </div>
+                                <h6 class="mb-0 ms-3">Improve WiFi Infrastructure</h6>
+                            </div>
+                            <p class="mb-2 small">WiFi speed complaints have increased by 15% in the last quarter. Consider upgrading routers on floors 3 and 4 where most issues are reported.</p>
+                            <div class="small text-muted">
+                                <i class="bi bi-graph-up me-1"></i> Estimated impact: +8% in tech amenities satisfaction.
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item p-3 border rounded">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="recommendation-priority bg-success text-white">
+                                    <small>Standard</small>
+                                </div>
+                                <h6 class="mb-0 ms-3">Expand Breakfast Options</h6>
+                            </div>
+                            <p class="mb-2 small">Guests have consistently praised breakfast quality but requested more vegan and gluten-free options. Adding 3-4 new items could boost satisfaction.</p>
+                            <div class="small text-muted">
+                                <i class="bi bi-graph-up me-1"></i> Estimated impact: +5% in dining satisfaction.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guest Intelligence Card -->
+        <div class="card dashboard-card mb-4 section-id" id="guest-intelligence">
+            <div class="card-body">
+                <h5 class="card-title">Guest Intelligence</h5>
+                <p class="text-muted">AI-powered guest behavior analysis and insights</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <h6 class="mb-3">Guest Behavior Patterns</h6>
+                        <div class="chart-container">
+                            <canvas id="guest-behavior-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="mb-3">Key Insights</h6>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Booking Window</h6>
+                                    <span class="badge bg-info">Trend</span>
+                                </div>
+                                <p class="mb-0 small">Guests are booking 2 weeks earlier than last year</p>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Length of Stay</h6>
+                                    <span class="badge bg-success">Positive</span>
+                                </div>
+                                <p class="mb-0 small">Average stay duration increased by 1.5 days</p>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Room Preferences</h6>
+                                    <span class="badge bg-warning">Change</span>
+                                </div>
+                                <p class="mb-0 small">High-floor rooms are 25% more popular</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Card -->
+        <div class="card dashboard-card mb-4 section-id" id="analytics">
+            <div class="card-body">
+                <h5 class="card-title">Guest Analytics</h5>
+                <p class="text-muted">Comprehensive guest data analysis and trends</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <h6 class="mb-3">Guest Demographics</h6>
+                        <div class="chart-container">
+                            <canvas id="guest-demographics-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="mb-3">Booking Channels</h6>
+                        <div class="chart-container">
+                            <canvas id="booking-channels-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Average Age</h6>
+                                <h3 class="mb-0">42</h3>
+                                <small class="text-muted">+2 years vs last year</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Repeat Guests</h6>
+                                <h3 class="mb-0">35%</h3>
+                                <small class="text-muted">+5% vs last year</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Average Stay</h6>
+                                <h3 class="mb-0">4.2 days</h3>
+                                <small class="text-muted">+0.5 days vs last year</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Card -->
+        <div class="card dashboard-card mb-4 section-id" id="alerts">
+            <div class="card-body">
+                <h5 class="card-title">Guest Alerts</h5>
+                <p class="text-muted">Real-time alerts and notifications</p>
+                
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">VIP Guest Arrival</h6>
+                            <span class="badge bg-success">High Priority</span>
+                        </div>
+                        <p class="mb-0">John Smith (Diamond Member) arriving today at 15:00</p>
+                        <small class="text-muted">Last stay: 3 months ago</small>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Special Request</h6>
+                            <span class="badge bg-warning">Medium Priority</span>
+                        </div>
+                        <p class="mb-0">Room 304 requesting early check-in</p>
+                        <small class="text-muted">Requested 2 hours ago</small>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Guest Feedback</h6>
+                            <span class="badge bg-info">Low Priority</span>
+                        </div>
+                        <p class="mb-0">New review from Room 205</p>
+                        <small class="text-muted">Posted 30 minutes ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Card -->
+        <div class="card dashboard-card mb-4 section-id" id="insights">
+            <div class="card-body">
+                <h5 class="card-title">Guest Insights</h5>
+                <p class="text-muted">AI-generated insights and recommendations</p>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title">Guest Satisfaction</h6>
+                                <div class="chart-container">
+                                    <canvas id="satisfaction-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title">Service Performance</h6>
+                                <div class="chart-container">
+                                    <canvas id="service-performance-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-lightbulb fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="alert-heading">AI Recommendation</h6>
+                            <p class="mb-0">Based on guest feedback patterns, consider adding more vegetarian options to the breakfast menu. This could improve satisfaction scores by up to 15%.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personalization Card -->
+        <div class="card dashboard-card mb-4 section-id" id="personalization">
+            <div class="card-body">
+                <h5 class="card-title">Guest Personalization</h5>
+                <p class="text-muted">Personalized guest experience recommendations</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <h6 class="mb-3">Guest Preferences</h6>
+                        <div class="chart-container">
+                            <canvas id="guest-preferences-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="mb-3">Personalization Score</h6>
+                        <div class="text-center mb-4">
+                            <div class="display-4 text-primary">92%</div>
+                            <p class="text-muted">Personalization Effectiveness</p>
+                        </div>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Room Preferences</h6>
+                                    <span class="badge bg-success">High</span>
+                                </div>
+                                <p class="mb-0 small">Successfully matched 95% of guest preferences</p>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Amenity Selection</h6>
+                                    <span class="badge bg-success">High</span>
+                                </div>
+                                <p class="mb-0 small">Accurate amenity recommendations for 90% of guests</p>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Communication Style</h6>
+                                    <span class="badge bg-warning">Medium</span>
+                                </div>
+                                <p class="mb-0 small">Communication preferences matched for 75% of guests</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .recommendation-priority {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.65rem;
+            width: 85px;
+            text-align: center;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/guest-insights.js"></script>
+</body>
+</html> 

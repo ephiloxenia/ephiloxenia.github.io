@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pricing | e-Philoxenia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Ensure sustainability icon is visible */
+        .nav-link[href="sustainability.html"] i.bi-tree-fill {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Navigation buttons styling - using global section-nav styles */
+        
+        /* Card highlight animation */
+        .card.highlight {
+            animation: highlightCard 2s ease-out;
+        }
+        
+        @keyframes highlightCard {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 86, 179, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0);
+            }
+        }
+        
+        /* Add IDs to sections */
+        .section-id {
+            scroll-margin-top: 350px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center">
+                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="sidebar-logo me-2">
+                <h4 class="brand-logo mb-0">e-Philoxenia</h4>
+            </div>
+        </div>
+        <div class="pt-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="hotel-dashboard.html">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="dynamic-pricing.html">
+                        <i class="bi bi-currency-euro"></i>
+                        <span>Dynamic Pricing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="guest-insights.html">
+                        <i class="bi bi-people"></i>
+                        <span>Guest Insights</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="operations.html">
+                        <i class="bi bi-gear"></i>
+                        <span>Operations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sustainability.html">
+                        <i class="bi bi-tree-fill"></i>
+                        <span>Sustainability</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-5">
+                    <a class="nav-link" href="settings.html">
+                        <i class="bi bi-sliders"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-0">Dynamic Pricing</h2>
+                <p class="text-muted">Optimize your room rates with AI-powered pricing strategies</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <button id="toggle-auto-pricing" class="btn btn-danger" data-auto="true">
+                    Disable Auto Pricing
+                </button>
+            </div>
+        </div>
+
+        <!-- Section Navigation -->
+        <div class="section-nav">
+            <div class="d-flex flex-wrap justify-content-center">
+                <button class="btn btn-outline-primary" data-section="pricing-strategy">Pricing Strategy</button>
+                <button class="btn btn-outline-primary" data-section="market-analysis">Market Analysis</button>
+                <button class="btn btn-outline-primary" data-section="competitor-tracking">Competitor Tracking</button>
+                <button class="btn btn-outline-primary" data-section="revenue-optimization">Revenue Optimization</button>
+                <button class="btn btn-outline-primary" data-section="forecasting">Forecasting</button>
+            </div>
+        </div>
+
+        <!-- Pricing Strategy Card -->
+        <div class="card mb-4 section-id" id="pricing-strategy">
+            <!-- Pricing Overview -->
+            <div class="card dashboard-card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Pricing Overview</h5>
+                    <p class="text-muted">30-day price forecast based on AI analysis</p>
+                    <div class="chart-container">
+                        <canvas id="pricing-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar and Control Panel -->
+            <div class="row mb-4">
+                <div class="col-lg-8 mb-3">
+                    <div class="card dashboard-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Price Calendar</h5>
+                            <p class="text-muted">Click on a date to adjust pricing manually</p>
+                            <div id="pricing-calendar" class="mt-4"></div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <div>
+                                    <span class="d-inline-block me-3">
+                                        <i class="bi bi-circle-fill text-danger me-1"></i> Low Occupancy
+                                    </span>
+                                    <span class="d-inline-block me-3">
+                                        <i class="bi bi-circle-fill text-warning me-1"></i> Medium Occupancy
+                                    </span>
+                                    <span class="d-inline-block">
+                                        <i class="bi bi-circle-fill text-success me-1"></i> High Occupancy
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card dashboard-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pricing Recommendation</h5>
+                            <div class="alert alert-primary" role="alert">
+                                <i class="bi bi-lightbulb-fill me-2"></i>
+                                Our AI suggests increasing prices for the weekend of July 15-17 due to a local festival.
+                            </div>
+                            <h6 class="mt-4">Room Types</h6>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Standard Room
+                                    <span class="badge bg-primary rounded-pill">€120</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Deluxe Room
+                                    <span class="badge bg-primary rounded-pill">€150</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Suite
+                                    <span class="badge bg-primary rounded-pill">€220</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Family Room
+                                    <span class="badge bg-primary rounded-pill">€180</span>
+                                </a>
+                            </div>
+                            <div class="mt-4">
+                                <h6>Current vs Suggested (Avg.)</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="progress flex-grow-1 me-3" style="height: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="text-muted">€140</span>
+                                        <i class="bi bi-arrow-right mx-2 text-muted"></i>
+                                        <span class="text-success fw-bold">€167</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mt-4">
+                                <button id="apply-pricing-btn" class="btn btn-primary">Apply AI Suggestions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Factors -->
+            <div class="card dashboard-card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Pricing Factors</h5>
+                    <p class="text-muted">Elements that influence the AI price recommendations</p>
+                    <div class="row mt-4" id="pricing-factors-container">
+                        <!-- Pricing factors will be dynamically added here by pricing.js -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Data -->
+            <div class="card dashboard-card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Historical Price Performance</h5>
+                    <p class="text-muted">Past 12 months price and occupancy correlation</p>
+                    <div class="chart-container">
+                        <canvas id="pricing-history-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Analysis Card -->
+        <div class="card dashboard-card mb-4 section-id" id="market-analysis">
+            <div class="card-body">
+                <h5 class="card-title">Market Analysis</h5>
+                <p class="text-muted">Real-time market trends and demand analysis</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <h6 class="mb-3">Market Demand Forecast</h6>
+                        <div class="chart-container">
+                            <canvas id="market-demand-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="mb-3">Demand Drivers</h6>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span>Local Events</span>
+                                    <span class="badge bg-success">High Impact</span>
+                                </div>
+                                <small class="text-muted">Summer Festival (Jul 15-17)</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span>Seasonality</span>
+                                    <span class="badge bg-success">High Impact</span>
+                                </div>
+                                <small class="text-muted">Peak Summer Season</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span>Business Travel</span>
+                                    <span class="badge bg-warning">Medium Impact</span>
+                                </div>
+                                <small class="text-muted">Tech Conference (Aug 5-7)</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span>Weather</span>
+                                    <span class="badge bg-info">Low Impact</span>
+                                </div>
+                                <small class="text-muted">Favorable conditions expected</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-info-circle fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="alert-heading">Market Intelligence</h6>
+                            <p class="mb-0">The upcoming Summer Festival is expected to drive a 35% increase in demand. Consider adjusting rates for the festival weekend (Jul 15-17) and surrounding dates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competitor Tracking Card -->
+        <div class="card dashboard-card mb-4 section-id" id="competitor-tracking">
+            <div class="card-body">
+                <h5 class="card-title">Competitor Analysis</h5>
+                <p class="text-muted">Monitor competitor pricing and strategies</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <h6 class="mb-3">Competitive Price Comparison</h6>
+                        <div class="chart-container">
+                            <canvas id="competitor-price-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="mb-3">Price Position</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Hotel</th>
+                                        <th>Avg. Rate</th>
+                                        <th>vs. You</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Your Hotel</td>
+                                        <td>€145</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Competitor A</td>
+                                        <td>€160</td>
+                                        <td class="text-success">+€15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Competitor B</td>
+                                        <td>€135</td>
+                                        <td class="text-danger">-€10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Competitor C</td>
+                                        <td>€155</td>
+                                        <td class="text-success">+€10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-warning" role="alert">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-exclamation-triangle fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="alert-heading">Competitive Alert</h6>
+                            <p class="mb-0">Competitor A has reduced their rates by 10% for weekday bookings in August. Consider adjusting your pricing strategy for affected dates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Optimization Card -->
+        <div class="card dashboard-card mb-4 section-id" id="revenue-optimization">
+            <div class="card-body">
+                <h5 class="card-title">Revenue Optimization</h5>
+                <p class="text-muted">AI-driven revenue optimization insights</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <h6 class="mb-3">Revenue Performance</h6>
+                        <div class="chart-container">
+                            <canvas id="revenue-performance-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="mb-3">Optimization Opportunities</h6>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Weekend Pricing</h6>
+                                    <span class="badge bg-success">High Impact</span>
+                                </div>
+                                <p class="mb-0 small">Increase weekend rates by 15% to match demand patterns</p>
+                                <div class="mt-2">
+                                    <span class="badge bg-light text-dark">Potential Revenue: +€5,200/month</span>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Length of Stay</h6>
+                                    <span class="badge bg-success">High Impact</span>
+                                </div>
+                                <p class="mb-0 small">Offer 15% discount for stays longer than 4 nights</p>
+                                <div class="mt-2">
+                                    <span class="badge bg-light text-dark">Potential Revenue: +€3,800/month</span>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Early Bird Rates</h6>
+                                    <span class="badge bg-warning">Medium Impact</span>
+                                </div>
+                                <p class="mb-0 small">Implement early booking discounts for low season</p>
+                                <div class="mt-2">
+                                    <span class="badge bg-light text-dark">Potential Revenue: +€2,500/month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecasting Card -->
+        <div class="card dashboard-card mb-4 section-id" id="forecasting">
+            <div class="card-body">
+                <h5 class="card-title">Revenue Forecasting</h5>
+                <p class="text-muted">AI-powered revenue predictions and trends</p>
+                
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <h6 class="mb-3">Revenue Forecast (Next 90 Days)</h6>
+                        <div class="chart-container">
+                            <canvas id="revenue-forecast-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="mb-3">Key Metrics</h6>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Forecasted Revenue</span>
+                                    <span class="text-success">€425,000</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                                <small class="text-muted">vs €380,000 last period</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Expected Occupancy</span>
+                                    <span class="text-success">82%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 82%"></div>
+                                </div>
+                                <small class="text-muted">vs 75% last period</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Projected ADR</span>
+                                    <span class="text-success">€165</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 88%"></div>
+                                </div>
+                                <small class="text-muted">vs €145 last period</small>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Forecasted RevPAR</span>
+                                    <span class="text-success">€135</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 90%"></div>
+                                </div>
+                                <small class="text-muted">vs €108 last period</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-success" role="alert">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-graph-up fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="alert-heading">Forecast Insights</h6>
+                            <p class="mb-0">Based on current trends and booking patterns, we predict a 12% increase in revenue for the next quarter. Key drivers include increased business travel and the upcoming summer festival.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Editing Modal -->
+    <div class="modal fade" id="pricing-modal" tabindex="-1" aria-labelledby="pricingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pricingModalLabel">Edit Price: <span id="pricing-modal-date"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Current Price: <span id="pricing-modal-current" class="text-primary fw-bold"></span></h6>
+                            <h6>AI Suggested: <span id="pricing-modal-suggested" class="text-success fw-bold"></span></h6>
+                            <h6>Occupancy: <span id="pricing-modal-occupancy"></span></h6>
+                            
+                            <div class="mt-4">
+                                <label for="pricing-modal-input" class="form-label">Set New Price (€)</label>
+                                <input type="number" class="form-control form-control-lg" id="pricing-modal-input">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Competitor Prices</h6>
+                            <div id="competitor-prices" class="mt-3">
+                                <!-- Competitor prices will be dynamically added here -->
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6>Influencing Factors</h6>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Local Events
+                                        <span class="badge bg-info rounded-pill">Low</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Historical Demand
+                                        <span class="badge bg-warning rounded-pill">Medium</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Competitor Pricing
+                                        <span class="badge bg-danger rounded-pill">High</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-price-btn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/pricing.js"></script>
+    <script>
+        // Prevent scrollTo(0, 0) when clicking on room type links
+        document.addEventListener('DOMContentLoaded', function() {
+            const roomTypeLinks = document.querySelectorAll('.list-group-item.list-group-item-action');
+            roomTypeLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Prevent default behavior which might cause scroll to top
+                });
+            });
+        });
+        
+        // Initialize section navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSectionNavigation();
+        });
+        
+        function initializeSectionNavigation() {
+            const navButtons = document.querySelectorAll('.section-nav .btn');
+            const sections = document.querySelectorAll('.section-id');
+            
+            // Handle button clicks
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetSection = button.getAttribute('data-section');
+                    const section = document.getElementById(targetSection);
+                    
+                    if (section) {
+                        // Remove active class from all buttons
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked button
+                        button.classList.add('active');
+                        
+                        // Scroll to section
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Highlight the section
+                        section.classList.add('highlight');
+                        setTimeout(() => {
+                            section.classList.remove('highlight');
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Update active button based on scroll position
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        const sectionId = section.id;
+                        navButtons.forEach(btn => {
+                            if (btn.getAttribute('data-section') === sectionId) {
+                                btn.classList.add('active');
+                            } else {
+                                btn.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <!-- Phi Symbol (Main circle and vertical line) -->
+  <circle cx="150" cy="150" r="100" stroke="#2A8678" stroke-width="30" fill="none" />
+  <line x1="150" y1="30" x2="150" y2="270" stroke="#2A8678" stroke-width="30" />
+  
+  <!-- Green Leaf -->
+  <path d="M220,50 C280,90 250,170 180,190 C220,130 200,70 220,50 Z" fill="#6DAE61" />
+  
+  <!-- Circuit/Technology Elements -->
+  <path d="M70,100 L100,130 L130,130 L150,100" stroke="#D4A53F" stroke-width="8" fill="none" />
+  <circle cx="70" cy="100" r="10" fill="#D4A53F" />
+  <circle cx="100" cy="130" r="10" fill="#D4A53F" />
+  <circle cx="130" cy="130" r="10" fill="#D4A53F" />
+</svg> 
