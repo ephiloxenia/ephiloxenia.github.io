@@ -15,6 +15,23 @@
             font-size: 0.9rem;
         }
         
+        /* Blue theme modifications */
+        .card-header.bg-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+        }
+        
+        .progress-bar.bg-primary {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary)) !important;
+        }
+        
+        .bg-primary-light {
+            background-color: rgba(41, 98, 255, 0.1);
+        }
+        
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        
         .typing-indicator {
             display: flex;
             padding: 10px 15px;
@@ -63,9 +80,9 @@
         }
         
         .room-scene-btn.active {
-            background-color: rgba(13, 110, 253, 0.85);
+            background-color: var(--primary);
             color: white;
-            box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+            box-shadow: 0 2px 5px rgba(41, 98, 255, 0.3);
             transform: translateY(-2px);
         }
         
@@ -99,7 +116,7 @@
         }
         
         .service-status-card {
-            border-left: 4px solid var(--bs-primary);
+            border-left: 4px solid var(--primary);
         }
         
         /* Add some animations */
@@ -803,7 +820,7 @@
         <!-- Header with Room Information -->
         <div class="mobile-header-alt">
             <div class="d-flex align-items-center">
-                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="mobile-logo">
+                <div class="mobile-logo-placeholder text-primary">Your Logo</div>
                 <div>
                     <h5 class="mb-0 text-primary">Sunset Resort</h5>
                     <div class="small text-secondary">Room 302 - Deluxe Ocean View</div>
