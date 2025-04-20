@@ -63,6 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Add event listener for the clear chat button
+    const clearChatBtn = document.getElementById('clear-chat-btn');
+    if (clearChatBtn) {
+        clearChatBtn.addEventListener('click', function() {
+            clearChat();
+        });
+    }
 });
 
 function initChatbot() {
@@ -86,9 +94,16 @@ function initChatbot() {
         humanSupportOption.classList.add('visible');
     }
     
-    // Add welcome message
+    // Add welcome message based on current language
     setTimeout(() => {
+        // Get current language from cookie or default to 'el'
+        const currentLang = getCookie('app_language') || 'el';
+        
+        if (currentLang === 'el') {
+            addBotMessage("Γεια σας! Είμαι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω κατά τη διάρκεια της διαμονής σας; Αν προτιμάτε να μιλήσετε με έναν ανθρώπινο υπάλληλο, κάντε κλικ στην επιλογή παρακάτω.");
+        } else {
         addBotMessage("Hello! I'm your AI assistant. How can I help you during your stay? If you prefer to speak with a human concierge, click the option below.");
+        }
     }, 500);
     
     // Handle form submission
@@ -140,7 +155,7 @@ function initChatbot() {
                 addHumanAgentMessage(randomResponse);
             } else {
                 // Regular AI processing
-                processUserMessage(message);
+                processMessage(message);
             }
         }, 1000 + Math.random() * 1000);
     });
@@ -299,117 +314,137 @@ function scrollToBottom() {
     }
 }
 
-function processUserMessage(message) {
-    // Get guest preferences and context (in a real app this would come from backend)
-    const guestPreferences = getGuestPreferences();
-    
-    // Convert message to lowercase for easier matching
-    const lowerMessage = message.toLowerCase();
-    
-    // Check if it's a personalized recommendation request
-    if (containsAny(lowerMessage, ['recommend', 'suggestion', 'what should', 'advise', 'best for me', 'personalized'])) {
-        if (containsAny(lowerMessage, ['restaurant', 'dinner', 'lunch', 'food', 'eat', 'dining'])) {
-            providePersonalizedRestaurantRecommendations(guestPreferences);
+async function processMessage(message) {
+    // If in human mode, just echo the message back with a response
+    if (window.isHumanMode) {
+        showTypingIndicator();
+        
+        // Get current language for response
+        const currentLang = getCookie('app_language') || 'el';
+        const humanResponse = currentLang === 'el' 
+            ? "Καταλαβαίνω. Θα το ερευνήσω αμέσως για εσάς. Υπάρχει κάτι άλλο με το οποίο χρειάζεστε βοήθεια;"
+            : "I understand. I'll look into that for you right away. Is there anything else you need help with?";
+        
+        setTimeout(() => {
+            removeTypingIndicator();
+            addHumanAgentMessage(humanResponse);
+        }, 2000);
             return;
         }
         
-        if (containsAny(lowerMessage, ['activity', 'activities', 'do', 'explore', 'tour', 'sightseeing', 'attractions'])) {
-            providePersonalizedActivityRecommendations(guestPreferences);
-            return;
+    try {
+        // Add user's message to chat
+        addUserMessage(message);
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Get current language for API request
+        const currentLang = getCookie('app_language') || 'el';
+        
+        // Prepare system message based on language
+        let systemPrompt = '';
+        
+        if (currentLang === 'el') {
+            systemPrompt = `Είσαι ένας χρήσιμος AI βοηθός για το ψηφιακό σύστημα υποδοχής ενός πολυτελούς ξενοδοχείου με την ονομασία "Ephiloxenia". 
+                Το όνομα του ξενοδοχείου είναι "Crystal Waters Resort & Spa" που βρίσκεται στη Σαντορίνη, Ελλάδα.
+                Διεύθυνση: Παραλία Καμαρίου, Σαντορίνη, 84700, Ελλάδα
+                Επικοινωνία: +30 2286 123456, info@crystalwaters-santorini.com
+                
+                Ο τρέχων επισκέπτης διαμένει στο δωμάτιο 203. Σήμερα είναι ${new Date().toLocaleDateString()}.
+                
+                Διαθέσιμες υπηρεσίες:
+                - Υπηρεσία δωματίου (7πμ - 11μμ)
+                - Σπα & ευεξία (9πμ - 8μμ)
+                - Κρατήσεις εστιατορίου (πρωινό: 7-10:30πμ, γεύμα: 12-3μμ, δείπνο: 6-10:30μμ)
+                - Καθαριότητα δωματίων (8πμ - 5μμ)
+                - Βοήθεια υποδοχής (24/7)
+                - Υπηρεσία παραλίας & πισίνας (8πμ - 7μμ)
+                
+                Όταν ρωτάνε για το WiFi, το όνομα του δικτύου είναι "CrystalWaters_Guest" και ο κωδικός είναι "BlueSantorini2023".
+                
+                Να είσαι φιλικός, εξυπηρετικός και σύντομος. Περιόρισε τις απαντήσεις σε 3-4 προτάσεις εκτός αν απαιτούνται περισσότερες λεπτομέρειες.
+                Αν ερωτηθείς για κάτι που δεν γνωρίζεις ή δεν σχετίζεται με το ξενοδοχείο, ανακατεύθυνε ευγενικά στις υπηρεσίες του ξενοδοχείου.
+                
+                Ανάλυσε το συναίσθημα κάθε μηνύματος από τον επισκέπτη και προσάρμοσε τον τόνο σου αναλόγως.
+                Θετικό: ταίριαξε τον ενθουσιασμό
+                Ουδέτερο: να είσαι ζεστός και εξυπηρετικός
+                Αρνητικό/Παράπονο: να είσαι ενσυναισθητικός και προσανατολισμένος στη λύση
+                
+                Για παράπονα ή προβλήματα, πάντα να προσφέρεις σύνδεση με ένα μέλος του προσωπικού αν δεν μπορείς να το επιλύσεις.
+                
+                Υπόγραψε τις απαντήσεις σου ως "AI Βοηθός Crystal Waters".`;
+        } else {
+            systemPrompt = `You are a helpful AI assistant for a luxury hotel's digital concierge system named "Ephiloxenia". 
+                Hotel name is "Crystal Waters Resort & Spa" located in Santorini, Greece.
+                Address: Kamari Beach, Santorini, 84700, Greece
+                Contact: +30 2286 123456, info@crystalwaters-santorini.com
+                
+                Current guest is staying in room 203. Today is ${new Date().toLocaleDateString()}.
+                
+                Services available:
+                - Room service (7am - 11pm)
+                - Spa & wellness (9am - 8pm)
+                - Restaurant reservations (breakfast: 7-10:30am, lunch: 12-3pm, dinner: 6-10:30pm)
+                - Housekeeping (8am - 5pm)
+                - Concierge assistance (24/7)
+                - Beach & pool service (8am - 7pm)
+                
+                When asked about WiFi, the network name is "CrystalWaters_Guest" and password is "BlueSantorini2023".
+                
+                Be friendly, helpful, and concise. Limit responses to 3-4 sentences unless more detail is necessary.
+                If asked about something you don't know or isn't hotel-related, politely redirect to hotel services.
+                
+                Analyze the sentiment of each guest message and adjust your tone accordingly.
+                Positive: match enthusiasm
+                Neutral: be warm and helpful
+                Negative/Complaint: be empathetic and solution-oriented
+                
+                For complaints or issues, always offer to connect them with a staff member if you can't resolve it.
+                
+                Sign your responses as "Crystal Waters AI Assistant".`;
         }
         
-        if (containsAny(lowerMessage, ['spa', 'massage', 'wellness', 'relax', 'treatment'])) {
-            providePersonalizedSpaRecommendations(guestPreferences);
-            return;
-        }
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    { 
+                        role: "system", 
+                        content: systemPrompt
+                    },
+                    { role: "user", content: message }
+                ],
+                temperature: 0.7,
+                max_tokens: 150
+            })
+        });
         
-        // General recommendation request
-        provideGeneralRecommendations(guestPreferences);
-        return;
-    }
-    
-    // Check for greeting
-    if (containsAny(lowerMessage, ['hello', 'hi', 'hey', 'greetings'])) {
-        addBotMessage(`Hello ${guestPreferences.name || ''}! How can I assist you today?`);
-        return;
-    }
-    
-    // Check for checkout information
-    if (containsAny(lowerMessage, ['check out', 'checkout', 'leaving'])) {
-        addBotMessage("Check-out time is at 12:00 PM. You can request a late check-out through the app or at the reception. Would you like me to arrange a late check-out for you?");
-        return;
-    }
-    
-    // Check for breakfast information
-    if (containsAny(lowerMessage, ['breakfast', 'morning', 'meal'])) {
-        const breakfastRecommendation = getPersonalizedBreakfastRecommendation(guestPreferences);
-        addBotMessage(`Breakfast is served in the main restaurant from 7:00 AM to 10:30 AM. ${breakfastRecommendation} Would you like to reserve a table?`);
-        return;
-    }
-    
-    // Check for wifi information
-    if (containsAny(lowerMessage, ['wifi', 'internet', 'connection', 'password'])) {
-        addBotMessage("You can connect to our WiFi network named 'Sunset_Resort_Guest' using the password 'SunnyStay2023'. If you're having trouble connecting, please let me know.");
-        return;
-    }
-    
-    // Check for room service
-    if (containsAny(lowerMessage, ['room service', 'order', 'deliver', 'bring'])) {
-        // Check if it's a specific menu recommendation request
-        if (containsAny(lowerMessage, ['recommend', 'suggestion', 'best'])) {
-            providePersonalizedRoomServiceRecommendations(guestPreferences);
-            return;
+        const data = await response.json();
+        if (data.choices && data.choices.length > 0) {
+            removeTypingIndicator();
+            const botResponse = data.choices[0].message.content;
+            addBotMessage(botResponse);
+        } else {
+            throw new Error("No response from API");
         }
+    } catch (error) {
+        console.error("Error:", error);
+        removeTypingIndicator();
         
-        addBotMessage("Room service is available 24/7. You can view the menu in the 'Services' tab of this app. Would you like me to help you place an order?");
-        return;
+        // Error message based on language
+        const currentLang = getCookie('app_language') || 'el';
+        const errorMsg = currentLang === 'el'
+            ? "Λυπάμαι, αντιμετωπίζω πρόβλημα σύνδεσης. Παρακαλώ δοκιμάστε ξανά αργότερα."
+            : "I'm sorry, I'm having trouble connecting. Please try again later.";
+            
+        addBotMessage(errorMsg);
     }
-    
-    // Check for local transport
-    if (containsAny(lowerMessage, ['taxi', 'transport', 'bus', 'transportation', 'travel', 'airport'])) {
-        addBotMessage("I can help you arrange transportation. We have taxi services available 24/7, and the concierge can assist with rental cars or shuttle services. The nearest bus stop is a 5-minute walk from the hotel. Would you like me to arrange a taxi for you?");
-        return;
-    }
-    
-    // Check for hotel facilities
-    if (containsAny(lowerMessage, ['gym', 'fitness', 'pool', 'swimming', 'facilities'])) {
-        addBotMessage(`
-            <p>Our hotel offers the following facilities:</p>
-            <ul>
-                <li><strong>Swimming Pool</strong> - Open 7:00 AM to 10:00 PM (level 3)</li>
-                <li><strong>Fitness Center</strong> - Open 24/7 with your room key (level 2)</li>
-                <li><strong>Spa & Wellness</strong> - Open 9:00 AM to 9:00 PM (level 2)</li>
-                <li><strong>Business Center</strong> - Open 8:00 AM to 8:00 PM (lobby level)</li>
-                <li><strong>Rooftop Bar</strong> - Open 4:00 PM to midnight (top floor)</li>
-            </ul>
-        `);
-        return;
-    }
-    
-    // Check for weather information
-    if (containsAny(lowerMessage, ['weather', 'temperature', 'forecast', 'rain', 'sunny'])) {
-        provideWeatherForecast();
-        return;
-    }
-    
-    // AI assistant features
-    if (containsAny(lowerMessage, ['set', 'wake', 'alarm', 'reminder'])) {
-        if (containsAny(lowerMessage, ['wake', 'up', 'morning', 'tomorrow'])) {
-            addBotMessage("I'll set a wake-up call for you. What time would you like to be woken up tomorrow?");
-            return;
-        }
-        addBotMessage("I can help you set reminders and alarms. What would you like me to remind you about?");
-        return;
-    }
-    
-    // Default response based on sentiment analysis
-    if (containsNegativeWords(lowerMessage)) {
-        addBotMessage("I'm sorry to hear that. How can I help improve your experience? Your comfort is our priority.");
-        return;
-    }
-    
-    // Default response
-    addBotMessage("I'm here to make your stay exceptional. You can ask me about personalized recommendations, hotel facilities, local attractions, dining options, or any services you might need. How else can I assist you?");
 }
 
 function containsAny(text, keywords) {
@@ -417,7 +452,11 @@ function containsAny(text, keywords) {
 }
 
 function containsNegativeWords(text) {
-    const negativeWords = ['bad', 'terrible', 'awful', 'disappointed', 'unhappy', 'problem', 'issue', 'complaint', 'wrong', 'broken', 'not working', 'dirty', 'noisy', 'uncomfortable'];
+    const negativeWords = [
+        'bad', 'terrible', 'awful', 'disappointed', 'unhappy', 'problem', 'issue', 'complaint', 'wrong', 'broken', 'not working', 'dirty', 'noisy', 'uncomfortable',
+        'κακό', 'κακή', 'άσχημο', 'άσχημη', 'απαίσιο', 'απαίσια', 'απογοητευμένος', 'απογοητευμένη', 'δυσαρεστημένος', 'δυσαρεστημένη', 
+        'πρόβλημα', 'θέμα', 'παράπονο', 'λάθος', 'χαλασμένο', 'δεν λειτουργεί', 'δεν δουλεύει', 'βρώμικο', 'βρώμικα', 'θορυβώδες', 'άβολο'
+    ];
     return negativeWords.some(word => text.includes(word));
 }
 
@@ -750,15 +789,24 @@ function handleTalkToHuman() {
     setTimeout(() => {
         removeTypingIndicator();
         
+        // Get current language and use appropriate message
+        const currentLang = getCookie('app_language') || 'el';
+        
         // Add a message from the human agent using our new function
+        if (currentLang === 'el') {
+            addHumanAgentMessage("Γεια σας! Είμαι η Μαρία από το γραφείο υποδοχής. Πώς μπορώ να σας βοηθήσω σήμερα; Θα είμαι διαθέσιμη για να σας βοηθήσω για τα επόμενα 30 λεπτά.");
+        } else {
         addHumanAgentMessage("Hello! I'm Maria from the concierge desk. How may I assist you today? I'll be available to help you for the next 30 minutes.");
+        }
         
         // Replace the "Talk to human" section with a "Return to AI" option
         const humanSupportOption = document.querySelector('.human-support-option');
         if (humanSupportOption) {
+            const returnToAIText = currentLang === 'el' ? 'Επιστροφή στον AI βοηθό' : 'Return to AI assistant';
+            
             humanSupportOption.innerHTML = `
                 <a class="human-support-link" id="return-to-ai">
-                    <i class="bi bi-robot"></i> Return to AI assistant
+                    <i class="bi bi-robot"></i> <span data-i18n="return_to_ai">${returnToAIText}</span>
                 </a>
             `;
         }
@@ -776,15 +824,24 @@ function handleReturnToAI() {
     setTimeout(() => {
         removeTypingIndicator();
         
+        // Get current language and use appropriate message
+        const currentLang = getCookie('app_language') || 'el';
+        
         // Add a message from the AI
+        if (currentLang === 'el') {
+            addBotMessage("Είμαι και πάλι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω με τη διαμονή σας;");
+        } else {
         addBotMessage("I'm your AI assistant again. How can I assist you with your stay?");
+        }
         
         // Replace the "Return to AI" section with a "Talk to human" option
         const humanSupportOption = document.querySelector('.human-support-option');
         if (humanSupportOption) {
+            const talkToHumanText = currentLang === 'el' ? 'Μιλήστε με έναν υπάλληλο' : 'Talk to a human concierge';
+            
             humanSupportOption.innerHTML = `
                 <a class="human-support-link" id="talk-to-human">
-                    <i class="bi bi-person-circle"></i> Talk to a human concierge
+                    <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">${talkToHumanText}</span>
                 </a>
             `;
         }
@@ -825,4 +882,60 @@ function addHumanAgentMessage(message) {
     }, 100);
     
     return messageElement;
+}
+
+// Function to clear the chat and reset to initial state
+function clearChat() {
+    const chatMessages = document.getElementById('chat-messages');
+    
+    if (!chatMessages) return;
+    
+    // Store the human support option before clearing
+    const humanSupportOption = document.getElementById('human-support-option');
+    
+    // Clear all messages
+    chatMessages.innerHTML = '';
+    
+    // Reset to AI mode if we were in human mode
+    if (window.isHumanMode) {
+        window.isHumanMode = false;
+    }
+    
+    // Re-add the human support option with the talk-to-human content
+    if (humanSupportOption) {
+        // Get current language from cookie or default to 'el'
+        const currentLang = getCookie('app_language') || 'el';
+        const talkToHumanText = currentLang === 'el' ? 'Μιλήστε με έναν υπάλληλο' : 'Talk to a human concierge';
+        
+        humanSupportOption.innerHTML = `
+            <a class="human-support-link" id="talk-to-human">
+                <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">${talkToHumanText}</span>
+            </a>
+        `;
+        chatMessages.appendChild(humanSupportOption);
+    }
+    
+    // Add welcome message based on current language
+    setTimeout(() => {
+        // Get current language from cookie or default to 'el'
+        const currentLang = getCookie('app_language') || 'el';
+        
+        if (currentLang === 'el') {
+            addBotMessage("Γεια σας! Είμαι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω κατά τη διάρκεια της διαμονής σας; Αν προτιμάτε να μιλήσετε με έναν ανθρώπινο υπάλληλο, κάντε κλικ στην επιλογή παρακάτω.");
+        } else {
+            addBotMessage("Hello! I'm your AI assistant. How can I help you during your stay? If you prefer to speak with a human concierge, click the option below.");
+        }
+    }, 300);
+}
+
+// Helper function to get cookies
+function getCookie(name) {
+    const nameEQ = name + '=';
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
 } 
