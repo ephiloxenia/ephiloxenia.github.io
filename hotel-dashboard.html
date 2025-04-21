@@ -16,8 +16,8 @@
             opacity: 1 !important;
         }
         .search-container {
-            max-width: 360px;
-            width: 100%;
+            position: relative;
+            width: 300px;
         }
         
         /* Header layout styling */
@@ -34,17 +34,17 @@
         }
         
         .search-results {
-            width: 100%;
-            max-height: 350px;
-            overflow-y: auto;
-            background-color: white;
-            border-radius: 0.375rem;
-            z-index: 1050;
+            position: absolute;
             top: 100%;
             left: 0;
-            margin-top: 0.25rem;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.08);
+            z-index: 1000;
+            max-height: 350px;
+            overflow-y: auto;
+            margin-top: 5px;
         }
         .search-result-item {
             padding: 0.75rem 1rem;
@@ -200,6 +200,13 @@
             color: #666;
         }
         
+        /* Ensure marketing suite icon is visible */
+        .nav-link[href="marketing-suite.html"] i.bi-megaphone {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
         /* Navigation buttons styling - using global section-nav styles */
         
         /* Override for section-nav buttons */
@@ -253,13 +260,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="guest-insights.html">
                         <i class="bi bi-people"></i>
-                        <span>Guest Insights</span>
+                        <span>360° Guest View</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="operations.html">
-                        <i class="bi bi-gear"></i>
-                        <span>Operations</span>
+                    <a class="nav-link" href="marketing-suite.html">
+                        <i class="bi bi-megaphone"></i>
+                        <span>Marketing Suite</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -330,6 +337,7 @@
                 <button class="btn btn-outline-primary" data-section="recent-activity">Recent Activity</button>
                 <button class="btn btn-outline-primary" data-section="room-status">Room Status</button>
                 <button class="btn btn-outline-primary" data-section="tasks">Tasks</button>
+                <button class="btn btn-outline-primary" data-section="operations">Operations</button>
                 <button class="btn btn-outline-primary" data-section="performance">Performance</button>
             </div>
         </div>
@@ -370,64 +378,6 @@
                             <small class="text-muted">vs last period</small>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts -->
-        <div class="row mb-4 section-id" id="charts">
-            <div class="col-lg-8 mb-3">
-                <div class="card dashboard-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Occupancy Trends</h5>
-                        <div class="chart-container">
-                            <canvas id="occupancy-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-3">
-                <div class="card dashboard-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Booking Sources</h5>
-                        <div class="chart-container">
-                            <canvas id="booking-source-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-lg-6 mb-3">
-                <div class="card dashboard-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Revenue Breakdown</h5>
-                        <div class="chart-container">
-                            <canvas id="revenue-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div class="card dashboard-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Guest Satisfaction Metrics</h5>
-                        <div class="chart-container">
-                            <canvas id="guest-satisfaction-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Forecast Section -->
-        <div class="card dashboard-card mb-4 section-id" id="forecast">
-            <div class="card-body">
-                <h5 class="card-title">30-Day Forecast</h5>
-                <p class="text-muted">AI-driven predictions for the next 30 days</p>
-                <div class="chart-container" style="height: 350px;">
-                    <canvas id="forecast-chart"></canvas>
                 </div>
             </div>
         </div>
@@ -675,132 +625,108 @@
             </div>
         </div>
         
-        <!-- Weather & Staff Schedule Row -->
-        <div class="row mb-4">
-            <!-- Weather Forecast -->
+        <!-- Maintenance & Housekeeping Row -->
+        <div class="row mb-4 section-id" id="operations">
+            <!-- Maintenance Card -->
             <div class="col-md-6 mb-3">
-                <div class="card dashboard-card h-100">
+                <div class="card dashboard-card h-100" id="maintenance">
                     <div class="card-body">
-                        <h5 class="card-title">Local Weather Forecast</h5>
-                        <div class="weather-section">
-                            <div class="current-weather d-flex align-items-center mb-3">
-                                <div class="weather-icon me-3">
-                                    <i class="bi bi-brightness-high-fill fs-1 text-warning"></i>
-                                </div>
-                                <div class="weather-info">
-                                    <h2 class="mb-0">24°C</h2>
-                                    <p class="text-muted mb-0">Sunny, Athens</p>
-                                </div>
-                                <div class="weather-details ms-auto text-end">
-                                    <div><i class="bi bi-moisture me-1"></i> Humidity: 45%</div>
-                                    <div><i class="bi bi-wind me-1"></i> Wind: 10 km/h</div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Maintenance</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#maintenanceScheduleModal">
+                                <i class="bi bi-tools"></i> Schedule Maintenance
+                            </button>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="display-5 me-3 text-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
                                 </div>
                             </div>
-                            <div class="forecast-days">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <div class="forecast-day">
-                                            <div class="day">Tue</div>
-                                            <div><i class="bi bi-sun fs-4 text-warning"></i></div>
-                                            <div class="temp">25°C</div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center">
-                                        <div class="forecast-day">
-                                            <div class="day">Wed</div>
-                                            <div><i class="bi bi-cloud-sun fs-4 text-primary"></i></div>
-                                            <div class="temp">23°C</div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center">
-                                        <div class="forecast-day">
-                                            <div class="day">Thu</div>
-                                            <div><i class="bi bi-cloud fs-4 text-secondary"></i></div>
-                                            <div class="temp">21°C</div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center">
-                                        <div class="forecast-day">
-                                            <div class="day">Fri</div>
-                                            <div><i class="bi bi-cloud-drizzle fs-4 text-primary"></i></div>
-                                            <div class="temp">19°C</div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center">
-                                        <div class="forecast-day">
-                                            <div class="day">Sat</div>
-                                            <div><i class="bi bi-sun fs-4 text-warning"></i></div>
-                                            <div class="temp">22°C</div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div>
+                                <div class="stat-value">3</div>
+                                <div class="text-muted">Open requests</div>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <p class="text-muted mb-0 small">Weather may affect guest activities and outdoor events. <a href="#" class="text-primary">See local attractions</a></p>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Issue</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>302</td>
+                                        <td>Air conditioning issue</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>215</td>
+                                        <td>Bathroom leak</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                        <td><span class="badge bg-info">In Progress</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>412</td>
+                                        <td>TV not working</td>
+                                        <td><span class="badge bg-info">Low</span></td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Staff Schedule -->
+            <!-- Housekeeping Card -->
             <div class="col-md-6 mb-3">
-                <div class="card dashboard-card h-100">
+                <div class="card dashboard-card h-100" id="housekeeping">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0">Staff Schedule</h5>
-                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-calendar3"></i> Full Schedule</button>
+                            <h5 class="card-title mb-0">Housekeeping</h5>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-check2-all"></i> View Details
+                            </button>
                         </div>
-                        <div class="schedule-content">
-                            <div class="schedule-section mb-3">
-                                <h6 class="text-primary">Front Desk</h6>
-                                <div class="staff-schedule-items">
-                                    <div class="staff-item d-flex align-items-center mb-2">
-                                        <img src="img/avatar-1.jpg" alt="Staff Avatar" class="staff-avatar me-2">
-                                        <div>
-                                            <div class="staff-name">Maria Papadopoulou</div>
-                                            <div class="staff-schedule text-muted small">08:00 - 16:00</div>
-                                        </div>
-                                        <div class="staff-status ms-auto">
-                                            <span class="badge bg-success">On Duty</span>
-                                        </div>
-                                    </div>
-                                    <div class="staff-item d-flex align-items-center mb-2">
-                                        <img src="img/avatar-2.jpg" alt="Staff Avatar" class="staff-avatar me-2">
-                                        <div>
-                                            <div class="staff-name">Nikos Georgiou</div>
-                                            <div class="staff-schedule text-muted small">16:00 - 00:00</div>
-                                        </div>
-                                        <div class="staff-status ms-auto">
-                                            <span class="badge bg-secondary">Off Duty</span>
-                                        </div>
-                                    </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="display-5 me-3 text-primary">
+                                    <i class="bi bi-check-circle"></i>
                                 </div>
                             </div>
-                            
-                            <div class="schedule-section">
-                                <h6 class="text-primary">Housekeeping</h6>
-                                <div class="staff-schedule-items">
-                                    <div class="staff-item d-flex align-items-center mb-2">
-                                        <img src="img/avatar-3.jpg" alt="Staff Avatar" class="staff-avatar me-2">
-                                        <div>
-                                            <div class="staff-name">Sofia Antoniadis</div>
-                                            <div class="staff-schedule text-muted small">07:00 - 15:00</div>
-                                        </div>
-                                        <div class="staff-status ms-auto">
-                                            <span class="badge bg-success">On Duty</span>
-                                        </div>
-                                    </div>
-                                    <div class="staff-item d-flex align-items-center mb-2">
-                                        <img src="img/avatar-4.jpg" alt="Staff Avatar" class="staff-avatar me-2">
-                                        <div>
-                                            <div class="staff-name">Andreas Dimitriou</div>
-                                            <div class="staff-schedule text-muted small">07:00 - 15:00</div>
-                                        </div>
-                                        <div class="staff-status ms-auto">
-                                            <span class="badge bg-success">On Duty</span>
-                                        </div>
-                                    </div>
+                            <div>
+                                <div class="stat-value">28/32</div>
+                                <div class="text-muted">Rooms cleaned</div>
+                            </div>
+                        </div>
+                        <div class="progress mb-3" style="height: 24px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <span class="fw-bold">75% Complete</span>
+                            </div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-4">
+                                <div class="border rounded p-2">
+                                    <div class="fs-5 fw-bold text-success">22</div>
+                                    <small class="text-muted">Clean</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border rounded p-2">
+                                    <div class="fs-5 fw-bold text-warning">6</div>
+                                    <small class="text-muted">In Progress</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border rounded p-2">
+                                    <div class="fs-5 fw-bold text-danger">4</div>
+                                    <small class="text-muted">Pending</small>
                                 </div>
                             </div>
                         </div>
@@ -956,6 +882,54 @@
         </div>
     </div>
 
+    <!-- Maintenance Schedule Modal -->
+    <div class="modal fade" id="maintenanceScheduleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Schedule Maintenance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="maintenanceForm">
+                        <div class="mb-3">
+                            <label class="form-label">Room</label>
+                            <select class="form-select" required>
+                                <option>Select Room</option>
+                                <!-- Rooms will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Maintenance Type</label>
+                            <select class="form-select" required>
+                                <option>Regular Cleaning</option>
+                                <option>Deep Cleaning</option>
+                                <option>Repair</option>
+                                <option>Inspection</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <input type="time" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Schedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/charts.js"></script>
@@ -973,6 +947,7 @@
             
             // Initialize section navigation
             initializeSectionNavigation();
+
         });
         
         function initializePlaceholderAnimation() {
