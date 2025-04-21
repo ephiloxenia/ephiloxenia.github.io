@@ -8,6 +8,52 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary: #0c3b80;
+            --primary-light: #4a88e0;
+            --primary-dark: #062554;
+            --nav-bg-gradient: linear-gradient(120deg, #0c3b80 0%, #4a88e0 65%, #74b9ff 100%);
+        }
+        
+        body.login-page {
+            background: var(--nav-bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 15px;
+        }
+        
+        .logo-container img {
+            height: 70px;
+            margin-bottom: 10px;
+        }
+        
+        .brand-logo {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(12, 59, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(12, 59, 128, 0.3);
+            background: var(--primary-dark);
+        }
+    </style>
 </head>
 <body class="login-page">
     <div class="container">

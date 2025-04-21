@@ -15505,7 +15505,7 @@
         <div class="mobile-nav">
             <div class="mobile-nav-item active" data-tab="home">
                 <i class="bi bi-house"></i>
-                    <small data-i18n="home">Home</small>
+                    <small data-i18n="home">Αρχική</small>
             </div>
                 <div class="mobile-nav-item assistant-nav-item" data-tab="concierge">
                     <i class="bi bi-robot"></i>
@@ -15513,11 +15513,11 @@
             </div>
             <div class="mobile-nav-item" data-tab="experience">
                 <i class="bi bi-compass"></i>
-                    <small data-i18n="experiences">Explore</small>
+                    <small data-i18n="experiences">Εμπειρίες</small>
             </div>
             <div class="mobile-nav-item" data-tab="moments">
                 <i class="bi bi-images"></i>
-                <small data-i18n="moments">Memories</small>
+                <small data-i18n="moments">Moments</small>
             </div>
         </div>
 

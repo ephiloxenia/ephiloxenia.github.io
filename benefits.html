@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Philoxenia | Smart Hospitality Platform</title>
+    <title>Benefits | e-Philoxenia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -752,9 +752,19 @@
                 transform: translateY(0) translateX(0);
             }
         }
+        
+        /* Additional styles for Benefits page */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
     </style>
 </head>
-<body class="index-page">
+<body>
     <!-- Navigation -->
     <div class="navbar-container">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-landing">
@@ -769,7 +779,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                            <a class="nav-link active" href="index.html#features">Home</a>
+                            <a class="nav-link" href="index.html#features">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -782,7 +792,7 @@
                             </ul>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="benefits.html">Benefits</a>
+                            <a class="nav-link active" href="benefits.html">Benefits</a>
                     </li>
                     <li class="nav-item">
                             <a class="nav-link" href="index.html#contact">Contact</a>
@@ -799,190 +809,144 @@
     </nav>
     </div>
 
-    <!-- Hero Section with Motion Background -->
-    <section class="hero-section">
-        <div class="hero-background" id="dots-background"></div>
-        <div class="hero-pattern pattern-top-right"></div>
-        <div class="hero-pattern pattern-bottom-left"></div>
-        
+    <!-- Benefits Section -->
+    <section class="py-5 mt-5" id="benefits">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <div class="hero-title-container">
-                            <h1 class="hero-title">
-                                <span style="background: linear-gradient(to right, #0c3b80, #4a88e0); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;">Smarter Stays.</span> 
-                                <span style="background: linear-gradient(to right, #4a88e0, #6abbfb); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;">Deeper Connections.</span>
-                            </h1>
-                    </div>
-                        
-                        <div class="hero-box" style="background: white; border-radius: 15px; padding: 35px; box-shadow: 0 12px 30px rgba(0,0,0,0.07); border-left: 4px solid var(--primary);">
-                            <p class="hero-tagline mb-4" style="font-size: 1.8rem; font-weight: 600; color: var(--primary); margin-bottom: 0;" id="typing-text"></p>
-                            
-                            <p style="font-size: 1.5rem; font-weight: 500; margin-top: 30px; color: #333; line-height: 1.5;">
-                                Redefining the way guests experience, share, and connect with their stay.
-                            </p>
-                    </div>
-                        
-                <div class="demo-buttons">
-                            <a href="hotel-login.html" class="btn btn-primary demo-btn">
-                                <i class="bi bi-building"></i>Hotel Demo
-                            </a>
-                            <a href="guest-login.html" class="btn btn-outline-primary demo-btn">
-                                <i class="bi bi-person"></i>Guest Demo
-                            </a>
-                        </div>
+            <!-- Benefits Header -->
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="display-4 fw-bold mb-4" style="color: #0c3b80;">Benefits of ePhiloxenia</h1>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <p class="lead mb-5" style="font-size: 1.2rem; color: #444;">
+                            Discover how our AI-powered hospitality platform can transform your guest experience and streamline your operations.
+                        </p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="hero-image-container">
-                        <div class="hero-images">
-                            <img src="img/guest-app-preview.png" alt="Guest Profile" class="floating-image floating-image-1">
-                            <img src="img/hotel-dashboard.png" alt="Analytics Dashboard" class="floating-image floating-image-2">
-                            <img src="img/guest-demo.png" alt="Mobile Experience" class="floating-image floating-image-3">
-            </div>
-        </div>
-                        </div>
-                    </div>
-                </div>
-    </section>
-
-    <!-- Value Proposition Section -->
-    <section class="py-5" id="value-proposition">
-        <div class="container py-5">
-            <div class="position-relative mb-5">
-                <div class="text-center">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--primary);">Why <span id="ephiloxenia-text" style="color: #4a88e0;"></span></h2>
-                    
-                    <div class="position-relative">
-                        <div class="position-absolute start-0 top-50" style="z-index: -1; transform: translateX(5%);">
-                            <div style="width: 150px; height: 150px; background-color: rgba(74, 136, 224, 0.1); border-radius: 50%;"></div>
-        </div>
-                        <div class="position-absolute end-0 top-0" style="z-index: -1; transform: translateY(50%) translateX(-5%);">
-                            <div style="width: 120px; height: 120px; background-color: rgba(74, 136, 224, 0.1); border-radius: 50%;"></div>
-                </div>
-                
-                        <p class="lead mb-4 mx-auto" style="font-size: 1.3rem; font-weight: 500; color: #333; line-height: 1.6; max-width: 1000px;">ePhiloxenia revolutionizes hospitality with an AI-powered platform that transforms every guest interaction into a personalized and memorable experience.</p>
-                            
-                        <div class="description-card p-5 mt-4 mb-4 rounded-4 shadow-sm mx-auto" style="background-color: white; border-left: 4px solid var(--primary); max-width: 1000px;">
-                            <h3 class="mb-4 text-center" style="color: #0c3b80; font-weight: 600;">Designed for Visionary Hoteliers</h3>
-                            <p class="text-center mb-4" style="color: #555; font-size: 1.1rem;">Empowering forward-thinking hotels to transform every guest interaction into a personalized experience.</p>
-                            
-                            <div class="row g-4 justify-content-center">
-                                <div class="col-md-4 text-center">
-                                    <div class="mb-3"><i class="bi bi-star text-primary" style="font-size: 2.5rem;"></i></div>
-                                    <h5 class="mb-2" style="color: #0c3b80; font-weight: 600;">Exceptional Service</h5>
-                                    <p style="color: #555;">Equip your team with the tools to deliver unforgettable, seamless service at every touchpoint.</p>
-                            </div>
-                                <div class="col-md-4 text-center">
-                                    <div class="mb-3"><i class="bi bi-graph-up-arrow text-primary" style="font-size: 2.5rem;"></i></div>
-                                    <h5 class="mb-2" style="color: #0c3b80; font-weight: 600;">Preference Prediction</h5>
-                                    <p style="color: #555;">Anticipate guest needs before they are even expressed, creating truly intuitive hospitality.</p>
-                        </div>
-                                <div class="col-md-4 text-center">
-                                    <div class="mb-3"><i class="bi bi-gear text-primary" style="font-size: 2.5rem;"></i></div>
-                                    <h5 class="mb-2" style="color: #0c3b80; font-weight: 600;">Operational Excellence</h5>
-                                    <p style="color: #555;">Streamline operations and optimize efficiency through a single intelligent, intuitive platform.</p>
-                    </div>
-                </div>
-                        </div>
-                    </div>
-                </div>
-                
-            <!-- New Feature Section with Triparound-like Style -->
-            <div class="position-relative py-5 mt-5">
-            <div class="text-center mb-5">
-                    <h1 class="display-4 fw-bold mb-2" style="color: #0c3b80;">Turn Your Hotel Team into</h1>
-                    <h1 class="display-4 fw-bold mb-4" style="color: #4a88e0;" id="architects-text"></h1>
-                    <p class="lead mb-5" style="font-size: 1.3rem; color: #444; max-width: 100%; margin: 0 auto;">ePhiloxenia turns hotel staff into intuitive experience creators powered by real-time data, automation, and emotional intelligence.</p>
-                            </div>
-            
-                <!-- Background Shape -->
-                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(245,249,255,0) 0%, rgba(245,249,255,1) 100%); z-index: -1; transform: translateY(10%);"></div>
-                
-                <!-- Decorative Bubbles -->
-                <div class="decorative-bubbles">
-                    <div class="bubble bubble-1"></div>
-                    <div class="bubble bubble-2"></div>
-                    <div class="bubble bubble-3"></div>
-                    <div class="bubble bubble-4"></div>
-                    <div class="bubble bubble-5"></div>
-                    <div class="bubble bubble-6"></div>
             </div>
             
-                <div class="row g-5 align-items-center justify-content-between">
-                    <!-- Left Features -->
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="100">
-                                    <h3 class="mb-3 feature-title">360 Guest Profile View</h3>
-                                    <p class="mb-0 feature-text">Get a dynamic, evolving view of each guest needs, preferences, behavior, and emotional insights all automatically summarized for your team.</p>
-                                    </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="200">
-                                    <h3 class="mb-3 feature-title">AI-Driven Behavior & Sentiment Analysis</h3>
-                                    <p class="mb-0 feature-text">Leverage machine learning to monitor guest behavior and emotional patterns, detecting potential issues before they arise.</p>
-                                </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="300">
-                                    <h3 class="mb-3 feature-title">Gamified Feedback with Rewards</h3>
-                                    <p class="mb-0 feature-text">Engage guests with interactive feedback flows that reward participation boosting satisfaction and gathering critical insights.</p>
-                                    </div>
-                                </div>
-                                    </div>
-                                    </div>
-            
-                    <!-- Center Image -->
-                    <div class="col-lg-5 text-center position-relative">
-                        <div class="feature-image-container" data-aos="fade-up" data-aos-delay="150">
-                            <img src="img/guest-app-preview.png" alt="e-Philoxenia Guest App" class="img-fluid rounded-4 feature-main-image">
-                            <div class="feature-image-shadow"></div>
+            <!-- Benefits Cards -->
+            <div class="row g-4 justify-content-center">
+                <!-- Enhanced Guest Experience -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 hover-lift">
+                        <div class="card-header p-0 position-relative">
+                            <div style="height: 8px; background: linear-gradient(90deg, #0c3b80, #4a88e0);"></div>
+                        </div>
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="mb-4">
+                                <i class="bi bi-emoji-smile-fill" style="font-size: 2.5rem; color: #4a88e0;"></i>
+                            </div>
+                            <h3 class="card-title fw-bold mb-3" style="color: #0c3b80;">Enhanced Guest Experience</h3>
+                            <p class="card-text">Create personalized, memorable stays that keep guests coming back and sharing their experiences.</p>
                             
-                            <!-- Decorative Elements -->
-                            <div class="decorative-circle circle-1"></div>
-                            <div class="decorative-circle circle-2"></div>
-                            <div class="decorative-line line-1"></div>
-                            <div class="decorative-line line-2"></div>
+                            <ul class="mt-4 list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #4a88e0;"></i>
+                                    <span>Personalized recommendations based on guest preferences</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #4a88e0;"></i>
+                                    <span>24/7 AI concierge for instant guest assistance</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #4a88e0;"></i>
+                                    <span>Seamless communication across all touchpoints</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                    <!-- Right Features -->
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="100">
-                                    <h3 class="mb-3 feature-title">AI Guest Assistant</h3>
-                                    <p class="mb-0 feature-text">Offer 24/7 personalized assistance. Guests can ask questions, book services, solve issues, and enjoy a frictionless stay.</p>
-                                    </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="200">
-                                    <h3 class="mb-3 feature-title">Experience & Service Booking</h3>
-                                    <p class="mb-0 feature-text">Enable guests to browse, select, and book activities, spa services, dining, and more directly from their mobile device, no downloads required.</p>
-                                </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="300">
-                                    <h3 class="mb-3 feature-title">Moments Guest Social Sharing</h3>
-                                    <p class="mb-0 feature-text">Turn guest stays into shared experiences. Allow guests to upload photos, share memories, and connect with others through your brand.</p>
-                                    </div>
-                                </div>
-                                    </div>
-                                    </div>
-                                </div>
+                
+                <!-- Increased Revenue -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 hover-lift">
+                        <div class="card-header p-0 position-relative">
+                            <div style="height: 8px; background: linear-gradient(90deg, #2ecc71, #55efc4);"></div>
+                        </div>
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="mb-4">
+                                <i class="bi bi-graph-up-arrow" style="font-size: 2.5rem; color: #2ecc71;"></i>
+                            </div>
+                            <h3 class="card-title fw-bold mb-3" style="color: #0c3b80;">Increased Revenue</h3>
+                            <p class="card-text">Drive more bookings, upsells, and repeat business through AI-powered recommendations and marketing.</p>
+                            
+                            <ul class="mt-4 list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #2ecc71;"></i>
+                                    <span>Intelligent upselling at optimal moments</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #2ecc71;"></i>
+                                    <span>Increased bookings for amenities and services</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #2ecc71;"></i>
+                                    <span>Higher guest retention and repeat bookings</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Operational Efficiency -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 hover-lift">
+                        <div class="card-header p-0 position-relative">
+                            <div style="height: 8px; background: linear-gradient(90deg, #d4af37, #f1c40f);"></div>
+                        </div>
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="mb-4">
+                                <i class="bi bi-gear-fill" style="font-size: 2.5rem; color: #d4af37;"></i>
+                            </div>
+                            <h3 class="card-title fw-bold mb-3" style="color: #0c3b80;">Operational Efficiency</h3>
+                            <p class="card-text">Streamline staff workflows, automate routine tasks, and optimize resources across your property.</p>
+                            
+                            <ul class="mt-4 list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #d4af37;"></i>
+                                    <span>Automated guest request handling and routing</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #d4af37;"></i>
+                                    <span>Predictive staffing based on real-time demands</span>
+                                </li>
+                                <li class="d-flex align-items-start">
+                                    <i class="bi bi-check-circle-fill me-2 mt-1" style="color: #d4af37;"></i>
+                                    <span>Intelligent resource allocation and optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="text-center mt-5 pt-4" data-aos="fade-up">
+                <a href="hotel-login.html" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm">
+                    <i class="bi bi-building me-2"></i> Schedule a Demo
+                </a>
+                <p class="mt-3 text-muted">See how ePhiloxenia can transform your hotel experience</p>
             </div>
         </div>
     </section>
+    
+    <style>
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+    </style>
 
     <!-- Footer Section -->
     <footer class="footer-section">
         <!-- Wave Separator -->
         <div class="footer-wave">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,122.7C384,117,480,139,576,149.3C672,160,768,160,864,138.7C960,117,1056,75,1152,69.3C1248,64,1344,96,1392,112L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
-                </div>
+        </div>
                 
     <div class="footer-content">
         <div class="container">
@@ -1010,13 +974,13 @@
                         <div class="footer-contact-item">
                             <span>Address:</span>
                             <p>Thessaloniki, Greece</p>
-                </div>
+                        </div>
                         <div class="footer-contact-item">
                             <span>Email:</span>
                             <p><a href="mailto:info@ephiloxenia.com">info@ephiloxenia.com</a></p>
+                        </div>
+                    </div>
                 </div>
-                    </div>
-                    </div>
             
                 <!-- Newsletter -->
                 <div class="col-lg-4">
@@ -1026,7 +990,7 @@
                         <div class="input-group mb-3">
                             <input type="email" class="form-control" placeholder="Your E-mail">
                             <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </div>
+                        </div>
                         <div class="footer-recaptcha mb-3">
                             <div class="d-flex align-items-center">
                                 <small class="text-muted">
@@ -1034,25 +998,25 @@
                                     <a href="#" class="text-decoration-none ms-2">Privacy</a> · 
                                     <a href="#" class="text-decoration-none">Terms</a>
                                 </small>
-                    </div>
-                                        </div>
-                                    </form>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             
             <!-- Copyright -->
             <div class="footer-bottom">
-            <div class="row">
+                <div class="row">
                     <div class="col-md-6 text-center text-md-start">
                         <p>&copy; 2025 ePhiloxenia. All rights reserved.</p>
-                </div>
+                    </div>
                     <div class="col-md-6 text-center text-md-end">
                         <p>Designed with <i class="bi bi-heart-fill text-danger"></i> for better hospitality</p>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1061,141 +1025,15 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize AOS for animations if available
         if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
+            AOS.init({
+                duration: 800,
                 once: false,
                 offset: 100,
-            easing: 'ease-in-out',
-            mirror: false
-        });
-        }
-        
-        // Typing effect for hero tagline
-        const text = "More than a guest app.\nMore than convenience.";
-        const typingText = document.getElementById('typing-text');
-        let i = 0;
-        const typingSpeed = 80; // milliseconds
-        
-        function typeWriter() {
-            if (i < text.length) {
-                if (text.charAt(i) === '\n') {
-                    typingText.innerHTML += '<br>';
-                } else {
-                    typingText.innerHTML += text.charAt(i);
-                }
-                i++;
-                setTimeout(typeWriter, typingSpeed);
-            }
-        }
-        
-        // Start typing effect
-        setTimeout(typeWriter, 500);
-        
-        // Architects text typing effect
-        const architectsText = "Experience Architects.";
-        const architectsElement = document.getElementById('architects-text');
-        let archIndex = 0;
-        const archTypingSpeed = 100; // milliseconds
-        let architectsStarted = false;
-        
-        function typeArchitectsText() {
-            if (archIndex < architectsText.length) {
-                architectsElement.innerHTML += architectsText.charAt(archIndex);
-                archIndex++;
-                setTimeout(typeArchitectsText, archTypingSpeed);
-            }
-        }
-        
-        // ePhiloxenia title typing effect
-        const ephiloxeniaText = "ePhiloxenia";
-        const ephiloxeniaElement = document.getElementById('ephiloxenia-text');
-        let ephiloxeniaIndex = 0;
-        const ephiloxeniaTypingSpeed = 120; // milliseconds
-        let ephiloxeniaStarted = false;
-        
-        function typeEphiloxeniaText() {
-            if (ephiloxeniaIndex < ephiloxeniaText.length) {
-                ephiloxeniaElement.innerHTML += ephiloxeniaText.charAt(ephiloxeniaIndex);
-                ephiloxeniaIndex++;
-                setTimeout(typeEphiloxeniaText, ephiloxeniaTypingSpeed);
-            }
-        }
-        
-        // Scroll-based animations
-        window.addEventListener('scroll', function() {
-            // Navbar scroll effect
-            const navbar = document.querySelector('.navbar-landing');
-            if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
-            }
-            
-            // Check if ephiloxenia is in view
-            const ephiloxeniaSection = document.querySelector('#value-proposition');
-            if (ephiloxeniaSection && !ephiloxeniaStarted) {
-                const ephiloxeniaSectionTop = ephiloxeniaSection.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (ephiloxeniaSectionTop < windowHeight * 0.75 && ephiloxeniaSectionTop > 0) {
-                    ephiloxeniaStarted = true;
-                    ephiloxeniaElement.innerHTML = '';
-                    ephiloxeniaIndex = 0;
-                    setTimeout(typeEphiloxeniaText, 300);
-                }
-            }
-            
-            // Check if architects is in view
-            const architectsSection = document.querySelector('#architects-text');
-            if (architectsSection && !architectsStarted) {
-                const architectsSectionTop = architectsSection.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (architectsSectionTop < windowHeight * 0.75 && architectsSectionTop > 0) {
-                    architectsStarted = true;
-                    architectsElement.innerHTML = '';
-                    archIndex = 0;
-                    setTimeout(typeArchitectsText, 300);
-                }
-            }
-        });
-        
-        // Create animated dots for hero background
-        const dotsBackground = document.getElementById('dots-background');
-        if (dotsBackground) {
-            const dotCount = 20;
-            
-            for (let i = 0; i < dotCount; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                
-                // Random position
-                const xPos = Math.random() * 100;
-                const yPos = Math.random() * 100;
-                
-                // Random size between 5 and 15px
-                const size = Math.random() * 10 + 5;
-                
-                // Random opacity
-                const opacity = Math.random() * 0.2 + 0.05;
-                
-                // Random animation duration
-                const animDuration = Math.random() * 10 + 15;
-                
-                dot.style.left = `${xPos}%`;
-                dot.style.top = `${yPos}%`;
-                dot.style.width = `${size}px`;
-                dot.style.height = `${size}px`;
-                dot.style.opacity = opacity;
-                dot.style.animation = `float ${animDuration}s ease-in-out infinite`;
-                dot.style.animationDelay = `${Math.random() * 5}s`;
-                
-                dotsBackground.appendChild(dot);
-            }
+                easing: 'ease-in-out',
+                mirror: false
+            });
         }
     });
     </script>
 </body>
-</html>
+</html> 
