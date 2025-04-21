@@ -330,12 +330,13 @@
                 <button class="btn btn-outline-primary" data-section="recent-activity">Recent Activity</button>
                 <button class="btn btn-outline-primary" data-section="room-status">Room Status</button>
                 <button class="btn btn-outline-primary" data-section="tasks">Tasks</button>
+                <button class="btn btn-outline-primary" data-section="performance">Performance</button>
             </div>
         </div>
 
         <!-- Key Metrics -->
         <div class="row mb-4 section-id" id="key-metrics">
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-md-6 col-lg-4 mb-3">
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <div class="stat-label">Occupancy Rate</div>
@@ -347,19 +348,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
-                <div class="card dashboard-card">
-                    <div class="card-body">
-                        <div class="stat-label">Average Daily Rate</div>
-                        <div class="stat-value" id="avg-daily-rate">€142</div>
-                        <div class="d-flex align-items-center">
-                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> €8</span>
-                            <small class="text-muted">vs last period</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-md-6 col-lg-4 mb-3">
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <div class="stat-label">Revenue Per Available Room</div>
@@ -371,7 +360,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-md-6 col-lg-4 mb-3">
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <div class="stat-label">Guest Satisfaction</div>
@@ -809,14 +798,104 @@
                                             <div class="staff-schedule text-muted small">07:00 - 15:00</div>
                                         </div>
                                         <div class="staff-status ms-auto">
-                                            <span class="badge bg-warning">On Break</span>
+                                            <span class="badge bg-success">On Duty</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="text-center mt-3">
-                                <button class="btn btn-sm btn-outline-primary"><i class="bi bi-person-plus"></i> Manage Staff</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Performance & Key Performance Indicators -->
+        <div class="row mb-4 section-id" id="performance">
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Department Performance</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Performance</th>
+                                        <th>Target</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Front Office</td>
+                                        <td>92%</td>
+                                        <td>90%</td>
+                                        <td><span class="badge bg-success">Exceeding</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Housekeeping</td>
+                                        <td>88%</td>
+                                        <td>90%</td>
+                                        <td><span class="badge bg-warning">Below Target</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>F&B</td>
+                                        <td>95%</td>
+                                        <td>90%</td>
+                                        <td><span class="badge bg-success">Exceeding</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maintenance</td>
+                                        <td>85%</td>
+                                        <td>90%</td>
+                                        <td><span class="badge bg-warning">Below Target</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="card dashboard-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Key Performance Indicators</h5>
+                        <div class="kpi-list">
+                            <div class="kpi-item mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>RevPAR</span>
+                                    <span class="fw-bold">€113.10</span>
+                                </div>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="kpi-item mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>ADR</span>
+                                    <span class="fw-bold">€145.00</span>
+                                </div>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="kpi-item mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>GOP</span>
+                                    <span class="fw-bold">42%</span>
+                                </div>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-warning" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>NPS</span>
+                                    <span class="fw-bold">8.5</span>
+                                </div>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 95%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
