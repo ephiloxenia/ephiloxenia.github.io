@@ -908,78 +908,7 @@
                     <div class="bubble bubble-4"></div>
                     <div class="bubble bubble-5"></div>
                     <div class="bubble bubble-6"></div>
-            </div>
-            
-                <div class="row g-5 align-items-center justify-content-between">
-                    <!-- Left Features -->
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="100">
-                                    <h3 class="mb-3 feature-title">360 Guest Profile View</h3>
-                                    <p class="mb-0 feature-text">Get a dynamic, evolving view of each guest needs, preferences, behavior, and emotional insights all automatically summarized for your team.</p>
-                                    </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="200">
-                                    <h3 class="mb-3 feature-title">AI-Driven Behavior & Sentiment Analysis</h3>
-                                    <p class="mb-0 feature-text">Leverage machine learning to monitor guest behavior and emotional patterns, detecting potential issues before they arise.</p>
-                                </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-right" data-aos-delay="300">
-                                    <h3 class="mb-3 feature-title">Gamified Feedback with Rewards</h3>
-                                    <p class="mb-0 feature-text">Engage guests with interactive feedback flows that reward participation boosting satisfaction and gathering critical insights.</p>
-                                    </div>
-                                </div>
-                                    </div>
-                                    </div>
-            
-                    <!-- Center Image -->
-                    <div class="col-lg-5 text-center position-relative">
-                        <div class="feature-image-container" data-aos="fade-up" data-aos-delay="150">
-                            <img src="img/guest-app-preview.png" alt="e-Philoxenia Guest App" class="img-fluid rounded-4 feature-main-image">
-                            <div class="feature-image-shadow"></div>
-                            
-                            <!-- Decorative Elements -->
-                            <div class="decorative-circle circle-1"></div>
-                            <div class="decorative-circle circle-2"></div>
-                            <div class="decorative-line line-1"></div>
-                            <div class="decorative-line line-2"></div>
-                    </div>
                 </div>
-
-                    <!-- Right Features -->
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="100">
-                                    <h3 class="mb-3 feature-title">AI Guest Assistant</h3>
-                                    <p class="mb-0 feature-text">Offer 24/7 personalized assistance. Guests can ask questions, book services, solve issues, and enjoy a frictionless stay.</p>
-                                    </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="200">
-                                    <h3 class="mb-3 feature-title">Experience & Service Booking</h3>
-                                    <p class="mb-0 feature-text">Enable guests to browse, select, and book activities, spa services, dining, and more directly from their mobile device, no downloads required.</p>
-                                </div>
-                                    </div>
-                            <div class="col-12 mt-4">
-                                <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="300">
-                                    <h3 class="mb-3 feature-title">Moments – Social Guest Sharing with Rewards</h3>
-                                    <p class="mb-0 feature-text">Turn every guest experience into a social connection. Guests can share their moments, upload photos, and engage with others. For each shared moment, they earn points that can be redeemed for exclusive offers, services, and discounts, making their stay even more rewarding.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 mt-4">
-                                    <div class="feature-card p-4 p-lg-4" data-aos="fade-left" data-aos-delay="400">
-                                        <h3 class="mb-3 feature-title">Quick Actions</h3>
-                                        <p class="mb-0 feature-text">Guests can easily make requests, submit reports, and check in seamlessly from their phone, enhancing convenience and streamlining their experience.</p>
-                                    </div>
-                                </div>
-                                    </div>
-                                    </div>
-                                </div>
             </div>
         </div>
     </section>
@@ -988,7 +917,8 @@
     <section class="py-5" id="hotel-features">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold mb-4" style="color: #0c3b80;">e-Philoxenia Hotel Dashboard</h1>
+                <h1 class="display-4 fw-bold mb-2" style="color: #0c3b80;">ePhiloxenia</h1>
+                <h1 class="display-4 fw-bold mb-4" style="color: #4a88e0;" id="hotel-features-text"></h1>
                 <p class="lead mb-5" style="font-size: 1.3rem; color: #444; max-width: 800px; margin: 0 auto;">
                     Ισχυρά εργαλεία που δίνουν στο προσωπικό του ξενοδοχείου πρόσβαση σε πολύτιμες πληροφορίες για τους επισκέπτες
                 </p>
@@ -1574,7 +1504,7 @@
         document.head.appendChild(style);
         
         // Typing effect for hero tagline
-        const text = "More than a guest app.\nMore than convenience.";
+        const text = "More than a guest app.\nThe First Social Hospitality App";
         const typingText = document.getElementById('typing-text');
         let i = 0;
         const typingSpeed = 80; // milliseconds
@@ -1624,6 +1554,21 @@
             }
         }
         
+        // Hotel Features typing effect
+        const hotelFeaturesText = "Hotel Features";
+        const hotelFeaturesElement = document.getElementById('hotel-features-text');
+        let hotelFeaturesIndex = 0;
+        const hotelFeaturesTypingSpeed = 100; // milliseconds
+        let hotelFeaturesStarted = false;
+        
+        function typeHotelFeaturesText() {
+            if (hotelFeaturesIndex < hotelFeaturesText.length) {
+                hotelFeaturesElement.innerHTML += hotelFeaturesText.charAt(hotelFeaturesIndex);
+                hotelFeaturesIndex++;
+                setTimeout(typeHotelFeaturesText, hotelFeaturesTypingSpeed);
+            }
+        }
+        
         // Scroll-based animations
         window.addEventListener('scroll', function() {
             // Navbar scroll effect
@@ -1661,6 +1606,20 @@
                     architectsElement.innerHTML = '';
                     archIndex = 0;
                     setTimeout(typeArchitectsText, 300);
+                }
+            }
+            
+            // Check if hotel-features is in view
+            const hotelFeaturesSection = document.querySelector('#hotel-features-text');
+            if (hotelFeaturesSection && !hotelFeaturesStarted) {
+                const hotelFeaturesSectionTop = hotelFeaturesSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (hotelFeaturesSectionTop < windowHeight * 0.75 && hotelFeaturesSectionTop > 0) {
+                    hotelFeaturesStarted = true;
+                    hotelFeaturesElement.innerHTML = '';
+                    hotelFeaturesIndex = 0;
+                    setTimeout(typeHotelFeaturesText, 300);
                 }
             }
         });
@@ -1729,6 +1688,20 @@
                 button.style.pointerEvents = 'auto';
                 button.style.cursor = 'pointer';
             });
+            
+            // Check if hotel features is in view on page load
+            const hotelFeaturesSection = document.querySelector('#hotel-features-text');
+            if (hotelFeaturesSection) {
+                const hotelFeaturesSectionTop = hotelFeaturesSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (hotelFeaturesSectionTop < windowHeight * 0.75 && hotelFeaturesSectionTop > 0 && !hotelFeaturesStarted) {
+                    hotelFeaturesStarted = true;
+                    hotelFeaturesElement.innerHTML = '';
+                    hotelFeaturesIndex = 0;
+                    setTimeout(typeHotelFeaturesText, 300);
+                }
+            }
         });
     });
     </script>
