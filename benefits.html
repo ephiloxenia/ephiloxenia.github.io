@@ -814,7 +814,7 @@
         <div class="container">
             <!-- Benefits Header -->
             <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="display-4 fw-bold mb-4" style="color: #0c3b80;">Benefits of ePhiloxenia</h1>
+                <h1 class="display-4 fw-bold mb-4" style="color: #0c3b80;">Benefits of <span id="ephiloxenia-benefits-text" style="color: #4a88e0;"></span></h1>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <p class="lead mb-5" style="font-size: 1.2rem; color: #444;">
@@ -918,14 +918,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Call to Action -->
-            <div class="text-center mt-5 pt-4" data-aos="fade-up">
-                <a href="hotel-login.html" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm">
-                    <i class="bi bi-building me-2"></i> Schedule a Demo
-                </a>
-                <p class="mt-3 text-muted">See how ePhiloxenia can transform your hotel experience</p>
             </div>
         </div>
     </section>
@@ -1033,6 +1025,46 @@
                 mirror: false
             });
         }
+        
+        // ePhiloxenia typing effect for benefits page
+        const ephiloxeniaText = "ePhiloxenia";
+        const ephiloxeniaElement = document.getElementById('ephiloxenia-benefits-text');
+        let ephiloxeniaIndex = 0;
+        const ephiloxeniaTypingSpeed = 120; // milliseconds
+        let ephiloxeniaStarted = false;
+        
+        function typeEphiloxeniaText() {
+            if (ephiloxeniaIndex < ephiloxeniaText.length) {
+                ephiloxeniaElement.innerHTML += ephiloxeniaText.charAt(ephiloxeniaIndex);
+                ephiloxeniaIndex++;
+                setTimeout(typeEphiloxeniaText, ephiloxeniaTypingSpeed);
+            }
+        }
+        
+        // Start typing effect for ePhiloxenia when the page loads
+        if (ephiloxeniaElement) {
+            ephiloxeniaElement.innerHTML = '';
+            ephiloxeniaIndex = 0;
+            setTimeout(typeEphiloxeniaText, 500);
+        }
+        
+        // Also check on scroll in case the element wasn't initially visible
+        window.addEventListener('scroll', function() {
+            const benefitsSection = document.querySelector('#benefits');
+            if (benefitsSection && !ephiloxeniaStarted) {
+                const benefitsSectionTop = benefitsSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (benefitsSectionTop < windowHeight * 0.75 && benefitsSectionTop > 0) {
+                    ephiloxeniaStarted = true;
+                    if (ephiloxeniaElement) {
+                        ephiloxeniaElement.innerHTML = '';
+                        ephiloxeniaIndex = 0;
+                        setTimeout(typeEphiloxeniaText, 300);
+                    }
+                }
+            }
+        });
     });
     </script>
 </body>
