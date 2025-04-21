@@ -331,108 +331,10 @@
         <!-- Section Navigation -->
         <div class="section-nav">
             <div class="d-flex flex-wrap justify-content-center">
-                <button class="btn btn-outline-primary" data-section="key-metrics">Key Metrics</button>
-                <button class="btn btn-outline-primary" data-section="charts">Charts</button>
-                <button class="btn btn-outline-primary" data-section="forecast">Forecast</button>
-                <button class="btn btn-outline-primary" data-section="recent-activity">Recent Activity</button>
                 <button class="btn btn-outline-primary" data-section="room-status">Room Status</button>
                 <button class="btn btn-outline-primary" data-section="tasks">Tasks</button>
                 <button class="btn btn-outline-primary" data-section="operations">Operations</button>
                 <button class="btn btn-outline-primary" data-section="performance">Performance</button>
-            </div>
-        </div>
-
-        <!-- Key Metrics -->
-        <div class="row mb-4 section-id" id="key-metrics">
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card dashboard-card">
-                    <div class="card-body">
-                        <div class="stat-label">Occupancy Rate</div>
-                        <div class="stat-value" id="occupancy-rate">78%</div>
-                        <div class="d-flex align-items-center">
-                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 5%</span>
-                            <small class="text-muted">vs last period</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card dashboard-card">
-                    <div class="card-body">
-                        <div class="stat-label">Revenue Per Available Room</div>
-                        <div class="stat-value" id="revenue-per-room">€110</div>
-                        <div class="d-flex align-items-center">
-                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> €12</span>
-                            <small class="text-muted">vs last period</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card dashboard-card">
-                    <div class="card-body">
-                        <div class="stat-label">Guest Satisfaction</div>
-                        <div class="stat-value" id="guest-satisfaction">4.7</div>
-                        <div class="d-flex align-items-center">
-                            <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 0.2</span>
-                            <small class="text-muted">vs last period</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Activity -->
-        <div class="card dashboard-card mb-4 section-id" id="recent-activity">
-            <div class="card-body">
-                <h5 class="card-title">Recent Activity</h5>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Time</th>
-                                <th scope="col">Event</th>
-                                <th scope="col">Details</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Today, 10:23 AM</td>
-                                <td>New Booking</td>
-                                <td>Reservation #12345 - John Doe, 3 nights, Deluxe Room</td>
-                                <td><span class="badge bg-success">Confirmed</span></td>
-                            </tr>
-                            <tr>
-                                <td>Today, 09:45 AM</td>
-                                <td>Price Optimization</td>
-                                <td>AI adjusted price for Standard Rooms (+€15) for next weekend</td>
-                                <td><span class="badge bg-info">Applied</span></td>
-                            </tr>
-                            <tr>
-                                <td>Today, 08:30 AM</td>
-                                <td>Check-out</td>
-                                <td>Guest Maria Johnson, Room 302, 4-night stay</td>
-                                <td><span class="badge bg-secondary">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>Yesterday, 11:15 PM</td>
-                                <td>System Alert</td>
-                                <td>Unusual booking pattern detected for next month</td>
-                                <td><span class="badge bg-warning">Attention</span></td>
-                            </tr>
-                            <tr>
-                                <td>Yesterday, 04:20 PM</td>
-                                <td>Review</td>
-                                <td>New 5-star review from David Wilson</td>
-                                <td><span class="badge bg-primary">New</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center mt-3">
-                    <a href="#" class="btn btn-outline-primary">View All Activity</a>
-                </div>
             </div>
         </div>
 
@@ -947,7 +849,9 @@
             
             // Initialize section navigation
             initializeSectionNavigation();
-
+            
+            // Setup Room Status Chart
+            const roomStatusCtx = document.getElementById('room-status-chart');
         });
         
         function initializePlaceholderAnimation() {
