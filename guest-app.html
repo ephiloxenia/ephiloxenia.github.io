@@ -900,38 +900,104 @@
         }
         
         .btn-icon:active {
-            transform: scale(0.9);
+            transform: scale(0.92);
         }
         
         .icon-wrapper {
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
-        .icon-wrapper:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-            transform: translateY(-2px);
+        .btn-icon:hover .icon-wrapper {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2) !important;
+        }
+        
+        .btn-icon .bi {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-icon:hover .bi {
+            transform: scale(1.15);
         }
         
         .icon-badge {
-            font-size: 0.65rem;
+            z-index: 1;
             font-weight: 600;
-            padding: 0.15rem 0.35rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 2px solid white;
         }
         
         /* Modal Styles Improvements */
         .modal-header.bg-warning {
-            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%) !important;
+            background: linear-gradient(135deg, #ffde59 0%, #ffa726 100%) !important;
+            border-bottom: none;
+            padding-top: 18px;
+            padding-bottom: 18px;
         }
         
         .modal-header.bg-primary {
-            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+            background: linear-gradient(135deg, #42a5f5 0%, #2979ff 100%) !important;
+            border-bottom: none;
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+        
+        .modal-content {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .modal-title i {
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+        
+        .modal-footer {
+            border-top: none;
+            padding-bottom: 20px;
         }
         
         .progress-bar.bg-warning {
-            background: linear-gradient(to right, #ffc107, #fd7e14) !important;
+            background: linear-gradient(to right, #ffde59, #ffa726) !important;
+            box-shadow: 0 2px 6px rgba(255, 167, 38, 0.3);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ffde59 0%, #ffa726 100%);
+            border: none;
+            box-shadow: 0 3px 6px rgba(255, 167, 38, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(255, 167, 38, 0.4);
+        }
+        
+        .btn-outline-warning {
+            border-color: #ffa726;
+            color: #ff9800;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-warning:hover {
+            background-color: #ffa726;
+            border-color: #ffa726;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(255, 167, 38, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #42a5f5 0%, #2979ff 100%);
+            border: none;
+            box-shadow: 0 3px 6px rgba(41, 121, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(41, 121, 255, 0.4);
         }
         
         /* Coupon Card Styles */
@@ -939,17 +1005,37 @@
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
         
         .coupon-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .coupon-icon {
+            color: #2979ff;
+            filter: drop-shadow(0 2px 3px rgba(41, 121, 255, 0.2));
         }
         
         .coupon-code {
-            border: 1px dashed #0d6efd;
-            padding: 3px 8px !important;
+            border: 1.5px dashed #2979ff;
+            padding: 4px 10px !important;
+            border-radius: 6px;
+            background-color: rgba(41, 121, 255, 0.05) !important;
+            letter-spacing: 1px;
+            color: #2979ff;
+        }
+        
+        .coupon-title {
+            font-weight: 600;
+            color: #37474f;
+        }
+        
+        .coupon-validity {
+            font-style: italic;
+            color: #78909c !important;
         }
     </style>
 </head>
@@ -958,7 +1044,7 @@
         <!-- Header with Room Information -->
         <div class="mobile-header-alt">
             <div class="d-flex align-items-center">
-                <div style="border: 2px solid #0c3b80; padding: 7px 12px; border-radius: 6px; font-weight: 600; color: #0c3b80; margin-right: 10px; font-size: 0.9rem;">Your Hotel Logo</div>
+                <div style="border: 2px dashed #2979ff; color: #2979ff; padding: 8px 16px; border-radius: 8px; font-weight: 600; margin-right: 15px; font-size: 1rem; background-color: rgba(41, 121, 255, 0.05);">Your&nbsp;Logo</div>
                 <div>
                     <h5 class="mb-0 text-primary">Sunset Resort</h5>
                     <div class="small text-secondary">Room 302 - Deluxe Ocean View</div>
@@ -966,20 +1052,20 @@
             </div>
             <div>
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-icon position-relative me-2" data-bs-toggle="modal" data-bs-target="#rewardsModal">
-                        <span class="icon-badge bg-warning text-dark rounded-circle position-absolute top-0 end-0 translate-middle badge-sm">145</span>
-                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                            <i class="bi bi-star-fill text-warning"></i>
+                    <button class="btn btn-icon position-relative me-3" data-bs-toggle="modal" data-bs-target="#rewardsModal">
+                        <span class="icon-badge bg-warning text-dark position-absolute top-0 end-0 translate-middle badge-pill fw-bold" style="font-size: 0.65rem; padding: 0.25rem 0.45rem; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">145</span>
+                        <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: linear-gradient(135deg, #ffde59 0%, #ffa726 100%); box-shadow: 0 3px 6px rgba(255, 167, 38, 0.3);">
+                            <i class="bi bi-star-fill text-white"></i>
                         </div>
                     </button>
-                    <button class="btn btn-icon me-2" data-bs-toggle="modal" data-bs-target="#walletModal">
-                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                            <i class="bi bi-wallet2 text-info"></i>
+                    <button class="btn btn-icon me-3" data-bs-toggle="modal" data-bs-target="#walletModal">
+                        <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: linear-gradient(135deg, #42a5f5 0%, #2979ff 100%); box-shadow: 0 3px 6px rgba(41, 121, 255, 0.3);">
+                            <i class="bi bi-wallet2 text-white"></i>
                         </div>
                     </button>
                     <button class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                            <i class="bi bi-person-circle text-primary"></i>
+                        <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: linear-gradient(135deg, #7986cb 0%, #3949ab 100%); box-shadow: 0 3px 6px rgba(57, 73, 171, 0.3);">
+                            <i class="bi bi-person-circle text-white"></i>
                         </div>
                     </button>
                 </div>
@@ -3421,23 +3507,23 @@
                         <div class="display-4 text-primary mb-2">
                             <i class="bi bi-ticket-perforated-fill"></i>
                         </div>
-                        <h5 class="mb-0">Τα Κουπόνια & Προσφορές σας</h5>
-                        <p class="text-muted small">Εμφανίστε αυτά τα κουπόνια στο προσωπικό του ξενοδοχείου για εξαργύρωση</p>
+                        <h5 class="mb-0">Your Coupons & Offers</h5>
+                        <p class="text-muted small">Show these coupons to hotel staff for redemption</p>
                     </div>
                     
-                    <!-- Λίστα κουπονιών (κενή αρχικά) -->
+                    <!-- Coupon list (empty initially) -->
                     <div id="coupons-container">
                         <div class="text-center py-4 bg-light rounded mb-4">
                             <i class="bi bi-info-circle text-muted fs-3"></i>
-                            <p class="mt-2 mb-0">Δεν έχετε κουπόνια προς το παρόν</p>
-                            <p class="small text-muted">Εξαγοράστε προσφορές από το Rewards για να εμφανιστούν εδώ</p>
+                            <p class="mt-2 mb-0">You don't have any coupons yet</p>
+                            <p class="small text-muted">Redeem offers from Rewards to see them here</p>
                             <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#rewardsModal" onclick="$('#walletModal').modal('hide');">
-                                <i class="bi bi-star-fill me-1"></i> Προβολή Προσφορών
+                                <i class="bi bi-star-fill me-1"></i> View Offers
                             </button>
                         </div>
                     </div>
                     
-                    <!-- Template για κουπόνι (κρυμμένο, το JavaScript θα το χρησιμοποιεί) -->
+                    <!-- Coupon template (hidden, JavaScript will use it) -->
                     <template id="coupon-template">
                         <div class="card mb-3 coupon-card">
                             <div class="card-body">
@@ -3461,7 +3547,7 @@
                     </template>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -3818,12 +3904,12 @@
                     
                     if (currentPoints >= pointsCost) {
                         // Εμφάνιση επιβεβαίωσης
-                        if (confirm(`Θέλετε να εξαργυρώσετε ${pointsCost} πόντους για: ${reward};`)) {
+                        if (confirm(`Do you want to redeem ${pointsCost} points for: ${reward}?`)) {
                             // Ενημέρωση UI (σε πραγματική εφαρμογή θα γινόταν κλήση στο backend)
                             const newPoints = currentPoints - pointsCost;
                             
                             // Ενημέρωση εμφάνισης πόντων
-                            document.querySelector('#rewardsModal h2').textContent = `${newPoints} πόντοι`;
+                            document.querySelector('#rewardsModal h2').textContent = `${newPoints} points`;
                             document.querySelector('.badge.bg-warning.text-dark').textContent = newPoints;
                             
                             // Δημιουργία κωδικού κουπονιού (σε πραγματική εφαρμογή αυτός θα ερχόταν από το backend)
@@ -3833,18 +3919,25 @@
                             addCouponToWallet(reward, description, couponCode);
                             
                             // Εμφάνιση ειδοποίησης επιτυχίας
-                            showNotification('Επιτυχής Εξαργύρωση', `Έχετε εξαργυρώσει επιτυχώς το κουπόνι: ${reward}. Μπορείτε να το βρείτε στο Wallet σας.`);
+                            showNotification('Successful Redemption', `You have successfully redeemed the coupon: ${reward}. You can find it in your Wallet.`);
                             
                             // Απενεργοποίηση του κουμπιού (για να μην μπορεί να εξαργυρωθεί ξανά)
                             this.disabled = true;
                             this.closest('.list-group-item').classList.add('disabled');
                         }
                     } else {
-                        showNotification('Μη επαρκείς πόντοι', 'Δεν έχετε αρκετούς πόντους για αυτή την προσφορά. Κερδίστε περισσότερους στο Moments!', 'warning');
+                        showNotification('Insufficient Points', 'You don\'t have enough points for this offer. Earn more on the Moments tab!', 'warning');
                     }
                 });
             });
             
+            // Διόρθωση του κουμπιού "Προβολή Προσφορών" στο wallet (αφού δεν έχουμε jQuery)
+            const viewOffersBtn = document.querySelector('#walletModal button[data-bs-target="#rewardsModal"]');
+            if (viewOffersBtn) {
+                viewOffersBtn.onclick = function() {
+                    const walletModal = bootstrap.Modal.getInstance(document.getElementById('walletModal'));
+                    walletModal.hide();
+                };
             }
         });
         
@@ -3879,8 +3972,8 @@
             // Υπολογισμός ημερομηνίας λήξης (30 ημέρες από σήμερα)
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + 30);
-            const formattedDate = expiryDate.toLocaleDateString('el-GR');
-            couponElement.querySelector('.coupon-validity').textContent = `Ισχύει έως: ${formattedDate}`;
+            const formattedDate = expiryDate.toLocaleDateString('en-US');
+            couponElement.querySelector('.coupon-validity').textContent = `Valid until: ${formattedDate}`;
             
             // Προσθήκη κωδικού
             couponElement.querySelector('.coupon-code small').textContent = code;
