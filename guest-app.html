@@ -889,6 +889,68 @@
         .btn {
             font-size: 0.85rem;
         }
+        
+        /* Header Icon Buttons Styles */
+        .btn-icon {
+            padding: 0;
+            background: transparent;
+            border: none;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .btn-icon:active {
+            transform: scale(0.9);
+        }
+        
+        .icon-wrapper {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .icon-wrapper:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        .icon-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.35rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        
+        /* Modal Styles Improvements */
+        .modal-header.bg-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%) !important;
+        }
+        
+        .modal-header.bg-primary {
+            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+        }
+        
+        .progress-bar.bg-warning {
+            background: linear-gradient(to right, #ffc107, #fd7e14) !important;
+        }
+        
+        /* Coupon Card Styles */
+        .coupon-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .coupon-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .coupon-code {
+            border: 1px dashed #0d6efd;
+            padding: 3px 8px !important;
+        }
     </style>
 </head>
 <body>
@@ -903,9 +965,24 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                    <i class="bi bi-person-circle fs-4"></i>
-                </button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-icon position-relative me-2" data-bs-toggle="modal" data-bs-target="#rewardsModal">
+                        <span class="icon-badge bg-warning text-dark rounded-circle position-absolute top-0 end-0 translate-middle badge-sm">145</span>
+                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                    </button>
+                    <button class="btn btn-icon me-2" data-bs-toggle="modal" data-bs-target="#walletModal">
+                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-wallet2 text-info"></i>
+                        </div>
+                    </button>
+                    <button class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <div class="icon-wrapper bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-person-circle text-primary"></i>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -1944,47 +2021,78 @@
             <!-- Experience Content End -->
             
             <!-- Moments Content -->
-            <div class="mobile-content moments-content" style="display: none;">
+            <div class="tab-content d-none" id="moments-content">
                 <div class="mb-4">
                     <h4 class="mb-3">Moments</h4>
-                    <p class="text-muted mb-4">Μοιραστείτε αναμνήσεις, εμπνευστείτε και εξερευνήστε</p>
+                    <p class="text-muted mb-4">Share memories, get inspired, and earn rewards</p>
+                    
+                    <!-- Rewards Info Card -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Earn Points!</h5>
+                            <p class="card-text">Share your hotel experience and earn rewards:</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-image me-2 text-primary"></i> Post a photo</span>
+                                    <span class="badge bg-primary rounded-pill">+20 points</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-camera-video me-2 text-primary"></i> Post a video</span>
+                                    <span class="badge bg-primary rounded-pill">+30 points</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-heart-fill me-2 text-danger"></i> Like a post</span>
+                                    <span class="badge bg-primary rounded-pill">+5 points</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-chat-fill me-2 text-primary"></i> Comment on a post</span>
+                                    <span class="badge bg-primary rounded-pill">+10 points</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-camera me-2 text-primary"></i> Create a story</span>
+                                    <span class="badge bg-primary rounded-pill">+15 points</span>
+                                </li>
+                            </ul>
+                            <p class="small text-muted mb-0">Redeem your points for exclusive hotel perks and discounts!</p>
+                        </div>
+                    </div>
                     
                     <!-- Stories Section -->
                     <div class="stories-section mb-4">
-                        <h5 class="mb-3">Ιστορίες</h5>
+                        <h5 class="mb-3">Stories</h5>
                         <div class="stories-container d-flex overflow-auto mb-4">
                             <!-- Add Story Button -->
                             <div class="story-item me-3 text-center">
                                 <div class="story-add-circle mb-2 d-flex align-items-center justify-content-center">
                                     <i class="bi bi-plus-lg"></i>
                                 </div>
-                                <small>Δημιουργία</small>
+                                <small>Create</small>
                             </div>
                             
-                            <!-- Stories -->
+                            <!-- Stories with actual images -->
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/beach-sunset.jpg');"></div>
-                                <small>Παραλία</small>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1520520731457-9283dd14aa66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJlYWNoJTIwc3Vuc2V0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <small>Beach</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/pool-view.jpg');"></div>
-                                <small>Πισίνα</small>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjBwb29sfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <small>Pool</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/spa.jpg');"></div>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNwYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
                                 <small>Spa</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/restaurant.jpg');"></div>
-                                <small>Δείπνο</small>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1592861956120-e524fc739696?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmluZSUyMGRpbmluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <small>Dining</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/cocktail.jpg');"></div>
-                                <small>Κοκτέιλ</small>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <small>Cocktails</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('img/experiences/local-culture.jpg');"></div>
-                                <small>Πολιτισμός</small>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z3JlZWslMjBjdWx0dXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <small>Culture</small>
                             </div>
                         </div>
                     </div>
@@ -1994,21 +2102,85 @@
                         <!-- Create Post Card -->
                         <div class="card mb-4 create-post-card">
                             <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                                    <div>
+                                        <h6 class="mb-0">Guest Room 204</h6>
+                                        <small class="text-muted">Public post</small>
+                                    </div>
+                                </div>
+                                <textarea class="form-control mb-3" rows="3" placeholder="What's on your mind?"></textarea>
+                                <div class="upload-preview p-2 rounded mb-3" style="background-color: #f8f9fa; display: none;">
+                                    <div class="position-relative">
+                                        <img src="" alt="Upload Preview" class="img-fluid rounded d-none" id="uploadPreview">
+                                        <video src="" class="img-fluid rounded d-none" id="videoPreview" controls></video>
+                                        <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle" id="removeMediaBtn">
+                                            <i class="bi bi-x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <button class="btn btn-light rounded-circle me-2" id="uploadPhotoBtn">
+                                            <i class="bi bi-image"></i>
+                                        </button>
+                                        <button class="btn btn-light rounded-circle me-2" id="uploadVideoBtn">
+                                            <i class="bi bi-camera-video"></i>
+                                        </button>
+                                        <button class="btn btn-light rounded-circle me-2">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </button>
+                                        <button class="btn btn-light rounded-circle me-2">
+                                            <i class="bi bi-emoji-smile"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="earnPointsSwitch" checked>
+                                        <label class="form-check-label" for="earnPointsSwitch">Earn points</label>
+                                    </div>
+                                </div>
+                                <input type="file" id="photoInput" class="d-none" accept="image/*">
+                                <input type="file" id="videoInput" class="d-none" accept="video/*">
+                                
+                                <!-- Points info -->
+                                <div class="alert alert-info mt-3">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <span><strong>Earn rewards:</strong> +20 points for photos, +30 points for videos!</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post 1 -->
+                        <div class="card mb-4 post-card">
+                            <div class="card-header bg-transparent border-0 p-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="img/avatar-1.jpg" class="rounded-circle me-3" width="40" height="40" alt="Profile">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <div>
+                                        <h6 class="mb-0">Maria K.</h6>
+                                        <small class="text-muted">35 minutes ago · <i class="bi bi-globe"></i></small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
+                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="40" height="40" alt="Profile">
                                     <div class="form-control text-muted rounded-pill" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                                        Μοιραστείτε μια στιγμή...
+                                        Share a moment...
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-around mt-3">
                                     <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                                        <i class="bi bi-image me-2"></i> Φωτογραφία
+                                        <i class="bi bi-image me-2"></i> Photo
                                     </button>
                                     <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                                        <i class="bi bi-camera-video me-2"></i> Βίντεο
+                                        <i class="bi bi-camera-video me-2"></i> Video
                                     </button>
                                     <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                                        <i class="bi bi-geo-alt me-2"></i> Τοποθεσία
+                                        <i class="bi bi-geo-alt me-2"></i> Location
                                     </button>
                                 </div>
                             </div>
@@ -2018,30 +2190,30 @@
                         <div class="card mb-4 post-card">
                             <div class="card-header bg-transparent border-0 p-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="img/avatar-3.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
                                     <div>
-                                        <h6 class="mb-0">Μαρία Κ.</h6>
-                                        <small class="text-muted">Πριν 35 λεπτά · <i class="bi bi-globe"></i></small>
+                                        <h6 class="mb-0">Maria K.</h6>
+                                        <small class="text-muted">35 minutes ago · <i class="bi bi-globe"></i></small>
                                     </div>
                                     <div class="ms-auto">
                                         <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +15 πόντοι
+                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="post-content">
-                                <p class="px-3">Απολαμβάνοντας το μαγευτικό ηλιοβασίλεμα στην παραλία του ξενοδοχείου! ✨🌅 #SunsetResort #AmazingViews</p>
-                                <img src="img/experiences/beach-sunset.jpg" alt="Beach Sunset" class="img-fluid">
+                                <p class="px-3">Enjoying the stunning sunset view at the hotel beach! ✨🌅 #SunsetResort #AmazingViews</p>
+                                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBzdW5zZXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60" alt="Beach Sunset" class="img-fluid">
                             </div>
                             <div class="card-footer bg-transparent border-0 p-3">
                                 <div class="d-flex justify-content-between mb-2">
                                     <div>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart"></i> 24
+                                            <i class="bi bi-heart"></i> 24 <small class="text-muted">(+5 points per like)</small>
                                         </button>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 5
+                                            <i class="bi bi-chat"></i> 5 <small class="text-muted">(+10 points per comment)</small>
                                         </button>
                                     </div>
                                     <button class="btn btn-sm text-primary">
@@ -2051,17 +2223,17 @@
                                 <!-- Comments -->
                                 <div class="comments-section p-2 rounded" style="background-color: #f8f9fa;">
                                     <div class="comment d-flex mb-2">
-                                        <img src="img/avatar-2.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                                        <img src="https://randomuser.me/api/portraits/men/42.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
                                         <div class="comment-bubble p-2 rounded flex-grow-1">
-                                            <h6 class="mb-0 fs-6">Γιώργος Μ.</h6>
-                                            <p class="mb-0 small">Πανέμορφο! Σε ποια παραλία είναι;</p>
+                                            <h6 class="mb-0 fs-6">George M.</h6>
+                                            <p class="mb-0 small">Beautiful! Which beach is this?</p>
                                         </div>
                                     </div>
                                     <!-- Add Comment -->
                                     <div class="add-comment d-flex mt-2">
-                                        <img src="img/avatar-1.jpg" class="rounded-circle me-2" width="32" height="32" alt="You">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="32" height="32" alt="You">
                                         <div class="input-group">
-                                            <input type="text" class="form-control form-control-sm rounded-pill" placeholder="Γράψτε ένα σχόλιο...">
+                                            <input type="text" class="form-control form-control-sm rounded-pill" placeholder="Write a comment...">
                                             <button class="btn btn-sm btn-primary rounded-circle ms-1">
                                                 <i class="bi bi-send"></i>
                                             </button>
@@ -2075,30 +2247,30 @@
                         <div class="card mb-4 post-card">
                             <div class="card-header bg-transparent border-0 p-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="img/avatar-4.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <img src="https://randomuser.me/api/portraits/men/91.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
                                     <div>
-                                        <h6 class="mb-0">Δημήτρης Α.</h6>
-                                        <small class="text-muted">Πριν 2 ώρες · <i class="bi bi-globe"></i></small>
+                                        <h6 class="mb-0">Daniel A.</h6>
+                                        <small class="text-muted">2 hours ago · <i class="bi bi-globe"></i></small>
                                     </div>
                                     <div class="ms-auto">
                                         <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +20 πόντοι
+                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="post-content">
-                                <p class="px-3">Γευστική εξερεύνηση στο εστιατόριο του ξενοδοχείου. Συνιστώ ανεπιφύλακτα τη σπεσιαλιτέ του σεφ! 🍽️👨‍🍳 #FoodLover #DeliciousMeal</p>
-                                <img src="img/experiences/restaurant.jpg" alt="Gourmet Dish" class="img-fluid">
+                                <p class="px-3">Culinary exploration at the hotel restaurant. I highly recommend the chef's specialty! 🍽️👨‍🍳 #FoodLover #DeliciousMeal</p>
+                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="Gourmet Dish" class="img-fluid">
                             </div>
                             <div class="card-footer bg-transparent border-0 p-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart-fill text-danger"></i> 38
+                                            <i class="bi bi-heart-fill text-danger"></i> 38 <small class="text-muted">(+5 points per like)</small>
                                         </button>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 11
+                                            <i class="bi bi-chat"></i> 11 <small class="text-muted">(+10 points per comment)</small>
                                         </button>
                                     </div>
                                     <button class="btn btn-sm text-primary">
@@ -2112,22 +2284,22 @@
                         <div class="card mb-4 post-card">
                             <div class="card-header bg-transparent border-0 p-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="img/avatar-5.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
                                     <div>
-                                        <h6 class="mb-0">Έλενα Π.</h6>
-                                        <small class="text-muted">Χθες · <i class="bi bi-globe"></i></small>
+                                        <h6 class="mb-0">Elena P.</h6>
+                                        <small class="text-muted">Yesterday · <i class="bi bi-globe"></i></small>
                                     </div>
                                     <div class="ms-auto">
                                         <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +25 πόντοι
+                                            <i class="bi bi-star-fill me-1"></i> +30 points earned
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="post-content">
-                                <p class="px-3">Απόλυτη χαλάρωση στο spa του ξενοδοχείου! Το μασάζ ήταν ακριβώς αυτό που χρειαζόμουν. 💆‍♀️✨ #SpaDay #Relaxation</p>
+                                <p class="px-3">Pure relaxation at the hotel spa! The massage was exactly what I needed. 💆‍♀️✨ #SpaDay #Relaxation</p>
                                 <div class="video-container position-relative">
-                                    <img src="img/experiences/spa.jpg" alt="Spa Experience" class="img-fluid">
+                                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3BhfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Spa Experience" class="img-fluid">
                                     <div class="position-absolute top-50 start-50 translate-middle">
                                         <button class="btn btn-light rounded-circle">
                                             <i class="bi bi-play-fill fs-4"></i>
@@ -2139,10 +2311,47 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart"></i> 45
+                                            <i class="bi bi-heart"></i> 45 <small class="text-muted">(+5 points per like)</small>
                                         </button>
                                         <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 8
+                                            <i class="bi bi-chat"></i> 8 <small class="text-muted">(+10 points per comment)</small>
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-sm text-primary">
+                                        <i class="bi bi-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post 4 - New Post with pool view -->
+                        <div class="card mb-4 post-card">
+                            <div class="card-header bg-transparent border-0 p-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/22.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <div>
+                                        <h6 class="mb-0">Sophie T.</h6>
+                                        <small class="text-muted">3 hours ago · <i class="bi bi-globe"></i></small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
+                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p class="px-3">Perfect morning by the infinity pool! The view is absolutely breathtaking 💙 #PoolVibes #LuxuryStay</p>
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5maW5pdHklMjBwb29sfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Pool View" class="img-fluid">
+                            </div>
+                            <div class="card-footer bg-transparent border-0 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-heart-fill text-danger"></i> 52 <small class="text-muted">(+5 points per like)</small>
+                                        </button>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-chat"></i> 7 <small class="text-muted">(+10 points per comment)</small>
                                         </button>
                                     </div>
                                     <button class="btn btn-sm text-primary">
@@ -2940,19 +3149,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Δημιουργία Ανάρτησης</h5>
+                    <h5 class="modal-title">Create Post</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="img/avatar-1.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
                             <div>
-                                <h6 class="mb-0">Επισκέπτης δωματίου 204</h6>
-                                <small class="text-muted">Δημόσια ανάρτηση</small>
+                                <h6 class="mb-0">Guest Room 204</h6>
+                                <small class="text-muted">Public post</small>
                             </div>
                         </div>
-                        <textarea class="form-control mb-3" rows="3" placeholder="Τι σκέφτεστε;"></textarea>
+                        <textarea class="form-control mb-3" rows="3" placeholder="What's on your mind?"></textarea>
                         <div class="upload-preview p-2 rounded mb-3" style="background-color: #f8f9fa; display: none;">
                             <div class="position-relative">
                                 <img src="" alt="Upload Preview" class="img-fluid rounded d-none" id="uploadPreview">
@@ -2979,16 +3188,22 @@
                             </div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="earnPointsSwitch" checked>
-                                <label class="form-check-label" for="earnPointsSwitch">Κέρδισε πόντους</label>
+                                <label class="form-check-label" for="earnPointsSwitch">Earn points</label>
                             </div>
                         </div>
                         <input type="file" id="photoInput" class="d-none" accept="image/*">
                         <input type="file" id="videoInput" class="d-none" accept="video/*">
+                        
+                        <!-- Points info -->
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <span><strong>Earn rewards:</strong> +20 points for photos, +30 points for videos!</span>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ακύρωση</button>
-                    <button type="button" class="btn btn-primary" id="publishPostBtn">Δημοσίευση</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="publishPostBtn">Publish</button>
                 </div>
             </div>
         </div>
@@ -3010,18 +3225,23 @@
                         <!-- Story Header -->
                         <div class="story-header position-absolute top-0 start-0 end-0 p-3 pt-4 d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
-                                <img src="img/avatar-3.jpg" class="rounded-circle me-2 border border-2 border-white" width="40" height="40" alt="User">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" class="rounded-circle me-2 border border-2 border-white" width="40" height="40" alt="User">
                                 <div class="text-white">
-                                    <h6 class="mb-0">Μαρία Κ.</h6>
-                                    <small class="text-white-50">Πριν 35 λεπτά</small>
+                                    <h6 class="mb-0">Maria K.</h6>
+                                    <small class="text-white-50">35 minutes ago</small>
                                 </div>
+                            </div>
+                            <div class="text-white">
+                                <span class="badge bg-primary px-3 py-2">
+                                    <i class="bi bi-star-fill me-1"></i> +15 points for viewing
+                                </span>
                             </div>
                             <button class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
                         <!-- Story Content -->
                         <div class="story-content h-100 d-flex align-items-center justify-content-center">
-                            <img src="img/experiences/beach-sunset.jpg" class="img-fluid" alt="Story Image">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBzdW5zZXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60" class="img-fluid" alt="Story Image">
                         </div>
                         
                         <!-- Story Navigation -->
@@ -3033,7 +3253,7 @@
                         <!-- Story Footer -->
                         <div class="story-footer position-absolute bottom-0 start-0 end-0 p-3 d-flex align-items-center">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-dark border-secondary text-white" placeholder="Απάντηση...">
+                                <input type="text" class="form-control bg-dark border-secondary text-white" placeholder="Reply...">
                                 <button class="btn btn-outline-light rounded-end" type="button">
                                     <i class="bi bi-send"></i>
                                 </button>
@@ -3048,9 +3268,209 @@
         </div>
     </div>
 
+    <!-- Rewards Modal -->
+    <div class="modal fade" id="rewardsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title">
+                        <i class="bi bi-star-fill me-2"></i>Your Rewards
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="display-4 text-warning mb-2">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <h2 class="mb-0">145 points</h2>
+                        <p class="text-muted">Earn more by sharing moments on the Moments tab!</p>
+                    </div>
+                    
+                    <div class="progress mb-4" style="height: 10px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 58%;" aria-valuenow="145" aria-valuemin="0" aria-valuemax="250">
+                            <span class="visually-hidden">58% to next level</span>
+                        </div>
+                    </div>
+                    <p class="text-center small mb-4">105 more points to reach Gold level</p>
+                    
+                    <h5 class="mb-3">Redeem Points</h5>
+                    
+                    <div class="list-group mb-4">
+                        <!-- Available offers -->
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">-20% at Hotel Spa</h6>
+                                    <p class="mb-0 small text-muted">Discount on any spa treatment</p>
+                                </div>
+                                <button class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i> 100 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">-10% taxi discount</h6>
+                                    <p class="mb-0 small text-muted">For any ride with partnered taxi services</p>
+                                </div>
+                                <button class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i> 80 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Free cocktail at hotel bar</h6>
+                                    <p class="mb-0 small text-muted">Valid for any cocktail of your choice</p>
+                                </div>
+                                <button class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i> 150 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Late check-out (until 4pm)</h6>
+                                    <p class="mb-0 small text-muted">Extend your stay on departure day</p>
+                                </div>
+                                <button class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i> 200 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Free breakfast in room</h6>
+                                    <p class="mb-0 small text-muted">Enjoy breakfast in your room at no extra charge</p>
+                                </div>
+                                <button class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i> 120 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium rewards (require more points) -->
+                        <div class="list-group-item list-group-item-action disabled">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Free room upgrade</h6>
+                                    <p class="mb-0 small text-muted">Upgrade your room to the next category</p>
+                                </div>
+                                <button class="btn btn-outline-secondary rounded-pill" disabled>
+                                    <i class="bi bi-star-fill me-1"></i> 500 points
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item list-group-item-action disabled">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Free airport transfer</h6>
+                                    <p class="mb-0 small text-muted">Luxury transfer to and from the airport</p>
+                                </div>
+                                <button class="btn btn-outline-secondary rounded-pill" disabled>
+                                    <i class="bi bi-star-fill me-1"></i> 350 points
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-light mb-3">
+                        <div class="card-body p-3">
+                            <h6 class="card-title">
+                                <i class="bi bi-info-circle me-2"></i>How it works
+                            </h6>
+                            <ul class="small mb-0 ps-3">
+                                <li>Earn points by sharing moments & interacting on Moments</li>
+                                <li>Redeemed coupons are available in your Wallet tab</li>
+                                <li>Points are valid for your current stay</li>
+                                <li>Ask the assistant for more information</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-tab="moments">Earn more points</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Modal -->
+    <div class="modal fade" id="walletModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-wallet2 me-2"></i>Your Wallet
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="display-4 text-primary mb-2">
+                            <i class="bi bi-ticket-perforated-fill"></i>
+                        </div>
+                        <h5 class="mb-0">Τα Κουπόνια & Προσφορές σας</h5>
+                        <p class="text-muted small">Εμφανίστε αυτά τα κουπόνια στο προσωπικό του ξενοδοχείου για εξαργύρωση</p>
+                    </div>
+                    
+                    <!-- Λίστα κουπονιών (κενή αρχικά) -->
+                    <div id="coupons-container">
+                        <div class="text-center py-4 bg-light rounded mb-4">
+                            <i class="bi bi-info-circle text-muted fs-3"></i>
+                            <p class="mt-2 mb-0">Δεν έχετε κουπόνια προς το παρόν</p>
+                            <p class="small text-muted">Εξαγοράστε προσφορές από το Rewards για να εμφανιστούν εδώ</p>
+                            <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#rewardsModal" onclick="$('#walletModal').modal('hide');">
+                                <i class="bi bi-star-fill me-1"></i> Προβολή Προσφορών
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Template για κουπόνι (κρυμμένο, το JavaScript θα το χρησιμοποιεί) -->
+                    <template id="coupon-template">
+                        <div class="card mb-3 coupon-card">
+                            <div class="card-body">
+                                <div class="row g-0">
+                                    <div class="col-3 d-flex align-items-center justify-content-center">
+                                        <div class="coupon-icon fs-1 text-primary">
+                                            <i class="bi bi-ticket-perforated-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <h6 class="coupon-title card-title mb-1"></h6>
+                                        <p class="coupon-description card-text small mb-1"></p>
+                                        <div class="coupon-validity small text-muted mb-2"></div>
+                                        <div class="coupon-code d-inline-block rounded p-1 bg-light">
+                                            <small class="fw-bold"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
     <script>
         // Initialize the app after DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -3073,19 +3493,17 @@
             });
             
             observer.observe(document.body, { childList: true, subtree: true });
-        });
-    </script>
-    <script>
+            
         // Tab navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fix for strikethrough on disabled preferences
-            const preferenceLabels = document.querySelectorAll('.form-check-label');
-            preferenceLabels.forEach(label => {
-                label.style.textDecoration = 'none';
-            });
+            const mobileTabs = {
+                'home': document.getElementById('home-content'),
+                'concierge': document.getElementById('concierge-content'),
+                'services': document.getElementById('services-content'),
+                'experience': document.getElementById('experience-content'),
+                'moments': document.getElementById('moments-content')
+            };
             
             const navItems = document.querySelectorAll('.mobile-nav-item');
-            const tabContents = document.querySelectorAll('.tab-content');
             
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -3093,21 +3511,46 @@
                     navItems.forEach(nav => nav.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Show corresponding content
+                    // Show the correct tab content
                     const tabName = this.getAttribute('data-tab');
-                    tabContents.forEach(content => content.classList.add('d-none'));
-                    document.getElementById(`${tabName}-content`).classList.remove('d-none');
+                    
+                    // Hide all tabs
+                    Object.values(mobileTabs).forEach(tab => {
+                        if (tab) tab.classList.add('d-none');
+                    });
+                    
+                    // Show selected tab
+                    if (mobileTabs[tabName]) {
+                        mobileTabs[tabName].classList.remove('d-none');
+                    }
                     
                     // Scroll to top of the page (only for bottom navigation tabs)
-                    window.scrollTo(0, 0);
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
                 });
             });
 
-            // Remove scroll to top behavior for internal tabs
+            // Handle internal tab navigation for Services
             const internalTabs = document.querySelectorAll('.nav-tabs .nav-link');
             internalTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // No scroll to top for internal tabs
+                tab.addEventListener('click', () => {
+                    const id = tab.getAttribute('id');
+                    console.log(`Tab ${id} clicked`);
+                });
+            });
+            
+            // Concierge chat suggestions
+            const conciergeTab = document.querySelector('.mobile-nav-item[data-tab="concierge"]');
+            const suggestionsBtn = document.querySelectorAll('.suggestion-btn');
+            
+            suggestionsBtn.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const chatInput = document.getElementById('global-chat-input');
+                    chatInput.value = this.textContent;
+                    conciergeTab.click(); // Switch to concierge tab
+                    chatInput.focus();
                 });
             });
 
@@ -3116,7 +3559,6 @@
             if (chatWithConcierge) {
                 chatWithConcierge.addEventListener('click', function() {
                     // Switch to concierge tab
-                    const conciergeTab = document.querySelector('.mobile-nav-item[data-tab="concierge"]');
                     conciergeTab.click();
                     
                     // Focus on the chat input
@@ -3141,62 +3583,6 @@
                     }
                 });
             }
-        });
-    </script>
-    <script>
-        // Initialize the app after DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab navigation functionality
-            const mobileTabs = {
-                'home': document.querySelector('.home-content'),
-                'concierge': document.querySelector('.concierge-content'),
-                'services': document.querySelector('.services-content'),
-                'experience': document.querySelector('.experience-content'),
-                'moments': document.querySelector('.moments-content')
-            };
-            
-            const navItems = document.querySelectorAll('.mobile-nav-item');
-            
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Update active nav item
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show the correct tab content
-                    const tabName = this.getAttribute('data-tab');
-                    Object.values(mobileTabs).forEach(tab => tab.style.display = 'none');
-                    mobileTabs[tabName].style.display = 'block';
-                    
-                    // Scroll to top of the page (only for bottom navigation tabs)
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Handle internal tab navigation for Services
-            const internalTabs = document.querySelectorAll('.nav-tabs .nav-link');
-            internalTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const id = tab.getAttribute('id');
-                    console.log(`Tab ${id} clicked`);
-                });
-            });
-            
-            // Concierge chat suggestions
-            const conciergeTab = document.querySelector('.mobile-nav-item[data-tab="concierge"]');
-            const suggestionsBtn = document.querySelectorAll('.suggestion-btn');
-            
-            suggestionsBtn.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const chatInput = document.getElementById('global-chat-input');
-                    chatInput.value = this.textContent;
-                    conciergeTab.click(); // Switch to concierge tab
-                    chatInput.focus();
-                });
-            });
             
             // Initialize Moments functionality
             initMoments();
@@ -3205,41 +3591,47 @@
         function initMoments() {
             // Story viewer
             const storyCircles = document.querySelectorAll('.story-circle');
-            const storyViewerModal = new bootstrap.Modal(document.getElementById('storyViewerModal'));
+            const storyViewerModal = document.getElementById('storyViewerModal');
             
-            storyCircles.forEach(story => {
-                story.addEventListener('click', () => {
-                    storyViewerModal.show();
-                    
-                    // Start progress animation
-                    const progressBar = document.querySelector('.story-progress .progress-bar');
-                    progressBar.style.width = '0%';
-                    progressBar.style.transition = 'width 5s linear';
-                    
-                    setTimeout(() => {
-                        progressBar.style.width = '100%';
-                    }, 100);
-                    
-                    // Auto close after story duration
-                    setTimeout(() => {
-                        storyViewerModal.hide();
-                    }, 5100);
+            if (storyViewerModal) {
+                const storyViewerModalBS = new bootstrap.Modal(storyViewerModal);
+                
+                storyCircles.forEach(story => {
+                    story.addEventListener('click', () => {
+                        storyViewerModalBS.show();
+                        
+                        // Start progress animation
+                        const progressBar = document.querySelector('.story-progress .progress-bar');
+                        progressBar.style.width = '0%';
+                        progressBar.style.transition = 'width 5s linear';
+                        
+                        setTimeout(() => {
+                            progressBar.style.width = '100%';
+                        }, 100);
+                        
+                        // Auto close after story duration
+                        setTimeout(() => {
+                            storyViewerModalBS.hide();
+                        }, 5100);
+                    });
                 });
-            });
-            
-            // Story navigation
-            const storyNavPrev = document.querySelector('.story-nav-prev');
-            const storyNavNext = document.querySelector('.story-nav-next');
-            
-            storyNavPrev.addEventListener('click', () => {
-                // Navigate to previous story (would implement actual logic in a real app)
-                storyViewerModal.hide();
-            });
-            
-            storyNavNext.addEventListener('click', () => {
-                // Navigate to next story (would implement actual logic in a real app)
-                storyViewerModal.hide();
-            });
+                
+                // Story navigation
+                const storyNavPrev = document.querySelector('.story-nav-prev');
+                const storyNavNext = document.querySelector('.story-nav-next');
+                
+                if (storyNavPrev && storyNavNext) {
+                    storyNavPrev.addEventListener('click', () => {
+                        // Navigate to previous story (would implement actual logic in a real app)
+                        storyViewerModalBS.hide();
+                    });
+                    
+                    storyNavNext.addEventListener('click', () => {
+                        // Navigate to next story (would implement actual logic in a real app)
+                        storyViewerModalBS.hide();
+                    });
+                }
+            }
             
             // Photo upload preview
             const photoInput = document.getElementById('photoInput');
@@ -3248,77 +3640,87 @@
             const uploadPreviewContainer = document.querySelector('.upload-preview');
             const videoPreview = document.getElementById('videoPreview');
             
-            uploadPhotoBtn.addEventListener('click', () => {
-                photoInput.click();
-            });
-            
-            photoInput.addEventListener('change', (e) => {
-                if (e.target.files && e.target.files[0]) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = (e) => {
-                        uploadPreview.src = e.target.result;
-                        uploadPreview.classList.remove('d-none');
-                        videoPreview.classList.add('d-none');
-                        uploadPreviewContainer.style.display = 'block';
-                    };
-                    
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
+            if (uploadPhotoBtn && photoInput) {
+                uploadPhotoBtn.addEventListener('click', () => {
+                    photoInput.click();
+                });
+                
+                photoInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = (e) => {
+                            uploadPreview.src = e.target.result;
+                            uploadPreview.classList.remove('d-none');
+                            videoPreview.classList.add('d-none');
+                            uploadPreviewContainer.style.display = 'block';
+                        };
+                        
+                        reader.readAsDataURL(e.target.files[0]);
+                    }
+                });
+            }
             
             // Video upload preview
             const videoInput = document.getElementById('videoInput');
             const uploadVideoBtn = document.getElementById('uploadVideoBtn');
             
-            uploadVideoBtn.addEventListener('click', () => {
-                videoInput.click();
-            });
-            
-            videoInput.addEventListener('change', (e) => {
-                if (e.target.files && e.target.files[0]) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = (e) => {
-                        videoPreview.src = e.target.result;
-                        videoPreview.classList.remove('d-none');
-                        uploadPreview.classList.add('d-none');
-                        uploadPreviewContainer.style.display = 'block';
-                    };
-                    
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
+            if (uploadVideoBtn && videoInput) {
+                uploadVideoBtn.addEventListener('click', () => {
+                    videoInput.click();
+                });
+                
+                videoInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = (e) => {
+                            videoPreview.src = e.target.result;
+                            videoPreview.classList.remove('d-none');
+                            uploadPreview.classList.add('d-none');
+                            uploadPreviewContainer.style.display = 'block';
+                        };
+                        
+                        reader.readAsDataURL(e.target.files[0]);
+                    }
+                });
+            }
             
             // Remove media preview
             const removeMediaBtn = document.getElementById('removeMediaBtn');
             
-            removeMediaBtn.addEventListener('click', () => {
-                uploadPreview.src = '';
-                videoPreview.src = '';
-                uploadPreview.classList.add('d-none');
-                videoPreview.classList.add('d-none');
-                uploadPreviewContainer.style.display = 'none';
-                photoInput.value = '';
-                videoInput.value = '';
-            });
+            if (removeMediaBtn) {
+                removeMediaBtn.addEventListener('click', () => {
+                    uploadPreview.src = '';
+                    videoPreview.src = '';
+                    uploadPreview.classList.add('d-none');
+                    videoPreview.classList.add('d-none');
+                    uploadPreviewContainer.style.display = 'none';
+                    photoInput.value = '';
+                    videoInput.value = '';
+                });
+            }
             
             // Publish post
             const publishPostBtn = document.getElementById('publishPostBtn');
-            const createPostModal = new bootstrap.Modal(document.getElementById('createPostModal'));
+            const createPostModal = document.getElementById('createPostModal');
             
-            publishPostBtn.addEventListener('click', () => {
-                // In a real app, would send post data to server here
-                createPostModal.hide();
+            if (publishPostBtn && createPostModal) {
+                const createPostModalBS = new bootstrap.Modal(createPostModal);
                 
-                // Show success notification
-                const pointsEarned = Math.floor(Math.random() * 20) + 10; // Random points between 10-30
-                showNotification('Επιτυχής Δημοσίευση', `Η ανάρτησή σας δημοσιεύτηκε και κερδίσατε ${pointsEarned} πόντους!`);
-                
-                // Reset form
-                removeMediaBtn.click();
-                document.querySelector('textarea').value = '';
-            });
+                publishPostBtn.addEventListener('click', () => {
+                    // In a real app, would send post data to server here
+                    createPostModalBS.hide();
+                    
+                    // Show success notification
+                    const pointsEarned = Math.floor(Math.random() * 20) + 10; // Random points between 10-30
+                    showNotification('Post Published!', `Your post has been published successfully. You earned ${pointsEarned} points!`);
+                    
+                    // Reset form
+                    removeMediaBtn.click();
+                    document.querySelector('textarea').value = '';
+                });
+            }
             
             // Like functionality for posts
             const heartBtns = document.querySelectorAll('.post-card .bi-heart');
@@ -3333,10 +3735,12 @@
                         this.classList.remove('bi-heart-fill', 'text-danger');
                         this.classList.add('bi-heart');
                         count--;
+                        showNotification('Like Removed', 'You unliked the post');
                     } else {
                         this.classList.remove('bi-heart');
                         this.classList.add('bi-heart-fill', 'text-danger');
                         count++;
+                        showNotification('Post Liked!', 'You earned +5 points for liking this post');
                     }
                     
                     // Update count text
@@ -3347,10 +3751,12 @@
             // Add story button
             const addStoryBtn = document.querySelector('.story-add-circle');
             
-            addStoryBtn.addEventListener('click', () => {
-                // In a real app, would show story creation UI
-                showNotification('Δημιουργία Ιστορίας', 'Αυτή η λειτουργία θα είναι διαθέσιμη σύντομα!');
-            });
+            if (addStoryBtn) {
+                addStoryBtn.addEventListener('click', () => {
+                    // In a real app, would show story creation UI
+                    showNotification('Create Story', 'This feature will be available soon!');
+                });
+            }
         }
         
         // Simple notification function
@@ -3379,6 +3785,179 @@
                 container.remove();
             }, 3000);
         }
+    </script>
+    <script>
+        // Αρχικοποίηση για το κουμπί στο rewards modal που μεταφέρει στην καρτέλα moments
+        document.addEventListener('DOMContentLoaded', function() {
+            // Λειτουργία για το κουμπί "Κέρδισε περισσότερους πόντους"
+            const earnMorePointsBtn = document.querySelector('#rewardsModal .btn-warning[data-tab="moments"]');
+            if (earnMorePointsBtn) {
+                earnMorePointsBtn.addEventListener('click', function() {
+                    // Κλείνουμε το rewards modal
+                    const rewardsModal = bootstrap.Modal.getInstance(document.getElementById('rewardsModal'));
+                    rewardsModal.hide();
+                    
+                    // Επιλέγουμε την καρτέλα Moments
+                    const momentsTab = document.querySelector('.mobile-nav-item[data-tab="moments"]');
+                    if (momentsTab) {
+                        momentsTab.click();
+                    }
+                });
+            }
+            
+            // Διαχείριση κουπιών εξαργύρωσης
+            const redeemButtons = document.querySelectorAll('#rewardsModal .list-group-item:not(.disabled) .btn-outline-warning');
+            redeemButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const reward = this.closest('.list-group-item').querySelector('h6').textContent;
+                    const description = this.closest('.list-group-item').querySelector('p').textContent;
+                    const pointsCost = parseInt(this.textContent.trim().match(/\d+/)[0]);
+                    
+                    // Έλεγχος αν ο χρήστης έχει αρκετούς πόντους
+                    const currentPoints = parseInt(document.querySelector('.badge.bg-warning.text-dark').textContent);
+                    
+                    if (currentPoints >= pointsCost) {
+                        // Εμφάνιση επιβεβαίωσης
+                        if (confirm(`Θέλετε να εξαργυρώσετε ${pointsCost} πόντους για: ${reward};`)) {
+                            // Ενημέρωση UI (σε πραγματική εφαρμογή θα γινόταν κλήση στο backend)
+                            const newPoints = currentPoints - pointsCost;
+                            
+                            // Ενημέρωση εμφάνισης πόντων
+                            document.querySelector('#rewardsModal h2').textContent = `${newPoints} πόντοι`;
+                            document.querySelector('.badge.bg-warning.text-dark').textContent = newPoints;
+                            
+                            // Δημιουργία κωδικού κουπονιού (σε πραγματική εφαρμογή αυτός θα ερχόταν από το backend)
+                            const couponCode = generateCouponCode();
+                            
+                            // Προσθήκη του κουπονιού στο wallet
+                            addCouponToWallet(reward, description, couponCode);
+                            
+                            // Εμφάνιση ειδοποίησης επιτυχίας
+                            showNotification('Επιτυχής Εξαργύρωση', `Έχετε εξαργυρώσει επιτυχώς το κουπόνι: ${reward}. Μπορείτε να το βρείτε στο Wallet σας.`);
+                            
+                            // Απενεργοποίηση του κουμπιού (για να μην μπορεί να εξαργυρωθεί ξανά)
+                            this.disabled = true;
+                            this.closest('.list-group-item').classList.add('disabled');
+                        }
+                    } else {
+                        showNotification('Μη επαρκείς πόντοι', 'Δεν έχετε αρκετούς πόντους για αυτή την προσφορά. Κερδίστε περισσότερους στο Moments!', 'warning');
+                    }
+                });
+            });
+            
+            // Προσθήκη του wallet στο κυρίως μενού
+            const profileMenuButton = document.querySelector('[data-bs-target="#profileModal"]');
+            if (profileMenuButton) {
+                profileMenuButton.parentNode.insertAdjacentHTML('beforeend', `
+                    <button class="btn btn-sm text-info me-2" data-bs-toggle="modal" data-bs-target="#walletModal">
+                        <i class="bi bi-wallet2 fs-4"></i>
+                    </button>
+                `);
+            }
+            
+            // Διόρθωση του κουμπιού "Προβολή Προσφορών" στο wallet (αφού δεν έχουμε jQuery)
+            const viewOffersBtn = document.querySelector('#walletModal button[data-bs-target="#rewardsModal"]');
+            if (viewOffersBtn) {
+                viewOffersBtn.onclick = function() {
+                    const walletModal = bootstrap.Modal.getInstance(document.getElementById('walletModal'));
+                    walletModal.hide();
+                };
+            }
+        });
+        
+        // Συνάρτηση για παραγωγή τυχαίων κωδικών κουπονιών
+        function generateCouponCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+        
+        // Προσθήκη κουπονιού στο wallet
+        function addCouponToWallet(title, description, code) {
+            const container = document.getElementById('coupons-container');
+            const template = document.getElementById('coupon-template');
+            
+            // Αφαίρεση του αρχικού μηνύματος "Δεν έχετε κουπόνια"
+            const emptyState = container.querySelector('.text-center.py-4');
+            if (emptyState) {
+                emptyState.remove();
+            }
+            
+            // Κλωνοποίηση του template
+            const couponElement = document.importNode(template.content, true);
+            
+            // Συμπλήρωση των στοιχείων
+            couponElement.querySelector('.coupon-title').textContent = title;
+            couponElement.querySelector('.coupon-description').textContent = description;
+            
+            // Υπολογισμός ημερομηνίας λήξης (30 ημέρες από σήμερα)
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            const formattedDate = expiryDate.toLocaleDateString('el-GR');
+            couponElement.querySelector('.coupon-validity').textContent = `Ισχύει έως: ${formattedDate}`;
+            
+            // Προσθήκη κωδικού
+            couponElement.querySelector('.coupon-code small').textContent = code;
+            
+            // Προσθήκη στο container
+            container.appendChild(couponElement);
+            
+            // Αποθήκευση στο localStorage για διατήρηση (σε πραγματική εφαρμογή θα αποθηκευόταν στο backend)
+            saveCouponsToStorage();
+        }
+        
+        // Αποθήκευση κουπονιών στο localStorage
+        function saveCouponsToStorage() {
+            const coupons = [];
+            const couponCards = document.querySelectorAll('.coupon-card');
+            
+            couponCards.forEach(card => {
+                coupons.push({
+                    title: card.querySelector('.coupon-title').textContent,
+                    description: card.querySelector('.coupon-description').textContent,
+                    validity: card.querySelector('.coupon-validity').textContent,
+                    code: card.querySelector('.coupon-code small').textContent
+                });
+            });
+            
+            localStorage.setItem('userCoupons', JSON.stringify(coupons));
+        }
+        
+        // Φόρτωση κουπονιών από το localStorage
+        function loadCouponsFromStorage() {
+            const couponsString = localStorage.getItem('userCoupons');
+            if (couponsString) {
+                const coupons = JSON.parse(couponsString);
+                const container = document.getElementById('coupons-container');
+                
+                // Αφαίρεση του αρχικού μηνύματος "Δεν έχετε κουπόνια"
+                const emptyState = container.querySelector('.text-center.py-4');
+                if (emptyState && coupons.length > 0) {
+                    emptyState.remove();
+                }
+                
+                // Προσθήκη των αποθηκευμένων κουπονιών
+                coupons.forEach(coupon => {
+                    const template = document.getElementById('coupon-template');
+                    const couponElement = document.importNode(template.content, true);
+                    
+                    couponElement.querySelector('.coupon-title').textContent = coupon.title;
+                    couponElement.querySelector('.coupon-description').textContent = coupon.description;
+                    couponElement.querySelector('.coupon-validity').textContent = coupon.validity;
+                    couponElement.querySelector('.coupon-code small').textContent = coupon.code;
+                    
+                    container.appendChild(couponElement);
+                });
+            }
+        }
+        
+        // Καλούμε τη φόρτωση των κουπονιών από το localStorage όταν φορτώνει η σελίδα
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCouponsFromStorage();
+        });
     </script>
 </body>
 </html>
