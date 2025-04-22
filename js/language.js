@@ -133,6 +133,7 @@ const translations = {
         
         // Quick Actions
         'room_key': 'Κλειδί Δωματίου',
+        'smart_checkin': 'Smart Check-in',
         'wifi': 'WiFi',
         'bill': 'Λογαριασμός',
         'help': 'Βοήθεια',
@@ -208,7 +209,20 @@ const translations = {
         'faq': 'Συχνές Ερωτήσεις',
         'find_answers': 'Βρείτε απαντήσεις σε συχνές ερωτήσεις',
         'hotel_map': 'Χάρτης Ξενοδοχείου',
-        'navigate_facilities': 'Πλοηγηθείτε στις εγκαταστάσεις του ξενοδοχείου'
+        'navigate_facilities': 'Πλοηγηθείτε στις εγκαταστάσεις του ξενοδοχείου',
+        
+        // Smart Check-in Modal
+        'smart_checkin_title': 'Smart Check-in',
+        'id_verified': 'ID Verified',
+        'id_verified_desc': 'Identity verification completed',
+        'payment_confirmed': 'Payment Confirmed',
+        'payment_confirmed_desc': 'Deposit has been confirmed',
+        'registration_form': 'Registration Form',
+        'registration_form_desc': 'Registration form completed',
+        'digital_key': 'Digital Room Key',
+        'use_qr_nfc': 'Use this QR code or NFC at your room door',
+        'room_details': 'Room Details',
+        'directions_to_room': 'Directions to Room'
     },
     en: {
         // Header
@@ -218,6 +232,7 @@ const translations = {
         
         // Quick Actions
         'room_key': 'Room Key',
+        'smart_checkin': 'Smart Check-in',
         'wifi': 'WiFi',
         'bill': 'Bill',
         'help': 'Help',
@@ -293,6 +308,19 @@ const translations = {
         'faq': 'FAQ',
         'find_answers': 'Find answers to common questions',
         'hotel_map': 'Hotel Map',
-        'navigate_facilities': 'Navigate hotel facilities and amenities'
+        'navigate_facilities': 'Navigate hotel facilities and amenities',
+        
+        // Smart Check-in Modal
+        'smart_checkin_title': 'Smart Check-in',
+        'id_verified': 'ID Verified',
+        'id_verified_desc': 'Identity verification completed',
+        'payment_confirmed': 'Payment Confirmed',
+        'payment_confirmed_desc': 'Deposit has been confirmed',
+        'registration_form': 'Registration Form',
+        'registration_form_desc': 'Registration form completed',
+        'digital_key': 'Digital Room Key',
+        'use_qr_nfc': 'Use this QR code or NFC at your room door',
+        'room_details': 'Room Details',
+        'directions_to_room': 'Directions to Room'
     }
 }; 

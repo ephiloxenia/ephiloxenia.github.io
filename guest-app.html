@@ -220,6 +220,103 @@
             animation: fadeIn 0.3s ease-out;
         }
         
+        /* Points update animation */
+        @keyframes pointsUpdated {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .points-updated {
+            animation: pointsUpdated 0.7s ease-in-out;
+            color: #000 !important;
+            background-color: #ffc107 !important;
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+        }
+        
+        /* Flying Points Animation */
+        .flying-points {
+            position: absolute;
+            pointer-events: none;
+            font-weight: bold;
+            color: #ffa726;
+            z-index: 9999;
+            font-size: 0.9rem;
+            opacity: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            animation: flyPoints 1.5s forwards ease-out;
+        }
+        
+        @keyframes flyPoints {
+            0% {
+                transform: scale(0.8) translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2) translateY(-100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Points Icon Styles */
+        @keyframes points-pulse {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 157, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 18px rgba(255, 157, 0, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 157, 0, 0.4); }
+        }
+        
+        @keyframes badge-pulse {
+            0% { transform: scale(1) translate(-50%, -50%); }
+            50% { transform: scale(1.1) translate(-45%, -45%); }
+            100% { transform: scale(1) translate(-50%, -50%); }
+        }
+        
+        @keyframes shine-effect {
+            0% { transform: translateX(-100%) rotate(35deg); }
+            100% { transform: translateX(200%) rotate(35deg); }
+        }
+        
+        .points-btn:hover .points-icon-wrapper {
+            animation: points-pulse 1.5s infinite;
+        }
+        
+        .points-badge {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .points-btn:hover .points-badge {
+            animation: badge-pulse 1.5s infinite;
+        }
+        
+        .points-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-100%) rotate(35deg);
+            animation: shine-effect 3s infinite;
+            pointer-events: none;
+        }
+        
+        .points-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0) 30%, rgba(255,221,87,0.3) 100%);
+            top: 0;
+            left: 0;
+        }
+        
         /* Make the app feel more interactive */
         .list-group-item, .btn, .form-check-input, .mobile-nav-item, .card {
             transition: all 0.2s ease;
@@ -273,6 +370,7 @@
             /* Hide scrollbar but keep functionality */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE and Edge */
+            scroll-behavior: smooth; /* Enable smooth scrolling for the container */
         }
         
         .chat-messages::-webkit-scrollbar {
@@ -1067,10 +1165,11 @@
             </div>
             <div>
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-icon position-relative me-3" data-bs-toggle="modal" data-bs-target="#rewardsModal">
-                        <span class="icon-badge bg-warning text-dark position-absolute top-0 end-0 translate-middle badge-pill fw-bold" style="font-size: 0.65rem; padding: 0.25rem 0.45rem; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">145</span>
-                        <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: linear-gradient(135deg, #ffde59 0%, #ffa726 100%); box-shadow: 0 3px 6px rgba(255, 167, 38, 0.3);">
-                            <i class="bi bi-star-fill text-white"></i>
+                    <button class="btn btn-icon position-relative me-3 points-btn" data-bs-toggle="modal" data-bs-target="#rewardsModal">
+                        <span class="icon-badge position-absolute top-0 end-0 translate-middle badge-pill fw-bold points-badge" style="font-size: 0.7rem; padding: 0.25rem 0.45rem; background: linear-gradient(to right, #f7b731, #f7911d); color: #fff; border: 2px solid #fff; box-shadow: 0 3px 8px rgba(247, 183, 49, 0.4); z-index: 2;">145</span>
+                        <div class="icon-wrapper points-icon-wrapper rounded-circle d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: linear-gradient(135deg, #ffd32a, #ff9d00, #ff7b00); box-shadow: 0 5px 15px rgba(255, 157, 0, 0.4); position: relative; overflow: hidden;">
+                            <div class="points-shine"></div>
+                            <i class="bi bi-star-fill text-white" style="font-size: 1.3rem; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15)); z-index: 1;"></i>
                         </div>
                     </button>
                     <button class="btn btn-icon me-3" data-bs-toggle="modal" data-bs-target="#walletModal">
@@ -1112,11 +1211,11 @@
                         <div class="p-3">
                             <div class="row g-2 quick-actions">
                                 <div class="col-3">
-                                    <div class="quick-action-btn room-key-btn" data-bs-toggle="modal" data-bs-target="#roomKeyModal">
+                                    <div class="quick-action-btn smart-checkin-btn" data-bs-toggle="modal" data-bs-target="#smartCheckinModal">
                                         <div class="icon-bg bg-primary-light mb-2">
-                                            <i class="bi bi-key text-primary"></i>
+                                            <i class="bi bi-box-arrow-in-right text-primary"></i>
                                         </div>
-                                        <div class="small">Room Key</div>
+                                        <div class="small">Smart Check-in</div>
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -3454,6 +3553,87 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Smart Check-in Modal -->
+    <div class="modal fade" id="smartCheckinModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Smart Check-in</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-box-arrow-in-right display-1 text-primary"></i>
+                    </div>
+                    
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item d-flex align-items-center">
+                            <div class="badge bg-success me-3">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Ταυτότητα Επαληθευμένη</h6>
+                                <small class="text-muted">Η επαλήθευση ταυτότητας ολοκληρώθηκε</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <div class="badge bg-success me-3">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Πληρωμή Επιβεβαιωμένη</h6>
+                                <small class="text-muted">Η προκαταβολή έχει επιβεβαιωθεί</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <div class="badge bg-success me-3">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Φόρμα Εγγραφής</h6>
+                                <small class="text-muted">Φόρμα εγγραφής συμπληρωμένη</small>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="card mb-4 border-success">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-key text-success me-2"></i> Ψηφιακό Κλειδί Δωματίου
+                            </h5>
+                            <div class="qr-code-container text-center my-3">
+                                <img src="img/qr-code-placeholder.svg" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+                            </div>
+                            <div class="form-check form-switch d-flex justify-content-center mb-3">
+                                <input class="form-check-input me-2" type="checkbox" id="saveKeyOffline" checked>
+                                <label class="form-check-label" for="saveKeyOffline">Διαθέσιμο Offline</label>
+                            </div>
+                            <div class="alert alert-info text-center mb-0">
+                                <i class="bi bi-info-circle"></i> Χρησιμοποιήστε αυτό το QR ή NFC στην πόρτα του δωματίου σας
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <button class="btn btn-outline-primary w-100" id="viewRoomDetails">
+                                <i class="bi bi-info-circle"></i> Πληροφορίες Δωματίου
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-outline-primary w-100" id="navigationToRoom">
+                                <i class="bi bi-map"></i> Οδηγίες Προς Δωμάτιο
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
                 </div>
             </div>
         </div>

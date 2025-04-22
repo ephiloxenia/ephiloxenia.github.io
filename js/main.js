@@ -605,6 +605,60 @@ function initializeRoomControls() {
         });
     }
     
+    // Initialize Smart Check-in functionality
+    const smartCheckinBtn = document.querySelector('.smart-checkin-btn');
+    if (smartCheckinBtn) {
+        smartCheckinBtn.addEventListener('click', function() {
+            // The actual modal is already handled by Bootstrap
+            // This is just for additional functionality
+            setTimeout(() => {
+                window.currentNotificationSource = 'homeButton';
+                showNotification('Smart Check-in is ready');
+            }, 1000);
+        });
+    }
+    
+    // Room Details Button
+    const viewRoomDetailsBtn = document.getElementById('viewRoomDetails');
+    if (viewRoomDetailsBtn) {
+        viewRoomDetailsBtn.addEventListener('click', function() {
+            // Show room details modal or update current view with room details
+            window.currentNotificationSource = 'homeButton';
+            showNotification('Προβολή πληροφοριών δωματίου');
+            
+            // Κλείσιμο του τρέχοντος modal
+            const currentModal = bootstrap.Modal.getInstance(document.getElementById('smartCheckinModal'));
+            if (currentModal) {
+                currentModal.hide();
+            }
+            
+            // Εδώ θα μπορούσατε να ανοίξετε ένα νέο modal με πληροφορίες για το δωμάτιο
+            // Ή να μεταβείτε σε μια νέα σελίδα/tab με λεπτομέρειες δωματίου
+        });
+    }
+    
+    // Navigation to Room Button
+    const navigationToRoomBtn = document.getElementById('navigationToRoom');
+    if (navigationToRoomBtn) {
+        navigationToRoomBtn.addEventListener('click', function() {
+            // Show room navigation directions
+            window.currentNotificationSource = 'homeButton';
+            showNotification('Οδηγίες πλοήγησης προς το δωμάτιο');
+            
+            // Κλείσιμο του τρέχοντος modal
+            const currentModal = bootstrap.Modal.getInstance(document.getElementById('smartCheckinModal'));
+            if (currentModal) {
+                currentModal.hide();
+            }
+            
+            // Ανοίγουμε το modal χάρτη του ξενοδοχείου με επισήμανση του δωματίου
+            setTimeout(() => {
+                const hotelMapModal = new bootstrap.Modal(document.getElementById('hotelMapModal'));
+                hotelMapModal.show();
+            }, 500);
+        });
+    }
+    
     // Copy WiFi credentials functionality
     const copyButtons = ['copyWifiName', 'copyWifiPassword'];
     copyButtons.forEach(btnId => {

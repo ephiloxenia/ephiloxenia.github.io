@@ -33,15 +33,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatMessages = document.getElementById('chat-messages');
     if (chatMessages) {
         const chatObserver = new MutationObserver(function(mutations) {
-            // Find the last added child and scroll to it
-            if (mutations.length > 0) {
-                const lastMutation = mutations[mutations.length - 1];
-                if (lastMutation.addedNodes.length > 0) {
-                    const lastNode = lastMutation.addedNodes[lastMutation.addedNodes.length - 1];
-                    if (lastNode.nodeType === 1) { // Element node
-                        lastNode.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                    }
+            // Scroll to bottom when new messages are added
+            let shouldScroll = false;
+            
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    shouldScroll = true;
                 }
+            });
+            
+            if (shouldScroll) {
+                // Use a small delay to ensure DOM is fully updated
+                setTimeout(scrollToBottom, 50);
             }
         });
         
@@ -238,10 +241,10 @@ function addUserMessage(message) {
         }
     }
     
-    // Force scroll to bottom when adding user message
+    // Force scroll to bottom immediately after adding the message
     setTimeout(() => {
-        messageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 100);
+        scrollToBottom();
+    }, 50);
 }
 
 function addBotMessage(message) {
@@ -263,10 +266,10 @@ function addBotMessage(message) {
         chatMessages.appendChild(messageElement);
     }
     
-    // Force scroll to bottom when adding bot message
+    // Force scroll to bottom immediately after adding the message
     setTimeout(() => {
-        messageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 100);
+        scrollToBottom();
+    }, 50);
 }
 
 function showTypingIndicator() {
@@ -302,19 +305,43 @@ function removeTypingIndicator() {
 function scrollToBottom() {
     const chatMessages = document.getElementById('chat-messages');
     if (chatMessages) {
-        // Force immediate scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        // Use scrollIntoView on the last message for better browser compatibility
+        // Χρησιμοποιούμε scrollIntoView με συμπεριφορά smooth για ομαλό scrolling
         const lastMessage = chatMessages.lastElementChild;
         if (lastMessage) {
-            lastMessage.style.marginBottom = '24px'; // Add extra margin to the last message
-            lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            lastMessage.style.marginBottom = '24px'; // Επιπλέον περιθώριο κάτω για καλύτερη εμφάνιση
+            
+            // Χρησιμοποιούμε setTimeout για να βεβαιωθούμε ότι η κύλιση γίνεται μετά την απόδοση του DOM
+            setTimeout(() => {
+                lastMessage.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'end',
+                    inline: 'nearest'
+                });
+            }, 50);
         }
     }
 }
 
 async function processMessage(message) {
+    const lowerMessage = message.toLowerCase();
+    
+    // Check if the message contains breakfast time or breakfast hours question
+    if (lowerMessage.includes('breakfast time') || 
+        lowerMessage.includes('breakfast hours') || 
+        lowerMessage.includes('πρωινό') && (lowerMessage.includes('ώρα') || lowerMessage.includes('ώρες'))) {
+        
+        // First response with breakfast time information
+        addBotMessage("Breakfast is served daily in the main restaurant from 7:00 AM to 10:30 AM. On weekends and holidays, breakfast is extended until 11:00 AM.");
+        
+        // Delay before showing the follow-up question for better UX
+        setTimeout(() => {
+            // Create breakfast preferences question with buttons
+            createBreakfastPreferencesQuestion();
+        }, 1000);
+        
+        return;
+    }
+    
     // If in human mode, just echo the message back with a response
     if (window.isHumanMode) {
         showTypingIndicator();
@@ -938,4 +965,182 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
+}
+
+// Function to create breakfast preferences question with buttons
+function createBreakfastPreferencesQuestion() {
+    const chatMessages = document.getElementById('chat-messages');
+    if (!chatMessages) return;
+    
+    // Create message container
+    const messageElement = document.createElement('div');
+    messageElement.className = 'message message-bot';
+    messageElement.setAttribute('data-is-human', 'false');
+    
+    // Add question text
+    const questionText = document.createElement('p');
+    questionText.textContent = 'We would like to know your breakfast preferences to better customize your experience. What type of breakfast do you prefer?';
+    messageElement.appendChild(questionText);
+    
+    // Create buttons container
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'breakfast-options mt-3 d-flex flex-column gap-2';
+    
+    // Create buttons for preferences
+    const options = [
+        { id: 'continental', text: 'Continental (Bread, butter, jam, coffee)', points: 20 },
+        { id: 'american', text: 'American (Eggs, bacon, pancakes)', points: 20 },
+        { id: 'mediterranean', text: 'Mediterranean (Yogurt, honey, fruits, olives)', points: 20 }
+    ];
+    
+    options.forEach(option => {
+        const button = document.createElement('button');
+        button.className = 'btn btn-outline-primary breakfast-option-btn';
+        button.setAttribute('data-preference', option.id);
+        button.setAttribute('data-points', option.points);
+        
+        // Inner HTML with points badge
+        button.innerHTML = `
+            ${option.text}
+            <span class="badge bg-warning text-dark ms-2">+${option.points} points</span>
+        `;
+        
+        // Add click event listener
+        button.addEventListener('click', function() {
+            const preference = this.getAttribute('data-preference');
+            const points = parseInt(this.getAttribute('data-points'));
+            handleBreakfastPreference(preference, points);
+            
+            // Disable all buttons after selection
+            const allButtons = document.querySelectorAll('.breakfast-option-btn');
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-50');
+            });
+            
+            // Highlight selected button
+            this.classList.remove('btn-outline-primary', 'opacity-50');
+            this.classList.add('btn-primary');
+        });
+        
+        buttonsContainer.appendChild(button);
+    });
+    
+    // Add buttons to message
+    messageElement.appendChild(buttonsContainer);
+    
+    // Add small print
+    const smallPrint = document.createElement('small');
+    smallPrint.className = 'text-muted d-block mt-2';
+    smallPrint.textContent = 'Earn points by answering our questions!';
+    messageElement.appendChild(smallPrint);
+    
+    // Get the human support option
+    const humanSupportOption = document.getElementById('human-support-option');
+    
+    // Insert before the human support option if it exists
+    if (humanSupportOption && humanSupportOption.parentNode === chatMessages) {
+        chatMessages.insertBefore(messageElement, humanSupportOption);
+    } else {
+        chatMessages.appendChild(messageElement);
+    }
+    
+    // Force scroll to bottom
+    setTimeout(() => {
+        scrollToBottom();
+    }, 50);
+}
+
+// Function to handle breakfast preference selection
+function handleBreakfastPreference(preference, points) {
+    // Add user's choice as a message
+    let userChoice = '';
+    switch(preference) {
+        case 'continental':
+            userChoice = 'Continental breakfast';
+            break;
+        case 'american':
+            userChoice = 'American breakfast';
+            break;
+        case 'mediterranean':
+            userChoice = 'Mediterranean breakfast';
+            break;
+    }
+    
+    // Update points immediately after clicking
+    updatePointsBadge(points);
+    
+    // Show immediate visual notification
+    showNotification('Points Earned!', `+${points} points added to your account.`);
+    
+    addUserMessage(userChoice);
+    
+    // Delay before showing the response
+    setTimeout(() => {
+        // Add bot confirmation message
+        addBotMessage(`Thank you for your choice! You've selected ${userChoice}. You've earned ${points} points for participating!`);
+        
+        // Βεβαιωνόμαστε ότι γίνεται scroll στο τέλος μετά από κάθε προσθήκη μηνύματος
+        setTimeout(scrollToBottom, 50);
+    }, 1000);
+}
+
+// Function to update the points badge
+function updatePointsBadge(pointsToAdd) {
+    const pointsBadge = document.querySelector('.badge.bg-warning.text-dark');
+    if (pointsBadge) {
+        // Αποθηκεύουμε την αρχική τιμή
+        const currentPoints = parseInt(pointsBadge.textContent);
+        const newPoints = currentPoints + pointsToAdd;
+        
+        // Δημιουργούμε ένα "flying" animation για τους πόντους που κερδήθηκαν
+        const flyingPoints = document.createElement('div');
+        flyingPoints.className = 'flying-points';
+        flyingPoints.textContent = `+${pointsToAdd}`;
+        
+        // Βρίσκουμε το στοιχείο όπου θα προσθέσουμε το animation
+        const header = document.querySelector('.mobile-header-alt');
+        if (header) {
+            header.appendChild(flyingPoints);
+            
+            // Υπολογίζουμε τη θέση του badge για το animation
+            const badgeRect = pointsBadge.getBoundingClientRect();
+            
+            // Ξεκινάμε το animation από το κέντρο της οθόνης
+            flyingPoints.style.top = '50%';
+            flyingPoints.style.left = '50%';
+            
+            // Προσθέτουμε την κλάση που ξεκινά το animation
+            setTimeout(() => {
+                flyingPoints.style.top = `${badgeRect.top}px`;
+                flyingPoints.style.left = `${badgeRect.left}px`;
+                flyingPoints.style.opacity = '0';
+                flyingPoints.style.transform = 'scale(0.5)';
+            }, 50);
+            
+            // Μετά την ολοκλήρωση του animation, ενημερώνουμε το badge
+            setTimeout(() => {
+                // Ενημερώνουμε την τιμή του badge
+                pointsBadge.textContent = newPoints;
+                
+                // Προσθέτουμε animation στο badge
+                pointsBadge.classList.add('points-updated');
+                
+                // Αφαιρούμε το flying element
+                header.removeChild(flyingPoints);
+                
+                // Αφαιρούμε την κλάση animation μετά από λίγο
+                setTimeout(() => {
+                    pointsBadge.classList.remove('points-updated');
+                }, 1500);
+            }, 600);
+        } else {
+            // Fallback αν δεν βρεθεί το header
+            pointsBadge.textContent = newPoints;
+            pointsBadge.classList.add('points-updated');
+            setTimeout(() => {
+                pointsBadge.classList.remove('points-updated');
+            }, 1500);
+        }
+    }
 } 
