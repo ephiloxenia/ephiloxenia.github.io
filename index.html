@@ -1100,97 +1100,141 @@
     </section>
 
     <!-- e-Philoxenia Guest App Section -->
-    <section class="py-3 bg-light" id="guest-app" style="background-color: #f7f9fc; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05); margin-top: 50px;">
-        <div class="container py-3">
-            <div class="row mb-4">
-                <div class="col-lg-7">
-                    <h1 class="display-4 fw-bold mb-2" style="color: #0c3b80;">Guest Experience.</h1>
-                    <h1 class="display-4 fw-bold mb-2" style="color: #4a88e0;">Redefined.</h1>
-                    <h2 class="h2 fw-bold mb-3" style="color: #0c3b80;">e-Philoxenia <span style="color: #4a88e0;">Guest App</span></h2>
-                    <p class="lead mb-3" style="font-size: 1.15rem; color: #444; line-height: 1.5;">
-                        Ένας έξυπνος ψηφιακός σύντροφος που μεταμορφώνει κάθε διαμονή σε μοναδική εμπειρία
-                    </p>
+    <section class="py-5" id="guest-app" style="background-color: #f0f5fc; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05); margin-top: 40px; position: relative; overflow: hidden;">
+        <!-- Decorative Elements -->
+        <div class="position-absolute" style="top: -50px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(74, 136, 224, 0.1) 0%, rgba(74, 136, 224, 0) 70%); border-radius: 50%; z-index: 0;"></div>
+        <div class="position-absolute" style="bottom: -80px; left: -120px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(74, 136, 224, 0.1) 0%, rgba(74, 136, 224, 0) 70%); border-radius: 50%; z-index: 0;"></div>
+        
+        <div class="container-fluid py-5 position-relative">
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-5">
+                    <h1 class="display-4 fw-bold mb-4" style="color: #0c3b80; display: inline-block;">Guest Experience.&nbsp;</h1>
+                    <h1 class="display-4 fw-bold mb-4" style="color: #4a88e0; display: inline-block;">Redefined.</h1>
+                    <p class="lead mb-4 w-100" style="font-size: 1.5rem; color: #444; line-height: 1.6;">An intelligent digital companion that transforms every stay into a unique experience</p>
+                    <div class="col-12 mx-auto position-relative">
+                        <h2 class="h1 fw-bold mb-4" style="color: #0c3b80; margin-top: 1rem;">ePhiloxenia <span style="color: #4a88e0;">Guest App Environment Features</span></h2>
+                        <div class="accent-line mx-auto" style="width: 80px; height: 4px; background: linear-gradient(90deg, #0c3b80, #4a88e0); margin-bottom: 30px; border-radius: 2px;"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row align-items-center">
+            <div class="row align-items-center justify-content-center">
                 <!-- Left Features -->
-                <div class="col-lg-5">
-                    <div id="guest-features-carousel" style="position: relative; background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.04);">
+                <div class="col-lg-6 col-md-12">
+                    <div id="guest-features-carousel" style="position: relative; background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.12); border-left: 5px solid #4a88e0; margin-right: 20px; transform: translateY(-10px);">
                         <!-- Progress Indicator -->
-                        <div class="carousel-progress" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
-                            <div style="background: #f0f4f8; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: inline-flex; align-items: center;">
-                                <span id="guest-progress" style="font-size: 0.9rem; color: #0c3b80; font-weight: 600;">1/4</span>
-                                <div style="margin-left: 15px; display: flex; gap: 5px;">
-                                    <span class="progress-dot guest-dot" data-index="0" style="width: 8px; height: 8px; background: #0c3b80; border-radius: 50%; cursor: pointer; opacity: 1; transition: all 0.3s ease;"></span>
-                                    <span class="progress-dot guest-dot" data-index="1" style="width: 8px; height: 8px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
-                                    <span class="progress-dot guest-dot" data-index="2" style="width: 8px; height: 8px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
-                                    <span class="progress-dot guest-dot" data-index="3" style="width: 8px; height: 8px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
+                        <div class="carousel-progress" style="margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                            <div style="background: #f0f4f8; padding: 12px 24px; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: inline-flex; align-items: center;">
+                                <span id="guest-progress" style="font-size: 1.1rem; color: #0c3b80; font-weight: 600;">1/4</span>
+                                <div style="margin-left: 20px; display: flex; gap: 8px;">
+                                    <span class="progress-dot guest-dot" data-index="0" style="width: 12px; height: 12px; background: #0c3b80; border-radius: 50%; cursor: pointer; opacity: 1; transition: all 0.3s ease;"></span>
+                                    <span class="progress-dot guest-dot" data-index="1" style="width: 12px; height: 12px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
+                                    <span class="progress-dot guest-dot" data-index="2" style="width: 12px; height: 12px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
+                                    <span class="progress-dot guest-dot" data-index="3" style="width: 12px; height: 12px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
                                 </div>
                             </div>
                         </div>
                         
                         <div style="position: relative; display: flex; align-items: center;">
                             <!-- Left Navigation Arrow -->
-                            <button class="carousel-control prev" onclick="prevGuestFeature()" style="position: relative; margin-right: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: auto;">
-                                <i class="bi bi-chevron-left"></i>
+                            <button class="carousel-control prev" onclick="prevGuestFeature()" style="position: relative; margin-right: 20px; background: #f0f4f8; color: #0c3b80; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.1); pointer-events: auto; transition: all 0.3s ease;">
+                                <i class="bi bi-chevron-left" style="font-size: 1.2rem;"></i>
                             </button>
                             
                             <!-- Feature Content -->
                             <div style="flex-grow: 1;">
                                 <div class="guest-feature active" data-feature="assistant">
-                                    <div class="feature-item mb-3" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">AI Guest Assistant</h3>
-                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div style="background-color: rgba(12, 59, 128, 0.1); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-right: 24px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(12, 59, 128, 0.08);">
+                                                <i class="bi bi-robot" style="font-size: 2.2rem; color: #0c3b80;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2.2rem;">AI Guest Assistant</h3>
+                                        </div>
+                                        <p class="mb-4" style="color: #444; font-size: 1.25rem; line-height: 1.7; padding-left: 94px;">
                                             Offer 24/7 personalized assistance. Guests can ask questions, book services, solve issues, and enjoy a frictionless stay.
                                         </p>
+                                        <div style="padding-left: 94px;">
+                                            <span class="badge rounded-pill" style="background-color: rgba(12, 59, 128, 0.1); color: #0c3b80; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Multilingual Support</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(12, 59, 128, 0.1); color: #0c3b80; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Voice Recognition</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(12, 59, 128, 0.1); color: #0c3b80; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">24/7 Available</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="booking" style="display: none;">
-                                    <div class="feature-item mb-3" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Experience & Service Booking</h3>
-                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div style="background-color: rgba(46, 204, 113, 0.1); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-right: 24px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(46, 204, 113, 0.08);">
+                                                <i class="bi bi-calendar-check" style="font-size: 2.2rem; color: #2ecc71;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2.2rem;">Experience & Service Booking</h3>
+                                        </div>
+                                        <p class="mb-4" style="color: #444; font-size: 1.25rem; line-height: 1.7; padding-left: 94px;">
                                             Enable guests to browse, select, and book activities, spa services, dining, and more directly from their mobile device, no downloads required.
                                         </p>
+                                        <div style="padding-left: 94px;">
+                                            <span class="badge rounded-pill" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Real-time Availability</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Secure Payment</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Instant Confirmation</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="social" style="display: none;">
-                                    <div class="feature-item mb-3" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Moments – Social Guest Sharing with Rewards</h3>
-                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
-                                            Turn every guest experience into a social connection. Guests can share their moments, upload photos, and engage with others. For each shared moment, they earn points that can be redeemed for exclusive offers, services, and discounts, making their stay even more rewarding.
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div style="background-color: rgba(212, 175, 55, 0.1); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-right: 24px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(212, 175, 55,.08);">
+                                                <i class="bi bi-share" style="font-size: 2.2rem; color: #d4af37;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2.2rem;">Moments – Social Sharing</h3>
+                                        </div>
+                                        <p class="mb-4" style="color: #444; font-size: 1.25rem; line-height: 1.7; padding-left: 94px;">
+                                            Turn every guest experience into a social connection. Guests can share moments, upload photos, and engage with others. Each shared moment earns points redeemable for exclusive offers.
                                         </p>
+                                        <div style="padding-left: 94px;">
+                                            <span class="badge rounded-pill" style="background-color: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Point System</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Photo Sharing</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Community Building</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="quickactions" style="display: none;">
-                                    <div class="feature-item mb-3" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Quick Actions</h3>
-                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div style="background-color: rgba(149, 165, 166, 0.1); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-right: 24px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(149, 165, 166, .08);">
+                                                <i class="bi bi-lightning" style="font-size: 2.2rem; color: #7f8c8d;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2.2rem;">Quick Actions</h3>
+                                        </div>
+                                        <p class="mb-4" style="color: #444; font-size: 1.25rem; line-height: 1.7; padding-left: 94px;">
                                             Guests can easily make requests, submit reports, and check in seamlessly from their phone, enhancing convenience and streamlining their experience.
                                         </p>
+                                        <div style="padding-left: 94px;">
+                                            <span class="badge rounded-pill" style="background-color: rgba(149, 165, 166, 0.1); color: #7f8c8d; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">One-tap Requests</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(149, 165, 166, 0.1); color: #7f8c8d; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Mobile Check-in</span>
+                                            <span class="badge rounded-pill" style="background-color: rgba(149, 165, 166, 0.1); color: #7f8c8d; font-size: 0.9rem; padding: 6px 12px; margin-right: 8px; margin-bottom: 8px; display: inline-block;">Digital Key</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Right Navigation Arrow -->
-                            <button class="carousel-control next" onclick="nextGuestFeature()" style="position: relative; margin-left: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: auto;">
-                                <i class="bi bi-chevron-right"></i>
+                            <button class="carousel-control next" onclick="nextGuestFeature()" style="position: relative; margin-left: 20px; background: #f0f4f8; color: #0c3b80; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.1); pointer-events: auto; transition: all 0.3s ease;">
+                                <i class="bi bi-chevron-right" style="font-size: 1.2rem;"></i>
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Center Phone Display -->
-                <div class="col-lg-2 d-none d-lg-block"></div>
-                
-                <!-- Center Phone -->
-                <div class="col-lg-5 text-center position-relative">
+                <!-- Right Phone -->
+                <div class="col-lg-6 col-md-12 text-center position-relative">
                     <div class="phone-container" data-aos="fade-up">
-                        <div class="phone-frame" style="position: relative; max-width: 300px; margin: 0 auto;">
-                            <svg viewBox="0 0 280 550" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none;">
+                        <div class="glow-effect" style="position: absolute; width: 300px; height: 600px; background: radial-gradient(circle, rgba(74, 136, 224, 0.2) 0%, rgba(74, 136, 224, 0) 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; border-radius: 50%;"></div>
+                        <div class="phone-frame" style="position: relative; max-width: 300px; margin: 0 auto; transform: perspective(1000px) rotateY(-5deg) scale(1.2); transition: all 0.5s ease;">
+                            <div class="phone-shadow" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; filter: blur(30px); opacity: 0.3; background: #0c3b80; border-radius: 30px; transform: translateY(10px);"></div>
+                            <svg viewBox="0 0 280 550" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; filter: drop-shadow(0 25px 40px rgba(0,0,0,0.2));">
                                 <rect x="0" y="0" width="280" height="550" rx="30" fill="#0c3b80" />
                                 <rect x="8" y="8" width="264" height="534" rx="24" fill="white" />
                                 <rect x="16" y="16" width="248" height="518" rx="18" fill="#f5f5f5" />
@@ -1198,7 +1242,7 @@
                             </svg>
                             
                             <div class="phone-content" style="position: relative; overflow: hidden; width: 100%; padding-top: 65px; padding-bottom: 65px; z-index: 5;">
-                                <div id="phone-content-carousel" style="height: 420px; width: 248px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 5px;">
+                                <div id="phone-content-carousel" style="height: 420px; width: 248px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 5px; box-shadow: 0 15px 30px rgba(0,0,0,0.15);">
                                     <div class="feature-screen" data-feature="assistant" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; flex-direction: column; opacity: 1; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(0);">
                                         <div style="padding: 15px; background: #0c3b80; color: white; text-align: left;">
                                             <h5 style="font-size: 1rem; margin: 0;">AI Guest Assistant</h5>
