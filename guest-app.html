@@ -49,16 +49,29 @@
             background-position: center;
             border: 3px solid #0c3b80;
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .story-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .story-add-circle {
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background-color: #f1f1f1;
+            background-color: #f8f9fa;
             border: 2px dashed #0c3b80;
             color: #0c3b80;
             font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .story-add-circle:hover {
+            background-color: rgba(12, 59, 128, 0.05);
+            transform: scale(1.05);
         }
         
         /* Posts Styles */
@@ -66,7 +79,9 @@
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            border: none;
+            margin-bottom: 20px;
         }
         
         .post-card:hover {
@@ -2109,7 +2124,7 @@
             <!-- Moments Content -->
             <div class="tab-content d-none" id="moments-content">
                 <div class="mb-4">
-                    <h4 class="mb-3">Moments</h4>
+                    <h4 class="mb-2" style="font-weight: 700; color: #0c3b80;">Moments <i class="bi bi-camera-fill ms-2"></i></h4>
                     <p class="text-muted mb-4">Share memories, get inspired, and earn rewards</p>
                     
                     <!-- Rewards Info Card -->
@@ -2173,7 +2188,7 @@
                                 <small>Dining</small>
                             </div>
                             <div class="story-item me-3 text-center">
-                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'); background-position: center;"></div>
+                                <div class="story-circle mb-2" style="background-image: url('https://images.unsplash.com/photo-1551734413-5943d61e982f?ixlib=rb-4.0.3https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60auto=formathttps://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60fit=crophttps://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60w=500https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29ja3RhaWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60q=80'); background-position: center;"></div>
                                 <small>Cocktails</small>
                             </div>
                             <div class="story-item me-3 text-center">
@@ -2327,115 +2342,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Post 2 -->
-                        <div class="card mb-4 post-card">
-                            <div class="card-header bg-transparent border-0 p-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://randomuser.me/api/portraits/men/91.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
-                                    <div>
-                                        <h6 class="mb-0">Daniel A.</h6>
-                                        <small class="text-muted">2 hours ago · <i class="bi bi-globe"></i></small>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p class="px-3">Culinary exploration at the hotel restaurant. I highly recommend the chef's specialty! 🍽️👨‍🍳 #FoodLover #DeliciousMeal</p>
-                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="Gourmet Dish" class="img-fluid">
-                            </div>
-                            <div class="card-footer bg-transparent border-0 p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart-fill text-danger"></i> 38 <small class="text-muted">(+5 points per like)</small>
-                                        </button>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 11 <small class="text-muted">(+10 points per comment)</small>
-                                        </button>
-                                    </div>
-                                    <button class="btn btn-sm text-primary">
-                                        <i class="bi bi-share"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Post 3 -->
-                        <div class="card mb-4 post-card">
-                            <div class="card-header bg-transparent border-0 p-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
-                                    <div>
-                                        <h6 class="mb-0">Elena P.</h6>
-                                        <small class="text-muted">Yesterday · <i class="bi bi-globe"></i></small>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +30 points earned
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p class="px-3">Pure relaxation at the hotel spa! The massage was exactly what I needed. 💆‍♀️✨ #SpaDay #Relaxation</p>
-                                <div class="video-container position-relative">
-                                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3BhfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Spa Experience" class="img-fluid">
-                                    <div class="position-absolute top-50 start-50 translate-middle">
-                                        <button class="btn btn-light rounded-circle">
-                                            <i class="bi bi-play-fill fs-4"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-transparent border-0 p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart"></i> 45 <small class="text-muted">(+5 points per like)</small>
-                                        </button>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 8 <small class="text-muted">(+10 points per comment)</small>
-                                        </button>
-                                    </div>
-                                    <button class="btn btn-sm text-primary">
-                                        <i class="bi bi-share"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Post 4 - New Post with pool view -->
-                        <div class="card mb-4 post-card">
-                            <div class="card-header bg-transparent border-0 p-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://randomuser.me/api/portraits/women/22.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
-                                    <div>
-                                        <h6 class="mb-0">Sophie T.</h6>
-                                        <small class="text-muted">3 hours ago · <i class="bi bi-globe"></i></small>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p class="px-3">Perfect morning by the infinity pool! The view is absolutely breathtaking 💙 #PoolVibes #LuxuryStay</p>
-                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5maW5pdHklMjBwb29sfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Pool View" class="img-fluid">
-                            </div>
-                            <div class="card-footer bg-transparent border-0 p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart-fill text-danger"></i> 52 <small class="text-muted">(+5 points per like)</small>
-                                        </button>
                                         <button class="btn btn-sm text-primary">
                                             <i class="bi bi-chat"></i> 7 <small class="text-muted">(+10 points per comment)</small>
                                         </button>

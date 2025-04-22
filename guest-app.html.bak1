@@ -2329,44 +2329,6 @@
                             </div>
                         </div>
                         
-                        <!-- Post 2 -->
-                        <div class="card mb-4 post-card">
-                            <div class="card-header bg-transparent border-0 p-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://randomuser.me/api/portraits/men/91.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
-                                    <div>
-                                        <h6 class="mb-0">Daniel A.</h6>
-                                        <small class="text-muted">2 hours ago · <i class="bi bi-globe"></i></small>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
-                                            <i class="bi bi-star-fill me-1"></i> +20 points earned
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p class="px-3">Culinary exploration at the hotel restaurant. I highly recommend the chef's specialty! 🍽️👨‍🍳 #FoodLover #DeliciousMeal</p>
-                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="Gourmet Dish" class="img-fluid">
-                            </div>
-                            <div class="card-footer bg-transparent border-0 p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-heart-fill text-danger"></i> 38 <small class="text-muted">(+5 points per like)</small>
-                                        </button>
-                                        <button class="btn btn-sm text-primary">
-                                            <i class="bi bi-chat"></i> 11 <small class="text-muted">(+10 points per comment)</small>
-                                        </button>
-                                    </div>
-                                    <button class="btn btn-sm text-primary">
-                                        <i class="bi bi-share"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Post 3 -->
                         <div class="card mb-4 post-card">
                             <div class="card-header bg-transparent border-0 p-3">
                                 <div class="d-flex align-items-center">
