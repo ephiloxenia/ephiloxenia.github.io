@@ -9,6 +9,99 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* App Styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        /* Moments Styles */
+        .moments-content {
+            padding-bottom: 80px;
+        }
+        
+        /* Stories Styles */
+        .stories-container {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        .stories-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        .story-item {
+            width: 80px;
+        }
+        
+        .story-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #0c3b80;
+            position: relative;
+        }
+        
+        .story-add-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            border: 2px dashed #0c3b80;
+            color: #0c3b80;
+            font-size: 1.5rem;
+        }
+        
+        /* Posts Styles */
+        .post-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .post-content img {
+            width: 100%;
+        }
+        
+        .comment-bubble {
+            background-color: #f1f1f1;
+            border-radius: 18px;
+        }
+        
+        .bg-primary-light {
+            background-color: rgba(12, 59, 128, 0.1);
+        }
+        
+        .video-container {
+            cursor: pointer;
+        }
+        
+        /* Create Post Form */
+        .create-post-card {
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .story-viewer-container {
+            background-color: black;
+        }
+        
+        /* Rest of the styles */
         /* Additional mobile-specific styles */
         body {
             background-color: #f5f5f5;
@@ -1848,6 +1941,221 @@
                 </div>
             </div>
             
+            <!-- Experience Content End -->
+            
+            <!-- Moments Content -->
+            <div class="mobile-content moments-content" style="display: none;">
+                <div class="mb-4">
+                    <h4 class="mb-3">Moments</h4>
+                    <p class="text-muted mb-4">Μοιραστείτε αναμνήσεις, εμπνευστείτε και εξερευνήστε</p>
+                    
+                    <!-- Stories Section -->
+                    <div class="stories-section mb-4">
+                        <h5 class="mb-3">Ιστορίες</h5>
+                        <div class="stories-container d-flex overflow-auto mb-4">
+                            <!-- Add Story Button -->
+                            <div class="story-item me-3 text-center">
+                                <div class="story-add-circle mb-2 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-plus-lg"></i>
+                                </div>
+                                <small>Δημιουργία</small>
+                            </div>
+                            
+                            <!-- Stories -->
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/beach-sunset.jpg');"></div>
+                                <small>Παραλία</small>
+                            </div>
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/pool-view.jpg');"></div>
+                                <small>Πισίνα</small>
+                            </div>
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/spa.jpg');"></div>
+                                <small>Spa</small>
+                            </div>
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/restaurant.jpg');"></div>
+                                <small>Δείπνο</small>
+                            </div>
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/cocktail.jpg');"></div>
+                                <small>Κοκτέιλ</small>
+                            </div>
+                            <div class="story-item me-3 text-center">
+                                <div class="story-circle mb-2" style="background-image: url('img/experiences/local-culture.jpg');"></div>
+                                <small>Πολιτισμός</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Posts Section -->
+                    <div class="posts-section">
+                        <!-- Create Post Card -->
+                        <div class="card mb-4 create-post-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatar-1.jpg" class="rounded-circle me-3" width="40" height="40" alt="Profile">
+                                    <div class="form-control text-muted rounded-pill" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                                        Μοιραστείτε μια στιγμή...
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-around mt-3">
+                                    <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                                        <i class="bi bi-image me-2"></i> Φωτογραφία
+                                    </button>
+                                    <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                                        <i class="bi bi-camera-video me-2"></i> Βίντεο
+                                    </button>
+                                    <button class="btn text-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                                        <i class="bi bi-geo-alt me-2"></i> Τοποθεσία
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post 1 -->
+                        <div class="card mb-4 post-card">
+                            <div class="card-header bg-transparent border-0 p-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatar-3.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <div>
+                                        <h6 class="mb-0">Μαρία Κ.</h6>
+                                        <small class="text-muted">Πριν 35 λεπτά · <i class="bi bi-globe"></i></small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
+                                            <i class="bi bi-star-fill me-1"></i> +15 πόντοι
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p class="px-3">Απολαμβάνοντας το μαγευτικό ηλιοβασίλεμα στην παραλία του ξενοδοχείου! ✨🌅 #SunsetResort #AmazingViews</p>
+                                <img src="img/experiences/beach-sunset.jpg" alt="Beach Sunset" class="img-fluid">
+                            </div>
+                            <div class="card-footer bg-transparent border-0 p-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-heart"></i> 24
+                                        </button>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-chat"></i> 5
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-sm text-primary">
+                                        <i class="bi bi-share"></i>
+                                    </button>
+                                </div>
+                                <!-- Comments -->
+                                <div class="comments-section p-2 rounded" style="background-color: #f8f9fa;">
+                                    <div class="comment d-flex mb-2">
+                                        <img src="img/avatar-2.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                                        <div class="comment-bubble p-2 rounded flex-grow-1">
+                                            <h6 class="mb-0 fs-6">Γιώργος Μ.</h6>
+                                            <p class="mb-0 small">Πανέμορφο! Σε ποια παραλία είναι;</p>
+                                        </div>
+                                    </div>
+                                    <!-- Add Comment -->
+                                    <div class="add-comment d-flex mt-2">
+                                        <img src="img/avatar-1.jpg" class="rounded-circle me-2" width="32" height="32" alt="You">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control-sm rounded-pill" placeholder="Γράψτε ένα σχόλιο...">
+                                            <button class="btn btn-sm btn-primary rounded-circle ms-1">
+                                                <i class="bi bi-send"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post 2 -->
+                        <div class="card mb-4 post-card">
+                            <div class="card-header bg-transparent border-0 p-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatar-4.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <div>
+                                        <h6 class="mb-0">Δημήτρης Α.</h6>
+                                        <small class="text-muted">Πριν 2 ώρες · <i class="bi bi-globe"></i></small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
+                                            <i class="bi bi-star-fill me-1"></i> +20 πόντοι
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p class="px-3">Γευστική εξερεύνηση στο εστιατόριο του ξενοδοχείου. Συνιστώ ανεπιφύλακτα τη σπεσιαλιτέ του σεφ! 🍽️👨‍🍳 #FoodLover #DeliciousMeal</p>
+                                <img src="img/experiences/restaurant.jpg" alt="Gourmet Dish" class="img-fluid">
+                            </div>
+                            <div class="card-footer bg-transparent border-0 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-heart-fill text-danger"></i> 38
+                                        </button>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-chat"></i> 11
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-sm text-primary">
+                                        <i class="bi bi-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post 3 -->
+                        <div class="card mb-4 post-card">
+                            <div class="card-header bg-transparent border-0 p-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatar-5.jpg" class="rounded-circle me-2" width="40" height="40" alt="User">
+                                    <div>
+                                        <h6 class="mb-0">Έλενα Π.</h6>
+                                        <small class="text-muted">Χθες · <i class="bi bi-globe"></i></small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2">
+                                            <i class="bi bi-star-fill me-1"></i> +25 πόντοι
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p class="px-3">Απόλυτη χαλάρωση στο spa του ξενοδοχείου! Το μασάζ ήταν ακριβώς αυτό που χρειαζόμουν. 💆‍♀️✨ #SpaDay #Relaxation</p>
+                                <div class="video-container position-relative">
+                                    <img src="img/experiences/spa.jpg" alt="Spa Experience" class="img-fluid">
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <button class="btn btn-light rounded-circle">
+                                            <i class="bi bi-play-fill fs-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-heart"></i> 45
+                                        </button>
+                                        <button class="btn btn-sm text-primary">
+                                            <i class="bi bi-chat"></i> 8
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-sm text-primary">
+                                        <i class="bi bi-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Moments Content End -->
+            
             <!-- Bottom Navigation -->
             <div class="mobile-nav">
                 <div class="mobile-nav-item active" data-tab="home">
@@ -1861,6 +2169,10 @@
                 <div class="mobile-nav-item" data-tab="services">
                     <i class="bi bi-basket"></i>
                     <small>Services</small>
+                </div>
+                <div class="mobile-nav-item" data-tab="moments">
+                    <i class="bi bi-camera"></i>
+                    <small>Moments</small>
                 </div>
                 <div class="mobile-nav-item" data-tab="experience">
                     <i class="bi bi-compass"></i>
@@ -2623,10 +2935,122 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Create Post Modal -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Δημιουργία Ανάρτησης</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="img/avatar-1.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                            <div>
+                                <h6 class="mb-0">Επισκέπτης δωματίου 204</h6>
+                                <small class="text-muted">Δημόσια ανάρτηση</small>
+                            </div>
+                        </div>
+                        <textarea class="form-control mb-3" rows="3" placeholder="Τι σκέφτεστε;"></textarea>
+                        <div class="upload-preview p-2 rounded mb-3" style="background-color: #f8f9fa; display: none;">
+                            <div class="position-relative">
+                                <img src="" alt="Upload Preview" class="img-fluid rounded d-none" id="uploadPreview">
+                                <video src="" class="img-fluid rounded d-none" id="videoPreview" controls></video>
+                                <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle" id="removeMediaBtn">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <button class="btn btn-light rounded-circle me-2" id="uploadPhotoBtn">
+                                    <i class="bi bi-image"></i>
+                                </button>
+                                <button class="btn btn-light rounded-circle me-2" id="uploadVideoBtn">
+                                    <i class="bi bi-camera-video"></i>
+                                </button>
+                                <button class="btn btn-light rounded-circle me-2">
+                                    <i class="bi bi-geo-alt"></i>
+                                </button>
+                                <button class="btn btn-light rounded-circle me-2">
+                                    <i class="bi bi-emoji-smile"></i>
+                                </button>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="earnPointsSwitch" checked>
+                                <label class="form-check-label" for="earnPointsSwitch">Κέρδισε πόντους</label>
+                            </div>
+                        </div>
+                        <input type="file" id="photoInput" class="d-none" accept="image/*">
+                        <input type="file" id="videoInput" class="d-none" accept="video/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ακύρωση</button>
+                    <button type="button" class="btn btn-primary" id="publishPostBtn">Δημοσίευση</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Viewer Modal -->
+    <div class="modal fade" id="storyViewerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content bg-dark">
+                <div class="modal-body p-0">
+                    <div class="story-viewer-container position-relative h-100">
+                        <!-- Story Progress Bar -->
+                        <div class="story-progress-container d-flex position-absolute top-0 start-0 end-0 p-2">
+                            <div class="progress story-progress flex-grow-1 mx-1" style="height: 3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Story Header -->
+                        <div class="story-header position-absolute top-0 start-0 end-0 p-3 pt-4 d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="img/avatar-3.jpg" class="rounded-circle me-2 border border-2 border-white" width="40" height="40" alt="User">
+                                <div class="text-white">
+                                    <h6 class="mb-0">Μαρία Κ.</h6>
+                                    <small class="text-white-50">Πριν 35 λεπτά</small>
+                                </div>
+                            </div>
+                            <button class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <!-- Story Content -->
+                        <div class="story-content h-100 d-flex align-items-center justify-content-center">
+                            <img src="img/experiences/beach-sunset.jpg" class="img-fluid" alt="Story Image">
+                        </div>
+                        
+                        <!-- Story Navigation -->
+                        <div class="story-nav position-absolute top-0 bottom-0 start-0 end-0 d-flex">
+                            <div class="story-nav-prev flex-grow-1" style="cursor: pointer;"></div>
+                            <div class="story-nav-next flex-grow-1" style="cursor: pointer;"></div>
+                        </div>
+                        
+                        <!-- Story Footer -->
+                        <div class="story-footer position-absolute bottom-0 start-0 end-0 p-3 d-flex align-items-center">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-dark border-secondary text-white" placeholder="Απάντηση...">
+                                <button class="btn btn-outline-light rounded-end" type="button">
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-outline-light rounded-circle ms-2">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/chatbot.js"></script>
     <script>
         // Initialize the app after DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -2718,6 +3142,243 @@
                 });
             }
         });
+    </script>
+    <script>
+        // Initialize the app after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation functionality
+            const mobileTabs = {
+                'home': document.querySelector('.home-content'),
+                'concierge': document.querySelector('.concierge-content'),
+                'services': document.querySelector('.services-content'),
+                'experience': document.querySelector('.experience-content'),
+                'moments': document.querySelector('.moments-content')
+            };
+            
+            const navItems = document.querySelectorAll('.mobile-nav-item');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Update active nav item
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show the correct tab content
+                    const tabName = this.getAttribute('data-tab');
+                    Object.values(mobileTabs).forEach(tab => tab.style.display = 'none');
+                    mobileTabs[tabName].style.display = 'block';
+                    
+                    // Scroll to top of the page (only for bottom navigation tabs)
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Handle internal tab navigation for Services
+            const internalTabs = document.querySelectorAll('.nav-tabs .nav-link');
+            internalTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const id = tab.getAttribute('id');
+                    console.log(`Tab ${id} clicked`);
+                });
+            });
+            
+            // Concierge chat suggestions
+            const conciergeTab = document.querySelector('.mobile-nav-item[data-tab="concierge"]');
+            const suggestionsBtn = document.querySelectorAll('.suggestion-btn');
+            
+            suggestionsBtn.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const chatInput = document.getElementById('global-chat-input');
+                    chatInput.value = this.textContent;
+                    conciergeTab.click(); // Switch to concierge tab
+                    chatInput.focus();
+                });
+            });
+            
+            // Initialize Moments functionality
+            initMoments();
+        });
+        
+        function initMoments() {
+            // Story viewer
+            const storyCircles = document.querySelectorAll('.story-circle');
+            const storyViewerModal = new bootstrap.Modal(document.getElementById('storyViewerModal'));
+            
+            storyCircles.forEach(story => {
+                story.addEventListener('click', () => {
+                    storyViewerModal.show();
+                    
+                    // Start progress animation
+                    const progressBar = document.querySelector('.story-progress .progress-bar');
+                    progressBar.style.width = '0%';
+                    progressBar.style.transition = 'width 5s linear';
+                    
+                    setTimeout(() => {
+                        progressBar.style.width = '100%';
+                    }, 100);
+                    
+                    // Auto close after story duration
+                    setTimeout(() => {
+                        storyViewerModal.hide();
+                    }, 5100);
+                });
+            });
+            
+            // Story navigation
+            const storyNavPrev = document.querySelector('.story-nav-prev');
+            const storyNavNext = document.querySelector('.story-nav-next');
+            
+            storyNavPrev.addEventListener('click', () => {
+                // Navigate to previous story (would implement actual logic in a real app)
+                storyViewerModal.hide();
+            });
+            
+            storyNavNext.addEventListener('click', () => {
+                // Navigate to next story (would implement actual logic in a real app)
+                storyViewerModal.hide();
+            });
+            
+            // Photo upload preview
+            const photoInput = document.getElementById('photoInput');
+            const uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
+            const uploadPreview = document.getElementById('uploadPreview');
+            const uploadPreviewContainer = document.querySelector('.upload-preview');
+            const videoPreview = document.getElementById('videoPreview');
+            
+            uploadPhotoBtn.addEventListener('click', () => {
+                photoInput.click();
+            });
+            
+            photoInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        uploadPreview.src = e.target.result;
+                        uploadPreview.classList.remove('d-none');
+                        videoPreview.classList.add('d-none');
+                        uploadPreviewContainer.style.display = 'block';
+                    };
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Video upload preview
+            const videoInput = document.getElementById('videoInput');
+            const uploadVideoBtn = document.getElementById('uploadVideoBtn');
+            
+            uploadVideoBtn.addEventListener('click', () => {
+                videoInput.click();
+            });
+            
+            videoInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        videoPreview.src = e.target.result;
+                        videoPreview.classList.remove('d-none');
+                        uploadPreview.classList.add('d-none');
+                        uploadPreviewContainer.style.display = 'block';
+                    };
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Remove media preview
+            const removeMediaBtn = document.getElementById('removeMediaBtn');
+            
+            removeMediaBtn.addEventListener('click', () => {
+                uploadPreview.src = '';
+                videoPreview.src = '';
+                uploadPreview.classList.add('d-none');
+                videoPreview.classList.add('d-none');
+                uploadPreviewContainer.style.display = 'none';
+                photoInput.value = '';
+                videoInput.value = '';
+            });
+            
+            // Publish post
+            const publishPostBtn = document.getElementById('publishPostBtn');
+            const createPostModal = new bootstrap.Modal(document.getElementById('createPostModal'));
+            
+            publishPostBtn.addEventListener('click', () => {
+                // In a real app, would send post data to server here
+                createPostModal.hide();
+                
+                // Show success notification
+                const pointsEarned = Math.floor(Math.random() * 20) + 10; // Random points between 10-30
+                showNotification('Επιτυχής Δημοσίευση', `Η ανάρτησή σας δημοσιεύτηκε και κερδίσατε ${pointsEarned} πόντους!`);
+                
+                // Reset form
+                removeMediaBtn.click();
+                document.querySelector('textarea').value = '';
+            });
+            
+            // Like functionality for posts
+            const heartBtns = document.querySelectorAll('.post-card .bi-heart');
+            
+            heartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isLiked = this.classList.contains('bi-heart-fill');
+                    const countEl = this.parentNode.querySelector('span') || this.nextSibling;
+                    let count = parseInt(this.nextSibling?.textContent || countEl?.textContent || this.parentNode.textContent.trim().replace(/[^\d]/g, ''));
+                    
+                    if (isLiked) {
+                        this.classList.remove('bi-heart-fill', 'text-danger');
+                        this.classList.add('bi-heart');
+                        count--;
+                    } else {
+                        this.classList.remove('bi-heart');
+                        this.classList.add('bi-heart-fill', 'text-danger');
+                        count++;
+                    }
+                    
+                    // Update count text
+                    this.parentNode.innerHTML = `<i class="${this.className}"></i> ${count}`;
+                });
+            });
+            
+            // Add story button
+            const addStoryBtn = document.querySelector('.story-add-circle');
+            
+            addStoryBtn.addEventListener('click', () => {
+                // In a real app, would show story creation UI
+                showNotification('Δημιουργία Ιστορίας', 'Αυτή η λειτουργία θα είναι διαθέσιμη σύντομα!');
+            });
+        }
+        
+        // Simple notification function
+        function showNotification(title, message) {
+            const notificationHTML = `
+                <div class="toast-container position-fixed top-0 end-0 p-3">
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">${title}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add to DOM
+            const container = document.createElement('div');
+            container.innerHTML = notificationHTML;
+            document.body.appendChild(container);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                container.remove();
+            }, 3000);
+        }
     </script>
 </body>
 </html>
