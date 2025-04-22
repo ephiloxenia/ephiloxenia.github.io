@@ -1121,7 +1121,16 @@
             <div class="row align-items-center justify-content-center">
                 <!-- Left Features -->
                 <div class="col-lg-6 col-md-12">
-                    <div id="guest-features-carousel" style="position: relative; background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.12); border-left: 5px solid #4a88e0; margin-right: 20px; transform: translateY(-10px);">
+                    <div id="guest-features-carousel" style="position: relative; background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(12, 59, 128, 0.15); border-left: 5px solid #4a88e0; margin-right: 20px; transform: translateY(-10px); overflow: hidden;">
+                        <!-- Background accent -->
+                        <div class="position-absolute" style="top: -30px; right: -30px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(74, 136, 224, 0.1) 0%, rgba(74, 136, 224, 0) 70%); border-radius: 50%; z-index: 0;"></div>
+                        <div class="position-absolute" style="bottom: -30px; left: -30px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(74, 136, 224, 0.1) 0%, rgba(74, 136, 224, 0) 70%); border-radius: 50%; z-index: 0;"></div>
+                        
+                        <!-- Header -->
+                        <div style="position: relative; margin-bottom: 30px; border-bottom: 1px solid rgba(12, 59, 128, 0.1); padding-bottom: 20px;">
+                            <h4 style="color: #0c3b80; font-weight: 700; margin-bottom: 10px;">Guest App Features</h4>
+                        </div>
+                        
                         <!-- Progress Indicator -->
                         <div class="carousel-progress" style="margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
                             <div style="background: #f0f4f8; padding: 12px 24px; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: inline-flex; align-items: center;">
@@ -1230,10 +1239,10 @@
                 
                 <!-- Right Phone -->
                 <div class="col-lg-6 col-md-12 text-center position-relative">
-                    <div class="phone-container" data-aos="fade-up">
-                        <div class="glow-effect" style="position: absolute; width: 300px; height: 600px; background: radial-gradient(circle, rgba(74, 136, 224, 0.2) 0%, rgba(74, 136, 224, 0) 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; border-radius: 50%;"></div>
-                        <div class="phone-frame" style="position: relative; max-width: 300px; margin: 0 auto; transform: perspective(1000px) rotateY(-5deg) scale(1.2); transition: all 0.5s ease;">
-                            <div class="phone-shadow" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; filter: blur(30px); opacity: 0.3; background: #0c3b80; border-radius: 30px; transform: translateY(10px);"></div>
+                    <div class="phone-container" data-aos="fade-up" style="margin-top: 30px;">
+                        <div class="glow-effect" style="position: absolute; width: 350px; height: 650px; background: radial-gradient(circle, rgba(74, 136, 224, 0.3) 0%, rgba(74, 136, 224, 0) 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; border-radius: 50%;"></div>
+                        <div class="phone-frame" style="position: relative; max-width: 320px; margin: 0 auto; transform: perspective(1000px) rotateY(-5deg) scale(1.25); transition: all 0.5s ease;">
+                            <div class="phone-shadow" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; filter: blur(30px); opacity: 0.4; background: #0c3b80; border-radius: 30px; transform: translateY(15px);"></div>
                             <svg viewBox="0 0 280 550" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; filter: drop-shadow(0 25px 40px rgba(0,0,0,0.2));">
                                 <rect x="0" y="0" width="280" height="550" rx="30" fill="#0c3b80" />
                                 <rect x="8" y="8" width="264" height="534" rx="24" fill="white" />
