@@ -9,6 +9,175 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-light: #4a88e0;
+            --primary-dark: #0d5bdd;
+            --secondary: #f8f9fa;
+            --light-gray: #f2f4f8;
+            --medium-gray: #e9ecef;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-blue: #ebf4ff;
+            --nav-hover: #eef5ff;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary);
+            color: var(--text-primary);
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            width: 260px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.03);
+        }
+        
+        .sidebar-logo {
+            height: 40px;
+        }
+        
+        .brand-logo {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 4px 12px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 12px;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--nav-hover);
+            color: var(--primary);
+        }
+        
+        .nav-link:hover i {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            background-color: var(--accent-blue);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-link.active i {
+            color: var(--primary);
+        }
+        
+        /* Main content styling */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px 32px;
+        }
+        
+        /* Card styling */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Button styling */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        /* Section navigation */
+        .section-nav {
+            background-color: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .section-nav .btn {
+            margin: 4px 8px;
+            border-radius: 30px;
+            font-weight: 500;
+            padding: 8px 18px;
+            background-color: var(--secondary);
+            border: none;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .section-nav .btn:hover {
+            background-color: var(--accent-blue);
+            color: var(--primary);
+        }
+        
+        .section-nav .btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
         /* Ensure sustainability icon is visible */
         .nav-link[href="sustainability.html"] i.bi-tree-fill {
             display: inline-block !important;
@@ -30,16 +199,6 @@
             opacity: 1 !important;
         }
         
-        /* Navigation buttons styling - using global section-nav styles */
-        
-        /* Override for section-nav buttons */
-        .section-nav .btn.btn-outline-primary:hover {
-            background-color: var(--primary) !important;
-            color: white !important;
-            border-color: var(--primary) !important;
-            transform: none !important;
-        }
-        
         /* Card highlight animation */
         .card.highlight {
             animation: highlightCard 2s ease-out;
@@ -47,19 +206,19 @@
         
         @keyframes highlightCard {
             0% {
-                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4);
+                box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.4);
             }
             70% {
-                box-shadow: 0 0 0 10px rgba(0, 86, 179, 0);
+                box-shadow: 0 0 0 10px rgba(26, 115, 232, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(0, 86, 179, 0);
+                box-shadow: 0 0 0 0 rgba(26, 115, 232, 0);
             }
         }
         
         /* Add IDs to sections */
         .section-id {
-            scroll-margin-top: 350px;
+            scroll-margin-top: 100px;
             padding-top: 20px;
         }
         
@@ -69,10 +228,6 @@
             width: 100%;
             margin-bottom: 1rem;
         }
-        
-        .card {
-            margin-bottom: 1.5rem;
-        }
     </style>
 </head>
 <body>
@@ -80,8 +235,7 @@
     <div class="sidebar">
         <div class="p-3 border-bottom">
             <div class="d-flex align-items-center">
-                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="sidebar-logo me-2">
-                <h4 class="brand-logo mb-0">e-Philoxenia</h4>
+                <div style="border: 2px dashed #ccc; padding: 5px 10px; border-radius: 5px; font-size: 12px; color: #666; background-color: #f9f9f9; text-align: center;">Your Logo Here</div>
             </div>
         </div>
         <div class="pt-3">
@@ -114,6 +268,12 @@
                     <a class="nav-link" href="sustainability.html">
                         <i class="bi bi-tree-fill"></i>
                         <span>Sustainability</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="gamified-rewards.html">
+                        <i class="bi bi-trophy"></i>
+                        <span>Gamified Feedback Rewards</span>
                     </a>
                 </li>
                 <li class="nav-item mt-5">
