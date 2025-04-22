@@ -914,71 +914,91 @@
     </section>
 
     <!-- e-Philoxenia Hotel Features Section -->
-    <section class="py-3" id="hotel-features" style="background-color: #f8faff; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05);">
-        <div class="container-fluid px-lg-5 py-3" style="max-width: 1600px;">
-            <div class="text-center mb-2">
-                <h1 class="display-4 fw-bold mb-1" style="color: #0c3b80;">ePhiloxenia</h1>
-                <h1 class="display-4 fw-bold mb-2" style="color: #4a88e0;" id="hotel-features-text"></h1>
-                <p class="lead mb-3" style="font-size: 1.3rem; color: #444; max-width: 800px; margin: 0 auto;">
-                    Ισχυρά εργαλεία που δίνουν στο προσωπικό του ξενοδοχείου πρόσβαση σε πολύτιμες πληροφορίες για τους επισκέπτες
-                </p>
+    <section class="py-5" id="hotel-features" style="background-color: #f0f5fc; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05);">
+        <div class="container-fluid px-lg-5 py-5" style="max-width: 1600px;">
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-5">
+                    <h1 class="display-4 fw-bold mb-3" style="color: #0c3b80;">One Mobile App. Two Worlds.</h1>
+                    <h1 class="display-4 fw-bold mb-4" style="color: #4a88e0;">Infinite Possibilities.</h1>
+                    <h2 class="h1 fw-bold mb-4" style="color: #0c3b80;">ePhiloxenia <span style="color: #4a88e0;" id="hotel-features-text">Hotel App Environment Features</span></h2>
+                    <div class="col-lg-8 mx-auto">
+                        <p class="lead mb-0" style="font-size: 1.3rem; color: #444; line-height: 1.6;">
+                            Ανακαλύψτε την επόμενη γενιά εργαλείων διαχείρισης ξενοδοχείων
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="row align-items-center mb-3 px-lg-4">
+            <div class="row align-items-center mb-5 px-lg-4">
                 <!-- Left Features -->
                 <div class="col-lg-6 px-lg-5">
-                    <div id="hotel-features-carousel" style="position: relative; background-color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div id="hotel-features-carousel" style="position: relative; background-color: white; padding: 35px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-left: 5px solid #0c3b80;">
                         <!-- Progress Indicator -->
-                        <div class="carousel-progress" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
-                            <div style="background: #f0f4f8; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); display: inline-flex; align-items: center;">
-                                <span id="hotel-progress" style="font-size: 0.9rem; color: #0c3b80; font-weight: 600;">1/3</span>
-                                <div style="margin-left: 15px; display: flex; gap: 5px;">
-                                    <span class="progress-dot" data-index="0" style="width: 8px; height: 8px; background: #0c3b80; border-radius: 50%; cursor: pointer; opacity: 1; transition: all 0.3s ease;"></span>
-                                    <span class="progress-dot" data-index="1" style="width: 8px; height: 8px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
-                                    <span class="progress-dot" data-index="2" style="width: 8px; height: 8px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
+                        <div class="carousel-progress" style="margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                            <div style="background: #f0f4f8; padding: 10px 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: inline-flex; align-items: center;">
+                                <span id="hotel-progress" style="font-size: 1.1rem; color: #0c3b80; font-weight: 600;">1/3</span>
+                                <div style="margin-left: 20px; display: flex; gap: 8px;">
+                                    <span class="progress-dot" data-index="0" style="width: 12px; height: 12px; background: #0c3b80; border-radius: 50%; cursor: pointer; opacity: 1; transition: all 0.3s ease;"></span>
+                                    <span class="progress-dot" data-index="1" style="width: 12px; height: 12px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
+                                    <span class="progress-dot" data-index="2" style="width: 12px; height: 12px; background: #ddd; border-radius: 50%; cursor: pointer; opacity: 0.5; transition: all 0.3s ease;"></span>
                                 </div>
                             </div>
                         </div>
                         
                         <div style="position: relative; display: flex; align-items: center;">
                             <!-- Left Navigation Arrow -->
-                            <button class="carousel-control prev" onclick="prevHotelFeature()" style="position: relative; margin-right: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); pointer-events: auto;">
-                                <i class="bi bi-chevron-left"></i>
+                            <button class="carousel-control prev" onclick="prevHotelFeature()" style="position: relative; margin-right: 20px; background: #f0f4f8; color: #0c3b80; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); pointer-events: auto; transition: all 0.3s ease;">
+                                <i class="bi bi-chevron-left" style="font-size: 1.5rem;"></i>
                             </button>
                             
                             <!-- Feature Content -->
                             <div style="flex-grow: 1;">
                                 <div class="hotel-feature active" data-feature="profile">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">360 Guest Profile View</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
-                                            Get a dynamic, evolving view of each guest needs, preferences, behavior, and emotional insights all automatically summarized for your team.
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div style="background-color: rgba(12, 59, 128, 0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                                <i class="bi bi-person-circle" style="font-size: 2rem; color: #0c3b80;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2rem;">360 Guest Profile View</h3>
+                                        </div>
+                                        <p class="mb-0" style="color: #444; font-size: 1.2rem; line-height: 1.7; padding-left: 80px;">
+                                            Αποκτήστε μια δυναμική, εξελισσόμενη εικόνα των αναγκών, προτιμήσεων, συμπεριφοράς και συναισθηματικών χαρακτηριστικών κάθε επισκέπτη, όλα αυτόματα συνοψισμένα για την ομάδα σας.
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <div class="hotel-feature" data-feature="sentiment" style="display: none;">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">AI-Driven Behavior & Sentiment Analysis</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
-                                            Leverage machine learning to monitor guest behavior and emotional patterns, detecting potential issues before they arise.
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div style="background-color: rgba(33, 150, 83, 0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                                <i class="bi bi-graph-up" style="font-size: 2rem; color: #219653;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2rem;">AI-Driven Behavior & Sentiment Analysis</h3>
+                                        </div>
+                                        <p class="mb-0" style="color: #444; font-size: 1.2rem; line-height: 1.7; padding-left: 80px;">
+                                            Αξιοποιήστε τη μηχανική μάθηση για την παρακολούθηση της συμπεριφοράς και των συναισθηματικών μοτίβων των επισκεπτών, εντοπίζοντας πιθανά ζητήματα πριν προκύψουν.
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <div class="hotel-feature" data-feature="feedback" style="display: none;">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">Gamified Feedback with Rewards</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
-                                            Engage guests with interactive feedback flows that reward participation boosting satisfaction and gathering critical insights.
+                                    <div class="feature-item mb-4" data-aos="fade-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div style="background-color: rgba(212, 175, 55, 0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                                <i class="bi bi-star" style="font-size: 2rem; color: #d4af37;"></i>
+                                            </div>
+                                            <h3 class="mb-0 feature-title" style="color: #0c3b80; font-weight: 700; font-size: 2rem;">Gamified Feedback with Rewards</h3>
+                                        </div>
+                                        <p class="mb-0" style="color: #444; font-size: 1.2rem; line-height: 1.7; padding-left: 80px;">
+                                            Εμπλέξτε τους επισκέπτες με διαδραστικές ροές ανατροφοδότησης που επιβραβεύουν τη συμμετοχή, αυξάνοντας την ικανοποίηση και συλλέγοντας κρίσιμες πληροφορίες.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Right Navigation Arrow -->
-                            <button class="carousel-control next" onclick="nextHotelFeature()" style="position: relative; margin-left: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); pointer-events: auto;">
-                                <i class="bi bi-chevron-right"></i>
+                            <button class="carousel-control next" onclick="nextHotelFeature()" style="position: relative; margin-left: 20px; background: #f0f4f8; color: #0c3b80; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); pointer-events: auto; transition: all 0.3s ease;">
+                                <i class="bi bi-chevron-right" style="font-size: 1.5rem;"></i>
                             </button>
                         </div>
                     </div>
@@ -986,68 +1006,111 @@
                 
                 <!-- Right: Computer Screen -->
                 <div class="col-lg-6 text-center position-relative px-lg-5">
-                    <div class="computer-container" data-aos="fade-up">
-                        <div class="computer-frame" style="position: relative; max-width: 600px; margin: 0 auto;">
-                            <!-- Computer/Monitor Design -->
-                            <div class="monitor" style="background: #222; border-radius: 10px; padding: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
-                                <div class="screen" style="position: relative; overflow: hidden; border-radius: 5px; background: white; aspect-ratio: 16/9; max-width: 100%;">
+                    <div class="computer-container" data-aos="fade-up" style="margin-top: 0; margin-bottom: 0;">
+                        <div class="computer-frame" style="position: relative; max-width: 800px; margin: 0 auto; transform: scale(1.1);">
+                            <!-- Computer Design - iMac style -->
+                            <div class="monitor" style="background: #e2e2e2; border-radius: 20px; padding: 15px; box-shadow: 0 40px 80px rgba(0,0,0,0.25), 0 0 40px rgba(10, 37, 64, 0.15) inset;">
+                                <!-- Screen Bezel -->
+                                <div style="background: #000; border-radius: 15px; padding: 2px; overflow: hidden;">
                                     <!-- Screen Content -->
-                                    <div id="computer-content-carousel">
-                                        <div class="dashboard-screen" data-feature="profile" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(0);">
-                                            <div style="width: 100%; height: 50px; background: #0c3b80; color: white; display: flex; align-items: center; padding: 0 15px;">
-                                                <h5 style="font-size: 1rem; margin: 0;">360 Guest Profile Dashboard</h5>
+                                    <div class="screen" style="position: relative; overflow: hidden; border-radius: 12px; background: white; aspect-ratio: 16/10; max-width: 100%; box-shadow: 0 0 30px rgba(0,0,0,0.15) inset;">
+                                        <!-- Screen Content -->
+                                        <div id="computer-content-carousel">
+                                            <div class="dashboard-screen" data-feature="profile" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(0);">
+                                                <div style="width: 100%; height: 70px; background: linear-gradient(90deg, #0c3b80, #1a5bab); color: white; display: flex; align-items: center; padding: 0 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.15);">
+                                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                                        <i class="bi bi-person-circle" style="font-size: 1.6rem;"></i>
+                                                        <h5 style="font-size: 1.4rem; margin: 0; font-weight: 600;">360° Guest Profile Dashboard</h5>
+                                                    </div>
+                                                    <div style="margin-left: auto; display: flex; gap: 10px;">
+                                                        <span style="width: 14px; height: 14px; border-radius: 50%; background: #fc625d;"></span>
+                                                        <span style="width: 14px; height: 14px; border-radius: 50%; background: #fdbc40;"></span>
+                                                        <span style="width: 14px; height: 14px; border-radius: 50%; background: #34c749;"></span>
+                                                    </div>
+                                                </div>
+                                                <div style="padding: 25px; height: calc(100% - 70px); background-color: #f7f9fc; overflow: hidden; background-image: linear-gradient(to bottom, #f7f9fc, #eef2f7);">
+                                                <div style="padding: 20px; height: calc(100% - 60px); background-color: #f7f9fc; overflow: hidden; background-image: linear-gradient(to bottom, #f7f9fc, #eef2f7);">
+                                                    <div style="width: 100%; height: 100%; background-image: url('img/guest-insights.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);"></div>
+                                                </div>
                                             </div>
-                                            <div style="padding: 15px; height: calc(100% - 50px); background-color: #f7f9fc; overflow: hidden;">
-                                                <div style="width: 100%; height: 100%; background-image: url('img/guest-insights.png'); background-size: cover; background-position: center; border-radius: 8px;"></div>
+                                            
+                                            <div class="dashboard-screen" data-feature="sentiment" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(50px);">
+                                                <div style="width: 100%; height: 60px; background: linear-gradient(90deg, #219653, #27ae60); color: white; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                                        <i class="bi bi-graph-up" style="font-size: 1.3rem;"></i>
+                                                        <h5 style="font-size: 1.2rem; margin: 0; font-weight: 600;">AI Sentiment Analysis Dashboard</h5>
+                                                    </div>
+                                                    <div style="margin-left: auto; display: flex; gap: 8px;">
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #fc625d;"></span>
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #fdbc40;"></span>
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #34c749;"></span>
+                                                    </div>
+                                                </div>
+                                                <div style="padding: 20px; height: calc(100% - 60px); background-color: #f7f9fc; overflow: hidden; background-image: linear-gradient(to bottom, #f7f9fc, #eef2f7);">
+                                                    <div style="width: 100%; height: 100%; background-image: url('img/dashboard-preview.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="dashboard-screen" data-feature="sentiment" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(50px);">
-                                            <div style="width: 100%; height: 50px; background: #2ecc71; color: white; display: flex; align-items: center; padding: 0 15px;">
-                                                <h5 style="font-size: 1rem; margin: 0;">AI Sentiment Analysis Dashboard</h5>
-                                            </div>
-                                            <div style="padding: 15px; height: calc(100% - 50px); background-color: #f7f9fc; overflow: hidden;">
-                                                <div style="width: 100%; height: 100%; background-image: url('img/dashboard-preview.png'); background-size: cover; background-position: center; border-radius: 8px;"></div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="dashboard-screen" data-feature="feedback" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(50px);">
-                                            <div style="width: 100%; height: 50px; background: #d4af37; color: white; display: flex; align-items: center; padding: 0 15px;">
-                                                <h5 style="font-size: 1rem; margin: 0;">Gamified Feedback Dashboard</h5>
-                                            </div>
-                                            <div style="padding: 15px; height: calc(100% - 50px); background-color: #f7f9fc; overflow: hidden;">
-                                                <div style="width: 100%; height: 100%; background-image: url('img/pricing-preview.png'); background-size: cover; background-position: center; border-radius: 8px;"></div>
+                                            
+                                            <div class="dashboard-screen" data-feature="feedback" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(50px);">
+                                                <div style="width: 100%; height: 60px; background: linear-gradient(90deg, #b8860b, #d4af37); color: white; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                                        <i class="bi bi-star" style="font-size: 1.3rem;"></i>
+                                                        <h5 style="font-size: 1.2rem; margin: 0; font-weight: 600;">Gamified Feedback Dashboard</h5>
+                                                    </div>
+                                                    <div style="margin-left: auto; display: flex; gap: 8px;">
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #fc625d;"></span>
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #fdbc40;"></span>
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #34c749;"></span>
+                                                    </div>
+                                                </div>
+                                                <div style="padding: 20px; height: calc(100% - 60px); background-color: #f7f9fc; overflow: hidden; background-image: linear-gradient(to bottom, #f7f9fc, #eef2f7);">
+                                                    <div style="width: 100%; height: 100%; background-image: url('img/pricing-preview.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="monitor-stand" style="width: 120px; height: 30px; background: #222; margin: 0 auto; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"></div>
-                                <div class="monitor-base" style="width: 180px; height: 15px; background: #222; margin: 0 auto; border-radius: 50%; transform: perspective(10px) rotateX(5deg);"></div>
+                                
+                                <!-- Reflection effect -->
+                                <div style="position: absolute; top: 8%; left: 5%; width: 70%; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0)); border-radius: 1px;"></div>
+                                <div style="position: absolute; top: 8.5%; left: 5%; width: 60%; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0)); border-radius: 1px;"></div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-9 mx-auto">
+                    <p class="lead text-center mb-3" style="font-size: 1.15rem; color: #444; line-height: 1.5;">
+                        Powerful tools providing hotel staff with access to valuable guest information, enabling personalized service delivery and operational excellence.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- e-Philoxenia Guest App Section -->
-    <section class="py-3 bg-light" id="guest-app">
+    <section class="py-3 bg-light" id="guest-app" style="background-color: #f7f9fc; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05); margin-top: 50px;">
         <div class="container py-3">
-            <div class="text-center mb-3">
-                <h1 class="display-4 fw-bold mb-2" style="color: #0c3b80;">e-Philoxenia Guest App</h1>
-                <p class="lead mb-3" style="font-size: 1.3rem; color: #444; max-width: 800px; margin: 0 auto;">
-                    Ένας έξυπνος ψηφιακός σύντροφος που μεταμορφώνει κάθε διαμονή σε μοναδική εμπειρία
-                </p>
+            <div class="row mb-4">
+                <div class="col-lg-7">
+                    <h1 class="display-4 fw-bold mb-2" style="color: #0c3b80;">Guest Experience.</h1>
+                    <h1 class="display-4 fw-bold mb-2" style="color: #4a88e0;">Redefined.</h1>
+                    <h2 class="h2 fw-bold mb-3" style="color: #0c3b80;">e-Philoxenia <span style="color: #4a88e0;">Guest App</span></h2>
+                    <p class="lead mb-3" style="font-size: 1.15rem; color: #444; line-height: 1.5;">
+                        Ένας έξυπνος ψηφιακός σύντροφος που μεταμορφώνει κάθε διαμονή σε μοναδική εμπειρία
+                    </p>
+                </div>
             </div>
 
             <div class="row align-items-center">
                 <!-- Left Features -->
                 <div class="col-lg-5">
-                    <div id="guest-features-carousel" style="position: relative;">
+                    <div id="guest-features-carousel" style="position: relative; background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.04);">
                         <!-- Progress Indicator -->
                         <div class="carousel-progress" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
-                            <div style="background: #f0f4f8; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); display: inline-flex; align-items: center;">
+                            <div style="background: #f0f4f8; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: inline-flex; align-items: center;">
                                 <span id="guest-progress" style="font-size: 0.9rem; color: #0c3b80; font-weight: 600;">1/4</span>
                                 <div style="margin-left: 15px; display: flex; gap: 5px;">
                                     <span class="progress-dot guest-dot" data-index="0" style="width: 8px; height: 8px; background: #0c3b80; border-radius: 50%; cursor: pointer; opacity: 1; transition: all 0.3s ease;"></span>
@@ -1060,43 +1123,43 @@
                         
                         <div style="position: relative; display: flex; align-items: center;">
                             <!-- Left Navigation Arrow -->
-                            <button class="carousel-control prev" onclick="prevGuestFeature()" style="position: relative; margin-right: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); pointer-events: auto;">
+                            <button class="carousel-control prev" onclick="prevGuestFeature()" style="position: relative; margin-right: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: auto;">
                                 <i class="bi bi-chevron-left"></i>
                             </button>
                             
                             <!-- Feature Content -->
                             <div style="flex-grow: 1;">
                                 <div class="guest-feature active" data-feature="assistant">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">AI Guest Assistant</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
+                                    <div class="feature-item mb-3" data-aos="fade-right">
+                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">AI Guest Assistant</h3>
+                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
                                             Offer 24/7 personalized assistance. Guests can ask questions, book services, solve issues, and enjoy a frictionless stay.
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="booking" style="display: none;">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">Experience & Service Booking</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
+                                    <div class="feature-item mb-3" data-aos="fade-right">
+                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Experience & Service Booking</h3>
+                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
                                             Enable guests to browse, select, and book activities, spa services, dining, and more directly from their mobile device, no downloads required.
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="social" style="display: none;">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">Moments – Social Guest Sharing with Rewards</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
+                                    <div class="feature-item mb-3" data-aos="fade-right">
+                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Moments – Social Guest Sharing with Rewards</h3>
+                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
                                             Turn every guest experience into a social connection. Guests can share their moments, upload photos, and engage with others. For each shared moment, they earn points that can be redeemed for exclusive offers, services, and discounts, making their stay even more rewarding.
                                         </p>
                                     </div>
                                 </div>
                                 
                                 <div class="guest-feature" data-feature="quickactions" style="display: none;">
-                                    <div class="feature-item mb-5" data-aos="fade-right">
-                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600;">Quick Actions</h3>
-                                        <p class="mb-0" style="color: #444; font-size: 1.1rem;">
+                                    <div class="feature-item mb-3" data-aos="fade-right">
+                                        <h3 class="mb-3 feature-title" style="color: #0c3b80; font-weight: 600; font-size: 1.6rem;">Quick Actions</h3>
+                                        <p class="mb-0" style="color: #555; font-size: 1rem; line-height: 1.6;">
                                             Guests can easily make requests, submit reports, and check in seamlessly from their phone, enhancing convenience and streamlining their experience.
                                         </p>
                                     </div>
@@ -1104,7 +1167,7 @@
                             </div>
                             
                             <!-- Right Navigation Arrow -->
-                            <button class="carousel-control next" onclick="nextGuestFeature()" style="position: relative; margin-left: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); pointer-events: auto;">
+                            <button class="carousel-control next" onclick="nextGuestFeature()" style="position: relative; margin-left: 15px; background: #f0f4f8; color: #0c3b80; border: none; width: 36px; height: 36px; border-radius: 50%; z-index: 20; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: auto;">
                                 <i class="bi bi-chevron-right"></i>
                             </button>
                         </div>
@@ -1309,8 +1372,31 @@
         const guestProgress = document.getElementById('guest-progress');
         
         // Auto-rotation intervals
-        let hotelInterval;
-        let guestInterval;
+        let hotelInterval = null;
+        let guestInterval = null;
+        
+        // Χρονικό διάστημα εναλλαγής σε milliseconds (5 δευτερόλεπτα)
+        const AUTO_ROTATE_INTERVAL = 5000;
+
+        // Συνάρτηση που ξεκινά το αυτόματο carousel για τα χαρακτηριστικά ξενοδοχείου
+        function startHotelAutoRotation() {
+            if (hotelInterval) clearInterval(hotelInterval);
+            hotelInterval = setInterval(function() {
+                let nextIndex = (currentHotelFeatureIndex + 1) % hotelFeatures.length;
+                showHotelFeature(nextIndex);
+            }, AUTO_ROTATE_INTERVAL);
+            console.log("Hotel carousel auto-rotation started");
+        }
+        
+        // Συνάρτηση που ξεκινά το αυτόματο carousel για τα χαρακτηριστικά επισκεπτών
+        function startGuestAutoRotation() {
+            if (guestInterval) clearInterval(guestInterval);
+            guestInterval = setInterval(function() {
+                let nextIndex = (currentGuestFeatureIndex + 1) % guestFeatures.length;
+                showGuestFeature(nextIndex);
+            }, AUTO_ROTATE_INTERVAL);
+            console.log("Guest carousel auto-rotation started");
+        }
 
         // Hotel Features Navigation
         function showHotelFeature(index) {
@@ -1364,9 +1450,8 @@
                 }
             });
             
-            // Reset interval
-            clearInterval(hotelInterval);
-            hotelInterval = setInterval(nextHotelFeature, 5000);
+            // Επανεκκίνηση του διαστήματος αυτόματης εναλλαγής
+            startHotelAutoRotation();
         }
         
         // Κάνουμε τις συναρτήσεις nextHotelFeature και prevHotelFeature διαθέσιμες στο παγκόσμιο περιβάλλον
@@ -1432,9 +1517,8 @@
                 }
             });
             
-            // Reset interval
-            clearInterval(guestInterval);
-            guestInterval = setInterval(nextGuestFeature, 5000);
+            // Επανεκκίνηση του διαστήματος αυτόματης εναλλαγής
+            startGuestAutoRotation();
         }
         
         // Κάνουμε τις συναρτήσεις nextGuestFeature και prevGuestFeature διαθέσιμες στο παγκόσμιο περιβάλλον
@@ -1452,18 +1536,16 @@
         if (featureScreens.length > 0 && guestFeatureElements.length > 0) {
             // Set initial phone feature
             showGuestFeature(0);
-            
-            // Start auto-rotation
-            guestInterval = setInterval(nextGuestFeature, 5000);
         }
         
         if (dashboardScreens.length > 0 && hotelFeatureElements.length > 0) {
             // Set initial hotel feature
             showHotelFeature(0);
-            
-            // Start auto-rotation
-            hotelInterval = setInterval(nextHotelFeature, 5000);
         }
+        
+        // Ξεκινάμε άμεσα την αυτόματη εναλλαγή και των δύο carousels
+        startHotelAutoRotation();
+        startGuestAutoRotation();
         
         // Add some CSS animations
         const style = document.createElement('style');
@@ -1573,11 +1655,8 @@
         let hotelFeaturesStarted = false;
         
         function typeHotelFeaturesText() {
-            if (hotelFeaturesIndex < hotelFeaturesText.length) {
-                hotelFeaturesElement.innerHTML += hotelFeaturesText.charAt(hotelFeaturesIndex);
-                hotelFeaturesIndex++;
-                setTimeout(typeHotelFeaturesText, hotelFeaturesTypingSpeed);
-            }
+            // Το κείμενο είναι ήδη μέσα στο στοιχείο, οπότε δεν χρειάζεται να το πληκτρολογήσουμε
+            hotelFeaturesStarted = true;
         }
         
         // Scroll-based animations
@@ -1628,9 +1707,10 @@
                 
                 if (hotelFeaturesSectionTop < windowHeight * 0.75 && hotelFeaturesSectionTop > 0) {
                     hotelFeaturesStarted = true;
-                    hotelFeaturesElement.innerHTML = '';
-                    hotelFeaturesIndex = 0;
-                    setTimeout(typeHotelFeaturesText, 300);
+                    // Δεν χρειάζεται πλέον το παρακάτω, καθώς το κείμενο υπάρχει ήδη
+                    // hotelFeaturesElement.innerHTML = '';
+                    // hotelFeaturesIndex = 0;
+                    // setTimeout(typeHotelFeaturesText, 300);
                 }
             }
         });
