@@ -914,8 +914,8 @@
     </section>
 
     <!-- e-Philoxenia Hotel Features Section -->
-    <section class="py-3" id="hotel-features">
-        <div class="container py-3">
+    <section class="py-3" id="hotel-features" style="background-color: #f8faff; border-top: 1px solid rgba(12, 59, 128, 0.05); border-bottom: 1px solid rgba(12, 59, 128, 0.05);">
+        <div class="container-fluid px-lg-5 py-3" style="max-width: 1600px;">
             <div class="text-center mb-2">
                 <h1 class="display-4 fw-bold mb-1" style="color: #0c3b80;">ePhiloxenia</h1>
                 <h1 class="display-4 fw-bold mb-2" style="color: #4a88e0;" id="hotel-features-text"></h1>
@@ -924,10 +924,10 @@
                 </p>
             </div>
 
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-center mb-3 px-lg-4">
                 <!-- Left Features -->
-                <div class="col-lg-6">
-                    <div id="hotel-features-carousel" style="position: relative;">
+                <div class="col-lg-6 px-lg-5">
+                    <div id="hotel-features-carousel" style="position: relative; background-color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                         <!-- Progress Indicator -->
                         <div class="carousel-progress" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
                             <div style="background: #f0f4f8; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); display: inline-flex; align-items: center;">
@@ -985,7 +985,7 @@
                 </div>
                 
                 <!-- Right: Computer Screen -->
-                <div class="col-lg-6 text-center position-relative">
+                <div class="col-lg-6 text-center position-relative px-lg-5">
                     <div class="computer-container" data-aos="fade-up">
                         <div class="computer-frame" style="position: relative; max-width: 600px; margin: 0 auto;">
                             <!-- Computer/Monitor Design -->
@@ -1366,18 +1366,19 @@
             
             // Reset interval
             clearInterval(hotelInterval);
-            hotelInterval = setInterval(nextHotelFeature, 4000);
+            hotelInterval = setInterval(nextHotelFeature, 5000);
         }
         
-        function nextHotelFeature() {
+        // Κάνουμε τις συναρτήσεις nextHotelFeature και prevHotelFeature διαθέσιμες στο παγκόσμιο περιβάλλον
+        window.nextHotelFeature = function() {
             let nextIndex = (currentHotelFeatureIndex + 1) % hotelFeatures.length;
             showHotelFeature(nextIndex);
-        }
+        };
         
-        function prevHotelFeature() {
+        window.prevHotelFeature = function() {
             let prevIndex = (currentHotelFeatureIndex - 1 + hotelFeatures.length) % hotelFeatures.length;
             showHotelFeature(prevIndex);
-        }
+        };
         
         // Guest Features Navigation
         function showGuestFeature(index) {
@@ -1433,18 +1434,19 @@
             
             // Reset interval
             clearInterval(guestInterval);
-            guestInterval = setInterval(nextGuestFeature, 4000);
+            guestInterval = setInterval(nextGuestFeature, 5000);
         }
         
-        function nextGuestFeature() {
+        // Κάνουμε τις συναρτήσεις nextGuestFeature και prevGuestFeature διαθέσιμες στο παγκόσμιο περιβάλλον
+        window.nextGuestFeature = function() {
             let nextIndex = (currentGuestFeatureIndex + 1) % guestFeatures.length;
             showGuestFeature(nextIndex);
-        }
+        };
         
-        function prevGuestFeature() {
+        window.prevGuestFeature = function() {
             let prevIndex = (currentGuestFeatureIndex - 1 + guestFeatures.length) % guestFeatures.length;
             showGuestFeature(prevIndex);
-        }
+        };
         
         // Initialize carousels
         if (featureScreens.length > 0 && guestFeatureElements.length > 0) {
@@ -1452,7 +1454,7 @@
             showGuestFeature(0);
             
             // Start auto-rotation
-            guestInterval = setInterval(nextGuestFeature, 4000);
+            guestInterval = setInterval(nextGuestFeature, 5000);
         }
         
         if (dashboardScreens.length > 0 && hotelFeatureElements.length > 0) {
@@ -1460,7 +1462,7 @@
             showHotelFeature(0);
             
             // Start auto-rotation
-            hotelInterval = setInterval(nextHotelFeature, 4000);
+            hotelInterval = setInterval(nextHotelFeature, 5000);
         }
         
         // Add some CSS animations
@@ -1490,11 +1492,20 @@
             
             button.carousel-control:hover {
                 background: #4a88e0 !important;
+                color: white !important;
+                transform: scale(1.1) !important;
+                box-shadow: 0 5px 15px rgba(12, 59, 128, 0.2) !important;
             }
             
             button.carousel-control.prev:hover,
             button.carousel-control.next:hover {
                 transform: scale(1.1) !important;
+            }
+            
+            button.carousel-control:active {
+                transform: scale(0.95) !important;
+                background: #0c3b80 !important;
+                transition: all 0.1s ease;
             }
             
             button.carousel-control {
