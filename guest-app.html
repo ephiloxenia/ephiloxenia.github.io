@@ -3845,23 +3845,6 @@
                 });
             });
             
-            // Προσθήκη του wallet στο κυρίως μενού
-            const profileMenuButton = document.querySelector('[data-bs-target="#profileModal"]');
-            if (profileMenuButton) {
-                profileMenuButton.parentNode.insertAdjacentHTML('beforeend', `
-                    <button class="btn btn-sm text-info me-2" data-bs-toggle="modal" data-bs-target="#walletModal">
-                        <i class="bi bi-wallet2 fs-4"></i>
-                    </button>
-                `);
-            }
-            
-            // Διόρθωση του κουμπιού "Προβολή Προσφορών" στο wallet (αφού δεν έχουμε jQuery)
-            const viewOffersBtn = document.querySelector('#walletModal button[data-bs-target="#rewardsModal"]');
-            if (viewOffersBtn) {
-                viewOffersBtn.onclick = function() {
-                    const walletModal = bootstrap.Modal.getInstance(document.getElementById('walletModal'));
-                    walletModal.hide();
-                };
             }
         });
         
