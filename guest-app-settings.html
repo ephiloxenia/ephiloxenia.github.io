@@ -374,11 +374,285 @@
             margin-bottom: 20px;
             border: 1px solid #e9ecef;
         }
+        
+        /* Mobile responsive styles */
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                padding: 0;
+            }
+            
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: none;
+            }
+            
+            .sidebar .nav-link {
+                justify-content: center;
+                padding: 12px;
+                margin: 4px 8px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+                padding: 16px;
+            }
+            
+            .phone-mockup {
+                width: 220px;
+                height: 450px;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 12px;
+            }
+            
+            .sidebar {
+                width: 0;
+                transform: translateX(-260px);
+                z-index: 1050;
+                padding-top: 60px; /* Make room for the toggle button */
+                background-color: white;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .sidebar.show {
+                width: 260px;
+                transform: translateX(0);
+            }
+            
+            /* Show text in sidebar on mobile when expanded */
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: inline-block;
+            }
+            
+            /* Fix sidebar item alignment */
+            .sidebar .nav-link {
+                justify-content: flex-start;
+                text-align: left;
+                padding: 12px 20px;
+                margin: 3px 10px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 12px;
+            }
+            
+            /* Logo styling in sidebar */
+            .sidebar .p-3.border-bottom {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: white;
+                z-index: 1;
+            }
+            
+            /* Default position of toggle button */
+            .sidebar-toggle {
+                display: block;
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Position for open sidebar */
+            .sidebar-toggle.moved {
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Responsive header for mobile */
+            .d-flex.justify-content-between.align-items-center.mb-4 {
+                flex-direction: column;
+                align-items: center !important;
+                text-align: center;
+            }
+            
+            .d-flex.justify-content-between.align-items-center.mb-4 > div:last-child {
+                margin-top: 15px;
+                align-self: center;
+            }
+            
+            /* Section nav scrollable on mobile */
+            .section-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 8px;
+            }
+            
+            .section-nav .btn {
+                padding: 6px 14px;
+                font-size: 0.9rem;
+            }
+            
+            /* App customization responsiveness */
+            .color-picker {
+                width: 30px;
+                height: 30px;
+                margin: 0 4px;
+            }
+            
+            /* Menu item responsiveness */
+            .menu-item .d-flex {
+                flex-wrap: wrap;
+            }
+            
+            .menu-item .icon-select {
+                margin-bottom: 8px;
+            }
+            
+            .app-menu-preview {
+                padding: 10px 0;
+                overflow-x: auto;
+            }
+            
+            .app-button {
+                margin: 0 10px;
+                width: 60px;
+            }
+        }
+        
+        /* Small phone adjustments */
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 10px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            .phone-mockup {
+                width: 200px;
+                height: 400px;
+                border-width: 6px;
+            }
+            
+            .section-nav .btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                margin: 2px 4px;
+            }
+            
+            .app-button {
+                width: 50px;
+                margin: 0 5px;
+                font-size: 0.7rem;
+            }
+            
+            .app-button i {
+                font-size: 1.2rem !important;
+            }
+            
+            .menu-item .d-flex {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .menu-item .icon-select,
+            .menu-item input {
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            
+            .menu-item .form-check {
+                margin-left: 0 !important;
+                margin-top: 5px;
+            }
+        }
+        
+        /* Toggle sidebar button */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1060;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                padding-top: 60px; /* Make room for the toggle button */
+            }
+            
+            /* Position the toggle button inside the sidebar when it's open */
+            .sidebar.show + .sidebar-toggle {
+                color: white;
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Move sidebar toggle back when sidebar is closed */
+            .sidebar:not(.show) + .sidebar-toggle {
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+        }
+        
+        /* Overlay for mobile sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Customization section visibility */
+        .customization-section {
+            display: none;
+        }
+        
+        .customization-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <!-- Sidebar Toggle Button for Mobile -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="bi bi-list" id="toggleIcon"></i>
+    </button>
+
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="p-3 border-bottom">
             <div class="d-flex align-items-center">
                 <div style="border: 2px dashed #ccc; padding: 5px 10px; border-radius: 5px; font-size: 12px; color: #666; background-color: #f9f9f9; text-align: center;">Your Logo Here</div>
@@ -764,6 +1038,288 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Widgets Section -->
+                        <div id="widgets" class="customization-section">
+                            <h6 class="border-bottom pb-2 mb-3">App Widgets</h6>
+                            <p class="text-muted">Configure the widgets that appear on the guest app home screen</p>
+                            
+                            <div class="mb-4">
+                                <label class="form-label">Available Widgets</label>
+                                <div class="card border p-3">
+                                    <div class="widget-item">
+                                        <div class="drag-handle me-2">
+                                            <i class="bi bi-grip-vertical"></i>
+                                        </div>
+                                        <div class="widget-icon">
+                                            <i class="bi bi-cup-hot"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Food & Beverage</h6>
+                                            <small class="text-muted">Room service, restaurant reservations</small>
+                                        </div>
+                                        <div class="form-check form-switch ms-2">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="widget-item">
+                                        <div class="drag-handle me-2">
+                                            <i class="bi bi-grip-vertical"></i>
+                                        </div>
+                                        <div class="widget-icon">
+                                            <i class="bi bi-water"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Spa & Wellness</h6>
+                                            <small class="text-muted">Spa bookings, massage services</small>
+                                        </div>
+                                        <div class="form-check form-switch ms-2">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="widget-item">
+                                        <div class="drag-handle me-2">
+                                            <i class="bi bi-grip-vertical"></i>
+                                        </div>
+                                        <div class="widget-icon">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Local Attractions</h6>
+                                            <small class="text-muted">Nearby points of interest</small>
+                                        </div>
+                                        <div class="form-check form-switch ms-2">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="widget-item">
+                                        <div class="drag-handle me-2">
+                                            <i class="bi bi-grip-vertical"></i>
+                                        </div>
+                                        <div class="widget-icon">
+                                            <i class="bi bi-calendar-event"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Events Calendar</h6>
+                                            <small class="text-muted">Hotel events and activities</small>
+                                        </div>
+                                        <div class="form-check form-switch ms-2">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-plus-circle me-1"></i> Add Custom Widget
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Services Section -->
+                        <div id="services" class="customization-section">
+                            <h6 class="border-bottom pb-2 mb-3">Hotel Services</h6>
+                            <p class="text-muted">Configure the services available in the guest app</p>
+                            
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <label class="form-label mb-0">Room Service</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </div>
+                                <div class="card border p-3 mb-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Service Hours</label>
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <input type="time" class="form-control" value="07:00">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="time" class="form-control" value="22:00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Menu Upload</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="room-service-menu.pdf">
+                                            <button class="btn btn-outline-secondary">Browse</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <label class="form-label mb-0">Housekeeping Requests</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </div>
+                                </div>
+                                <div class="card border p-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Service Options</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Room Cleaning</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Towel Replacement</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Amenity Restock</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Turn-down Service</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Experiences Section -->
+                        <div id="experiences" class="customization-section">
+                            <h6 class="border-bottom pb-2 mb-3">Guest Experiences</h6>
+                            <p class="text-muted">Configure unique experiences for guests to discover and book</p>
+                            
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="mb-0">Featured Experiences</h6>
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-plus-circle me-1"></i> Add Experience
+                                    </button>
+                                </div>
+                                
+                                <div class="card border p-3 mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 8px;" class="me-3 flex-shrink-0">
+                                            <img src="img/experience-1.jpg" alt="Sunset Cruise" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="mb-1">Sunset Cruise</h6>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted small mb-2">Enjoy breathtaking views of the sunset from our luxury yacht</p>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="badge bg-info">Daily at 18:30</span>
+                                                <span>€75 per person</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card border p-3">
+                                    <div class="d-flex align-items-start">
+                                        <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 8px;" class="me-3 flex-shrink-0">
+                                            <img src="img/experience-2.jpg" alt="Wine Tasting" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="mb-1">Wine Tasting Tour</h6>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted small mb-2">Explore local vineyards with our expert sommelier</p>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="badge bg-info">Tuesdays & Fridays</span>
+                                                <span>€95 per person</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- App Settings Section -->
+                        <div id="settings" class="customization-section">
+                            <h6 class="border-bottom pb-2 mb-3">App Configuration</h6>
+                            <p class="text-muted">Configure general settings for the guest mobile app</p>
+                            
+                            <div class="mb-4">
+                                <div class="card border p-3 mb-3">
+                                    <h6 class="mb-3">General Settings</h6>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">App Language</label>
+                                        <select class="form-select">
+                                            <option value="en" selected>English</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="it">Italian</option>
+                                        </select>
+                                        <div class="form-text">Default language for the app. Guests can change this in settings.</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Push Notifications</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Enable push notifications</label>
+                                        </div>
+                                        <div class="form-text">Send push notifications to guests for important updates</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Guest Check-in</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Enable mobile check-in</label>
+                                        </div>
+                                        <div class="form-text">Allow guests to check in through the mobile app</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Digital Key</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Enable digital room key</label>
+                                        </div>
+                                        <div class="form-text">Allow guests to use their smartphone as a room key</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card border p-3">
+                                    <h6 class="mb-3">Integration Settings</h6>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">PMS Integration</label>
+                                        <select class="form-select">
+                                            <option selected>Opera</option>
+                                            <option>Infor HMS</option>
+                                            <option>Protel</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">API Key</label>
+                                        <input type="text" class="form-control" value="••••••••••••••••">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Webhook URL</label>
+                                        <input type="text" class="form-control" value="https://api.example.com/webhook">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <button class="btn btn-outline-primary">
+                                            Test Connection
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -806,7 +1362,71 @@
                     this.classList.add('active');
                 });
             });
+            
+            // Initialize mobile sidebar toggle
+            initializeSidebarToggle();
         });
+        
+        // Initialize sidebar toggle for mobile
+        function initializeSidebarToggle() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    
+                    // Toggle the moved class for the button position
+                    sidebarToggle.classList.toggle('moved');
+                    
+                    // Change icon based on sidebar state
+                    if (sidebar.classList.contains('show')) {
+                        toggleIcon.classList.remove('bi-list');
+                        toggleIcon.classList.add('bi-x-lg');
+                    } else {
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                    }
+                    
+                    // Add overlay when sidebar is shown on mobile
+                    let overlay = document.querySelector('.sidebar-overlay');
+                    
+                    if (sidebar.classList.contains('show')) {
+                        if (!overlay) {
+                            overlay = document.createElement('div');
+                            overlay.className = 'sidebar-overlay';
+                            document.body.appendChild(overlay);
+                            
+                            // Close sidebar when overlay is clicked
+                            overlay.addEventListener('click', function() {
+                                sidebar.classList.remove('show');
+                                sidebarToggle.classList.remove('moved');
+                                toggleIcon.classList.remove('bi-x-lg');
+                                toggleIcon.classList.add('bi-list');
+                                overlay.remove();
+                            });
+                        }
+                    } else if (overlay) {
+                        overlay.remove();
+                    }
+                });
+                
+                // Close sidebar on window resize if it's in mobile view
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('show');
+                        sidebarToggle.classList.remove('moved');
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                        const overlay = document.querySelector('.sidebar-overlay');
+                        if (overlay) {
+                            overlay.remove();
+                        }
+                    }
+                });
+            }
+        }
     </script>
 </body>
 </html> 

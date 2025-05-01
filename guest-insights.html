@@ -228,11 +228,277 @@
             width: 100%;
             margin-bottom: 1rem;
         }
+        
+        /* Mobile responsive styles */
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                padding: 0;
+            }
+            
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: none;
+            }
+            
+            .sidebar .nav-link {
+                justify-content: center;
+                padding: 12px;
+                margin: 4px 8px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+                padding: 16px;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 12px;
+            }
+            
+            .sidebar {
+                width: 0;
+                transform: translateX(-260px);
+                z-index: 1050;
+                padding-top: 60px; /* Make room for the toggle button */
+                background-color: white;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .sidebar.show {
+                width: 260px;
+                transform: translateX(0);
+            }
+            
+            /* Show text in sidebar on mobile when expanded */
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: inline-block;
+            }
+            
+            /* Fix sidebar item alignment */
+            .sidebar .nav-link {
+                justify-content: flex-start;
+                text-align: left;
+                padding: 12px 20px;
+                margin: 3px 10px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 12px;
+            }
+            
+            /* Logo styling in sidebar */
+            .sidebar .p-3.border-bottom {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: white;
+                z-index: 1;
+            }
+            
+            /* Default position of toggle button */
+            .sidebar-toggle {
+                display: block;
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Position for open sidebar */
+            .sidebar-toggle.moved {
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Responsive header for mobile */
+            .d-flex.justify-content-between.align-items-center.mb-4 {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .d-flex.justify-content-between.align-items-center.mb-4 > div:last-child {
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+            
+            /* Make guest cards stack on mobile */
+            .card .row .col-md-4 {
+                margin-bottom: 15px;
+            }
+            
+            /* Table responsiveness */
+            .table-responsive {
+                margin-bottom: 0;
+            }
+            
+            .reviews-container .review-item {
+                padding: 10px;
+            }
+            
+            /* Sentiment analysis responsiveness */
+            .sentiment-gauge {
+                margin-top: 10px;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+            
+            /* Center header title and description on mobile */
+            .dashboard-header .col-12:first-child {
+                text-align: center;
+            }
+            
+            /* Center export button on mobile */
+            .dashboard-header .col-12.text-end {
+                text-align: center !important;
+            }
+        }
+        
+        /* Small phone adjustments */
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 10px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .section-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 8px;
+            }
+            
+            .section-nav .btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                margin: 2px 4px;
+            }
+            
+            /* Make chart containers smaller on small phones */
+            .chart-container, 
+            canvas#sentiment-chart, 
+            canvas#age-distribution-chart, 
+            canvas#guest-preferences-chart {
+                height: 200px !important;
+                max-height: 200px !important;
+            }
+            
+            /* Increase card readability on small screens */
+            .review-item .d-flex {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .review-item .rating {
+                margin-top: 5px;
+            }
+            
+            /* Improve badge display on small screens */
+            .review-item .mt-2.d-flex {
+                flex-wrap: wrap;
+            }
+            
+            .review-item .badge {
+                margin-bottom: 5px;
+            }
+            
+            /* Improve table display on small screens */
+            .table th, .table td {
+                padding: 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* Toggle sidebar button */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1060;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                padding-top: 60px; /* Make room for the toggle button */
+            }
+            
+            /* Position the toggle button inside the sidebar when it's open */
+            .sidebar.show + .sidebar-toggle {
+                color: white;
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Move sidebar toggle back when sidebar is closed */
+            .sidebar:not(.show) + .sidebar-toggle {
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+        }
+        
+        /* Overlay for mobile sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <!-- Sidebar Toggle Button for Mobile -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="bi bi-list" id="toggleIcon"></i>
+    </button>
+
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="p-3 border-bottom">
             <div class="d-flex align-items-center">
                 <div style="border: 2px dashed #ccc; padding: 5px 10px; border-radius: 5px; font-size: 12px; color: #666; background-color: #f9f9f9; text-align: center;">Your Logo Here</div>
@@ -295,29 +561,31 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h2 class="mb-0">360° Guest View</h2>
-                <p class="text-muted">Understand your guests better with data-driven insights</p>
-            </div>
-            <div>
-                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
-                    <i class="bi bi-download me-1"></i> Export Data
-                </button>
+        <div class="dashboard-header mb-4">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <h2 class="mb-0 fw-bold">360° Guest View</h2>
+                    <p class="text-muted">Understand your guests with data insights</p>
+                </div>
+                <div class="col-12 text-end">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+                        <i class="bi bi-download me-1"></i> Export Data
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Section Navigation -->
         <div class="section-nav">
-            <div class="d-flex flex-wrap justify-content-center">
-                <button class="btn btn-outline-primary" data-section="guest-intelligence">Guest Intelligence</button>
-                <button class="btn btn-outline-primary" data-section="analytics">Analytics</button>
-                <button class="btn btn-outline-primary" data-section="alerts">Alerts</button>
+            <div class="d-flex flex-nowrap overflow-auto py-1">
+                <button class="btn active" data-section="guest-intelligence">Guest Intelligence</button>
+                <button class="btn" data-section="analytics">Analytics</button>
+                <button class="btn" data-section="alerts">Alerts</button>
             </div>
         </div>
 
         <!-- Key Guest Metrics -->
-        <div class="row mb-4">
+        <div class="row mb-4 section-id" id="guest-intelligence">
             <div class="col-md-6 col-lg-3 mb-3">
                 <div class="card dashboard-card">
                     <div class="card-body">
@@ -523,11 +791,11 @@
                 <p class="text-muted">AI-powered analysis of guest feedback</p>
                 
                 <div class="row mb-4">
-                    <div class="col-md-8">
+                    <div class="col-md-12 col-lg-8 mb-3 mb-lg-0">
                         <h6 class="mb-3">Sentiment Trends (Last 6 Months)</h6>
                         <canvas id="sentiment-chart" style="height: 250px; max-height: 250px;"></canvas>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-12 col-lg-4">
                         <h6 class="mb-3">Overall Sentiment</h6>
                         <div class="sentiment-gauge text-center mb-3">
                             <div class="progress" style="height: 12px;">
@@ -638,7 +906,7 @@
                 <p class="text-muted">Comprehensive guest data analysis, demographic trends, and personalization insights</p>
                 
                 <div class="row mb-4">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-12">
                         <h6 class="mb-3">Country of Origin</h6>
                         <div class="table-responsive">
                             <table class="table table-sm">
@@ -702,20 +970,20 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-12">
                         <h6 class="mb-3">Age Distribution</h6>
                         <canvas id="age-distribution-chart" style="height: 250px; max-height: 250px;"></canvas>
                     </div>
                 </div>
                 
                 <div class="row mb-4">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 col-md-12 mb-3 mb-lg-0">
                         <h6 class="mb-3">Guest Preferences</h6>
                         <div class="chart-container">
                             <canvas id="guest-preferences-chart"></canvas>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-12">
                         <h6 class="mb-3">Personalization Score</h6>
                         <div class="text-center mb-4">
                             <div class="display-4 text-primary">92%</div>
@@ -801,5 +1069,135 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/guest-insights.js"></script>
+    
+    <!-- Initialize mobile sidebar toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile sidebar toggle
+            initializeSidebarToggle();
+            
+            // Initialize section navigation if it exists
+            if (document.querySelector('.section-nav')) {
+                initializeSectionNavigation();
+                
+                // Set the first button as active by default
+                const firstButton = document.querySelector('.section-nav .btn');
+                if (firstButton && !document.querySelector('.section-nav .btn.active')) {
+                    firstButton.classList.add('active');
+                }
+            }
+        });
+        
+        // Initialize sidebar toggle for mobile
+        function initializeSidebarToggle() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    
+                    // Toggle the moved class for the button position
+                    sidebarToggle.classList.toggle('moved');
+                    
+                    // Change icon based on sidebar state
+                    if (sidebar.classList.contains('show')) {
+                        toggleIcon.classList.remove('bi-list');
+                        toggleIcon.classList.add('bi-x-lg');
+                    } else {
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                    }
+                    
+                    // Add overlay when sidebar is shown on mobile
+                    let overlay = document.querySelector('.sidebar-overlay');
+                    
+                    if (sidebar.classList.contains('show')) {
+                        if (!overlay) {
+                            overlay = document.createElement('div');
+                            overlay.className = 'sidebar-overlay';
+                            document.body.appendChild(overlay);
+                            
+                            // Close sidebar when overlay is clicked
+                            overlay.addEventListener('click', function() {
+                                sidebar.classList.remove('show');
+                                sidebarToggle.classList.remove('moved');
+                                toggleIcon.classList.remove('bi-x-lg');
+                                toggleIcon.classList.add('bi-list');
+                                overlay.remove();
+                            });
+                        }
+                    } else if (overlay) {
+                        overlay.remove();
+                    }
+                });
+                
+                // Close sidebar on window resize if it's in mobile view
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('show');
+                        sidebarToggle.classList.remove('moved');
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                        const overlay = document.querySelector('.sidebar-overlay');
+                        if (overlay) {
+                            overlay.remove();
+                        }
+                    }
+                });
+            }
+        }
+        
+        function initializeSectionNavigation() {
+            const navButtons = document.querySelectorAll('.section-nav .btn');
+            const sections = document.querySelectorAll('.section-id');
+            
+            // Handle button clicks
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetSection = button.getAttribute('data-section');
+                    const section = document.getElementById(targetSection);
+                    
+                    if (section) {
+                        // Remove active class from all buttons
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked button
+                        button.classList.add('active');
+                        
+                        // Scroll to section
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Highlight the section
+                        section.classList.add('highlight');
+                        setTimeout(() => {
+                            section.classList.remove('highlight');
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Update active button based on scroll position
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        const sectionId = section.id;
+                        navButtons.forEach(btn => {
+                            if (btn.getAttribute('data-section') === sectionId) {
+                                btn.classList.add('active');
+                            } else {
+                                btn.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html> 

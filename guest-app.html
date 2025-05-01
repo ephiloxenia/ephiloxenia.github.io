@@ -3590,7 +3590,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Smart Check-in</h5>
+                    <h5 class="modal-title" data-i18n="smart_checkin_title">Smart Check-in</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -3604,8 +3604,8 @@
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
                             <div>
-                                <h6 class="mb-0">Ταυτότητα Επαληθευμένη</h6>
-                                <small class="text-muted">Η επαλήθευση ταυτότητας ολοκληρώθηκε</small>
+                                <h6 class="mb-0" data-i18n="id_verified">ID Verified</h6>
+                                <small class="text-muted" data-i18n="id_verified_desc">Identity verification completed</small>
                             </div>
                         </li>
                         <li class="list-group-item d-flex align-items-center">
@@ -3613,8 +3613,8 @@
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
                             <div>
-                                <h6 class="mb-0">Πληρωμή Επιβεβαιωμένη</h6>
-                                <small class="text-muted">Η προκαταβολή έχει επιβεβαιωθεί</small>
+                                <h6 class="mb-0" data-i18n="payment_confirmed">Payment Confirmed</h6>
+                                <small class="text-muted" data-i18n="payment_confirmed_desc">Deposit has been confirmed</small>
                             </div>
                         </li>
                         <li class="list-group-item d-flex align-items-center">
@@ -3622,8 +3622,8 @@
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
                             <div>
-                                <h6 class="mb-0">Φόρμα Εγγραφής</h6>
-                                <small class="text-muted">Φόρμα εγγραφής συμπληρωμένη</small>
+                                <h6 class="mb-0" data-i18n="registration_form">Registration Form</h6>
+                                <small class="text-muted" data-i18n="registration_form_desc">Registration form completed</small>
                             </div>
                         </li>
                     </ul>
@@ -3631,17 +3631,17 @@
                     <div class="card mb-4 border-success">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <i class="bi bi-key text-success me-2"></i> Ψηφιακό Κλειδί Δωματίου
+                                <i class="bi bi-key text-success me-2"></i> <span data-i18n="digital_key">Digital Room Key</span>
                             </h5>
                             <div class="qr-code-container text-center my-3">
                                 <img src="img/qr-code-placeholder.svg" alt="QR Code" class="img-fluid" style="max-width: 200px;">
                             </div>
                             <div class="form-check form-switch d-flex justify-content-center mb-3">
                                 <input class="form-check-input me-2" type="checkbox" id="saveKeyOffline" checked>
-                                <label class="form-check-label" for="saveKeyOffline">Διαθέσιμο Offline</label>
+                                <label class="form-check-label" for="saveKeyOffline" data-i18n="available_offline">Available Offline</label>
                             </div>
                             <div class="alert alert-info text-center mb-0">
-                                <i class="bi bi-info-circle"></i> Χρησιμοποιήστε αυτό το QR ή NFC στην πόρτα του δωματίου σας
+                                <i class="bi bi-info-circle"></i> <span data-i18n="use_qr_nfc">Use this QR code or NFC at your room door</span>
                             </div>
                         </div>
                     </div>
@@ -3649,18 +3649,18 @@
                     <div class="row g-3">
                         <div class="col-6">
                             <button class="btn btn-outline-primary w-100" id="viewRoomDetails">
-                                <i class="bi bi-info-circle"></i> Πληροφορίες Δωματίου
+                                <i class="bi bi-info-circle"></i> <span data-i18n="room_details">Room Details</span>
                             </button>
                         </div>
                         <div class="col-6">
                             <button class="btn btn-outline-primary w-100" id="navigationToRoom">
-                                <i class="bi bi-map"></i> Οδηγίες Προς Δωμάτιο
+                                <i class="bi bi-map"></i> <span data-i18n="directions_to_room">Directions to Room</span>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="close">Close</button>
                 </div>
             </div>
         </div>

@@ -1275,10 +1275,11 @@ function initializeServiceRequests() {
 let enableHomeButtonNotifications = false;
 
 function setupNotifications() {
-    // Simulate initial notification after a delay
-    setTimeout(() => {
-        showNotification('Welcome to Sunset Resort! Your room is ready.', 'primary', true); // Force this notification
-    }, 3000);
+    // Initial notification has been removed
+    // Previously: Simulate initial notification after a delay
+    // setTimeout(() => {
+    //    showNotification('Welcome to Sunset Resort! Your room is ready.', 'primary', true); // Force this notification
+    // }, 3000);
 }
 
 function showNotification(message, type = 'primary', force = false) {

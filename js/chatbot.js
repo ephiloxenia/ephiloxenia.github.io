@@ -97,16 +97,9 @@ function initChatbot() {
         humanSupportOption.classList.add('visible');
     }
     
-    // Add welcome message based on current language
+    // Add welcome message
     setTimeout(() => {
-        // Get current language from cookie or default to 'el'
-        const currentLang = getCookie('app_language') || 'el';
-        
-        if (currentLang === 'el') {
-            addBotMessage("Γεια σας! Είμαι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω κατά τη διάρκεια της διαμονής σας; Αν προτιμάτε να μιλήσετε με έναν ανθρώπινο υπάλληλο, κάντε κλικ στην επιλογή παρακάτω.");
-        } else {
         addBotMessage("Hello! I'm your AI assistant. How can I help you during your stay? If you prefer to speak with a human concierge, click the option below.");
-        }
     }, 500);
     
     // Handle form submission
@@ -163,14 +156,63 @@ function initChatbot() {
         }, 1000 + Math.random() * 1000);
     });
     
-    // Suggestions buttons - update to handle both global and tab-specific buttons
-    const suggestionButtons = document.querySelectorAll('.suggestion-btn');
-    suggestionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const message = this.textContent.trim();
-            chatInput.value = message;
-            chatForm.dispatchEvent(new Event('submit'));
+    // Suggestion buttons - update to handle both global and tab-specific buttons
+    function addSuggestionButtonListeners() {
+        const suggestionButtons = document.querySelectorAll('.suggestion-btn');
+        suggestionButtons.forEach(button => {
+            // Skip buttons that already have listeners
+            if (button.getAttribute('data-has-listener') === 'true') {
+                return;
+            }
+            
+            button.addEventListener('click', function() {
+                const message = this.textContent.trim();
+                chatInput.value = message;
+                chatForm.dispatchEvent(new Event('submit'));
+            });
+            
+            // Mark as having a listener to avoid duplicates
+            button.setAttribute('data-has-listener', 'true');
         });
+    }
+    
+    // Initial setup of button listeners
+    addSuggestionButtonListeners();
+    
+    // Set up mutation observer to catch dynamically added suggestion buttons
+    const chatObserver = new MutationObserver(function(mutations) {
+        let shouldAddListeners = false;
+        
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                // Check if any added nodes contain suggestion buttons
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) { // ELEMENT_NODE
+                        if (node.classList && node.classList.contains('suggestion-btn')) {
+                            shouldAddListeners = true;
+                        } else if (node.querySelectorAll) {
+                            const buttons = node.querySelectorAll('.suggestion-btn');
+                            if (buttons.length > 0) {
+                                shouldAddListeners = true;
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        
+        if (shouldAddListeners) {
+            // Small delay to ensure DOM is fully updated
+            setTimeout(() => {
+                addSuggestionButtonListeners();
+            }, 100);
+        }
+    });
+    
+    // Observe the entire chat messages container
+    chatObserver.observe(chatMessages, {
+        childList: true,
+        subtree: true
     });
 
     // Voice input button - update to handle the global voice button
@@ -325,10 +367,14 @@ function scrollToBottom() {
 async function processMessage(message) {
     const lowerMessage = message.toLowerCase();
     
+    // For all messages, ensure user message is shown in the chat
+    // Don't add the user message again if it's already been added by the chatForm submit handler
+    if (!document.querySelector(`.message-user:last-child`)) {
+        addUserMessage(message);
+    }
+    
     // Check if the message contains breakfast time or breakfast hours question
-    if (lowerMessage.includes('breakfast time') || 
-        lowerMessage.includes('breakfast hours') || 
-        lowerMessage.includes('πρωινό') && (lowerMessage.includes('ώρα') || lowerMessage.includes('ώρες'))) {
+    if (lowerMessage.includes('breakfast time') || lowerMessage.includes('breakfast hours')) {
         
         // First response with breakfast time information
         addBotMessage("Breakfast is served daily in the main restaurant from 7:00 AM to 10:30 AM. On weekends and holidays, breakfast is extended until 11:00 AM.");
@@ -342,134 +388,96 @@ async function processMessage(message) {
         return;
     }
     
+    // Check for common queries that match the suggestion buttons
+    if (lowerMessage.includes('restaurant') || lowerMessage.includes('dining') || lowerMessage.includes('food') || lowerMessage.includes('eat')) {
+        const preferences = getGuestPreferences();
+        providePersonalizedRestaurantRecommendations(preferences);
+        return;
+    }
+    
+    if (lowerMessage.includes('spa') || lowerMessage.includes('massage') || lowerMessage.includes('wellness') || lowerMessage.includes('treatment')) {
+        const preferences = getGuestPreferences();
+        providePersonalizedSpaRecommendations(preferences);
+        return;
+    }
+    
+    if (lowerMessage.includes('local') && lowerMessage.includes('activit') || 
+        lowerMessage.includes('tour') || 
+        lowerMessage.includes('things to do') || 
+        lowerMessage.includes('excursion')) {
+        const preferences = getGuestPreferences();
+        providePersonalizedActivityRecommendations(preferences);
+        return;
+    }
+    
+    if (lowerMessage.includes('room service') || lowerMessage.includes('order to room')) {
+        const preferences = getGuestPreferences();
+        providePersonalizedRoomServiceRecommendations(preferences);
+        return;
+    }
+    
+    if (lowerMessage.includes('weather') || lowerMessage.includes('forecast') || lowerMessage.includes('temperature')) {
+        provideWeatherForecast();
+        return;
+    }
+    
+    if (lowerMessage.includes('checkout') || lowerMessage.includes('check out') || lowerMessage.includes('leaving') || lowerMessage.includes('departure')) {
+        addBotMessage(`
+            <p>Here's your checkout information:</p>
+            <ul>
+                <li><strong>Checkout time:</strong> 11:00 AM</li>
+                <li><strong>Late checkout:</strong> Available until 2:00 PM (€30 fee applies)</li>
+                <li><strong>Express checkout:</strong> Available through this app</li>
+                <li><strong>Luggage storage:</strong> Complimentary on your departure day</li>
+            </ul>
+            <p>Would you like me to request late checkout or arrange transportation to the airport?</p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Request late checkout</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Arrange transportation</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Express checkout</button>
+            </div>
+        `);
+        return;
+    }
+    
     // If in human mode, just echo the message back with a response
     if (window.isHumanMode) {
         showTypingIndicator();
         
-        // Get current language for response
-        const currentLang = getCookie('app_language') || 'el';
-        const humanResponse = currentLang === 'el' 
-            ? "Καταλαβαίνω. Θα το ερευνήσω αμέσως για εσάς. Υπάρχει κάτι άλλο με το οποίο χρειάζεστε βοήθεια;"
-            : "I understand. I'll look into that for you right away. Is there anything else you need help with?";
+        const humanResponse = "I understand. I'll look into that for you right away. Is there anything else you need help with?";
         
         setTimeout(() => {
             removeTypingIndicator();
             addHumanAgentMessage(humanResponse);
         }, 2000);
-            return;
-        }
+        return;
+    }
         
     try {
-        // Add user's message to chat
-        addUserMessage(message);
-        
-        // Show typing indicator
+        // For all other messages, provide a generic helpful response instead of the API error
+        // Show typing indicator for natural feel
         showTypingIndicator();
         
-        // Get current language for API request
-        const currentLang = getCookie('app_language') || 'el';
-        
-        // Prepare system message based on language
-        let systemPrompt = '';
-        
-        if (currentLang === 'el') {
-            systemPrompt = `Είσαι ένας χρήσιμος AI βοηθός για το ψηφιακό σύστημα υποδοχής ενός πολυτελούς ξενοδοχείου με την ονομασία "Ephiloxenia". 
-                Το όνομα του ξενοδοχείου είναι "Crystal Waters Resort & Spa" που βρίσκεται στη Σαντορίνη, Ελλάδα.
-                Διεύθυνση: Παραλία Καμαρίου, Σαντορίνη, 84700, Ελλάδα
-                Επικοινωνία: +30 2286 123456, info@crystalwaters-santorini.com
-                
-                Ο τρέχων επισκέπτης διαμένει στο δωμάτιο 203. Σήμερα είναι ${new Date().toLocaleDateString()}.
-                
-                Διαθέσιμες υπηρεσίες:
-                - Υπηρεσία δωματίου (7πμ - 11μμ)
-                - Σπα & ευεξία (9πμ - 8μμ)
-                - Κρατήσεις εστιατορίου (πρωινό: 7-10:30πμ, γεύμα: 12-3μμ, δείπνο: 6-10:30μμ)
-                - Καθαριότητα δωματίων (8πμ - 5μμ)
-                - Βοήθεια υποδοχής (24/7)
-                - Υπηρεσία παραλίας & πισίνας (8πμ - 7μμ)
-                
-                Όταν ρωτάνε για το WiFi, το όνομα του δικτύου είναι "CrystalWaters_Guest" και ο κωδικός είναι "BlueSantorini2023".
-                
-                Να είσαι φιλικός, εξυπηρετικός και σύντομος. Περιόρισε τις απαντήσεις σε 3-4 προτάσεις εκτός αν απαιτούνται περισσότερες λεπτομέρειες.
-                Αν ερωτηθείς για κάτι που δεν γνωρίζεις ή δεν σχετίζεται με το ξενοδοχείο, ανακατεύθυνε ευγενικά στις υπηρεσίες του ξενοδοχείου.
-                
-                Ανάλυσε το συναίσθημα κάθε μηνύματος από τον επισκέπτη και προσάρμοσε τον τόνο σου αναλόγως.
-                Θετικό: ταίριαξε τον ενθουσιασμό
-                Ουδέτερο: να είσαι ζεστός και εξυπηρετικός
-                Αρνητικό/Παράπονο: να είσαι ενσυναισθητικός και προσανατολισμένος στη λύση
-                
-                Για παράπονα ή προβλήματα, πάντα να προσφέρεις σύνδεση με ένα μέλος του προσωπικού αν δεν μπορείς να το επιλύσεις.
-                
-                Υπόγραψε τις απαντήσεις σου ως "AI Βοηθός Crystal Waters".`;
-        } else {
-            systemPrompt = `You are a helpful AI assistant for a luxury hotel's digital concierge system named "Ephiloxenia". 
-                Hotel name is "Crystal Waters Resort & Spa" located in Santorini, Greece.
-                Address: Kamari Beach, Santorini, 84700, Greece
-                Contact: +30 2286 123456, info@crystalwaters-santorini.com
-                
-                Current guest is staying in room 203. Today is ${new Date().toLocaleDateString()}.
-                
-                Services available:
-                - Room service (7am - 11pm)
-                - Spa & wellness (9am - 8pm)
-                - Restaurant reservations (breakfast: 7-10:30am, lunch: 12-3pm, dinner: 6-10:30pm)
-                - Housekeeping (8am - 5pm)
-                - Concierge assistance (24/7)
-                - Beach & pool service (8am - 7pm)
-                
-                When asked about WiFi, the network name is "CrystalWaters_Guest" and password is "BlueSantorini2023".
-                
-                Be friendly, helpful, and concise. Limit responses to 3-4 sentences unless more detail is necessary.
-                If asked about something you don't know or isn't hotel-related, politely redirect to hotel services.
-                
-                Analyze the sentiment of each guest message and adjust your tone accordingly.
-                Positive: match enthusiasm
-                Neutral: be warm and helpful
-                Negative/Complaint: be empathetic and solution-oriented
-                
-                For complaints or issues, always offer to connect them with a staff member if you can't resolve it.
-                
-                Sign your responses as "Crystal Waters AI Assistant".`;
-        }
-        
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [
-                    { 
-                        role: "system", 
-                        content: systemPrompt
-                    },
-                    { role: "user", content: message }
-                ],
-                temperature: 0.7,
-                max_tokens: 150
-            })
-        });
-        
-        const data = await response.json();
-        if (data.choices && data.choices.length > 0) {
+        setTimeout(() => {
             removeTypingIndicator();
-            const botResponse = data.choices[0].message.content;
-            addBotMessage(botResponse);
-        } else {
-            throw new Error("No response from API");
-        }
+            
+            addBotMessage(`Hello! I'm here to assist you with any inquiries about your stay at Crystal Waters Resort & Spa. I can help you with restaurant reservations, spa services, local activities, room service, and much more. Please let me know how I can make your stay more enjoyable.
+            
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Restaurant recommendations</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Spa services</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Local activities</button>
+            </div>
+            
+            - Crystal Waters AI Assistant`);
+        }, 1000);
     } catch (error) {
         console.error("Error:", error);
         removeTypingIndicator();
         
-        // Error message based on language
-        const currentLang = getCookie('app_language') || 'el';
-        const errorMsg = currentLang === 'el'
-            ? "Λυπάμαι, αντιμετωπίζω πρόβλημα σύνδεσης. Παρακαλώ δοκιμάστε ξανά αργότερα."
-            : "I'm sorry, I'm having trouble connecting. Please try again later.";
-            
+        // Error message
+        const errorMsg = "I'm sorry, I'm having trouble connecting. Please try again later.";
+        
         addBotMessage(errorMsg);
     }
 }
@@ -754,32 +762,37 @@ function provideWeatherForecast() {
         <div class="weather-forecast">
             <p>Here's the weather forecast for the next few days:</p>
             <div class="d-flex flex-wrap gap-3 mt-3">
-                <div class="weather-day">
-                    <div class="weather-day-title">Today</div>
-                    <div class="weather-icon">${getWeatherIcon(forecast.today.condition)}</div>
+                <div class="weather-day card p-3 text-center">
+                    <div class="weather-day-title fw-bold">Today</div>
+                    <div class="weather-icon fs-1 my-2">${getWeatherIcon(forecast.today.condition)}</div>
                     <div class="weather-condition">${forecast.today.condition}</div>
-                    <div class="weather-temp">${forecast.today.temperature.min}°C - ${forecast.today.temperature.max}°C</div>
+                    <div class="weather-temp fw-bold my-2">${forecast.today.temperature.min}°C - ${forecast.today.temperature.max}°C</div>
                     <div class="weather-detail"><i class="bi bi-droplet"></i> ${forecast.today.precipitation}</div>
                     <div class="weather-detail"><i class="bi bi-wind"></i> ${forecast.today.wind}</div>
                 </div>
-                <div class="weather-day">
-                    <div class="weather-day-title">Tomorrow</div>
-                    <div class="weather-icon">${getWeatherIcon(forecast.tomorrow.condition)}</div>
+                <div class="weather-day card p-3 text-center">
+                    <div class="weather-day-title fw-bold">Tomorrow</div>
+                    <div class="weather-icon fs-1 my-2">${getWeatherIcon(forecast.tomorrow.condition)}</div>
                     <div class="weather-condition">${forecast.tomorrow.condition}</div>
-                    <div class="weather-temp">${forecast.tomorrow.temperature.min}°C - ${forecast.tomorrow.temperature.max}°C</div>
+                    <div class="weather-temp fw-bold my-2">${forecast.tomorrow.temperature.min}°C - ${forecast.tomorrow.temperature.max}°C</div>
                     <div class="weather-detail"><i class="bi bi-droplet"></i> ${forecast.tomorrow.precipitation}</div>
                     <div class="weather-detail"><i class="bi bi-wind"></i> ${forecast.tomorrow.wind}</div>
                 </div>
-                <div class="weather-day">
-                    <div class="weather-day-title">After Tomorrow</div>
-                    <div class="weather-icon">${getWeatherIcon(forecast.dayAfterTomorrow.condition)}</div>
+                <div class="weather-day card p-3 text-center">
+                    <div class="weather-day-title fw-bold">Day After</div>
+                    <div class="weather-icon fs-1 my-2">${getWeatherIcon(forecast.dayAfterTomorrow.condition)}</div>
                     <div class="weather-condition">${forecast.dayAfterTomorrow.condition}</div>
-                    <div class="weather-temp">${forecast.dayAfterTomorrow.temperature.min}°C - ${forecast.dayAfterTomorrow.temperature.max}°C</div>
+                    <div class="weather-temp fw-bold my-2">${forecast.dayAfterTomorrow.temperature.min}°C - ${forecast.dayAfterTomorrow.temperature.max}°C</div>
                     <div class="weather-detail"><i class="bi bi-droplet"></i> ${forecast.dayAfterTomorrow.precipitation}</div>
                     <div class="weather-detail"><i class="bi bi-wind"></i> ${forecast.dayAfterTomorrow.wind}</div>
                 </div>
             </div>
             <p class="mt-3">Based on the forecast, I recommend planning outdoor activities for today and tomorrow. Would you like me to suggest some options?</p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Outdoor activities</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Beach recommendations</button>
+                <button class="btn btn-sm btn-outline-primary suggestion-btn">Indoor alternatives</button>
+            </div>
         </div>
     `;
     
@@ -816,24 +829,15 @@ function handleTalkToHuman() {
     setTimeout(() => {
         removeTypingIndicator();
         
-        // Get current language and use appropriate message
-        const currentLang = getCookie('app_language') || 'el';
-        
         // Add a message from the human agent using our new function
-        if (currentLang === 'el') {
-            addHumanAgentMessage("Γεια σας! Είμαι η Μαρία από το γραφείο υποδοχής. Πώς μπορώ να σας βοηθήσω σήμερα; Θα είμαι διαθέσιμη για να σας βοηθήσω για τα επόμενα 30 λεπτά.");
-        } else {
         addHumanAgentMessage("Hello! I'm Maria from the concierge desk. How may I assist you today? I'll be available to help you for the next 30 minutes.");
-        }
         
         // Replace the "Talk to human" section with a "Return to AI" option
         const humanSupportOption = document.querySelector('.human-support-option');
         if (humanSupportOption) {
-            const returnToAIText = currentLang === 'el' ? 'Επιστροφή στον AI βοηθό' : 'Return to AI assistant';
-            
             humanSupportOption.innerHTML = `
                 <a class="human-support-link" id="return-to-ai">
-                    <i class="bi bi-robot"></i> <span data-i18n="return_to_ai">${returnToAIText}</span>
+                    <i class="bi bi-robot"></i> <span data-i18n="return_to_ai">Return to AI assistant</span>
                 </a>
             `;
         }
@@ -851,24 +855,15 @@ function handleReturnToAI() {
     setTimeout(() => {
         removeTypingIndicator();
         
-        // Get current language and use appropriate message
-        const currentLang = getCookie('app_language') || 'el';
-        
         // Add a message from the AI
-        if (currentLang === 'el') {
-            addBotMessage("Είμαι και πάλι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω με τη διαμονή σας;");
-        } else {
         addBotMessage("I'm your AI assistant again. How can I assist you with your stay?");
-        }
         
         // Replace the "Return to AI" section with a "Talk to human" option
         const humanSupportOption = document.querySelector('.human-support-option');
         if (humanSupportOption) {
-            const talkToHumanText = currentLang === 'el' ? 'Μιλήστε με έναν υπάλληλο' : 'Talk to a human concierge';
-            
             humanSupportOption.innerHTML = `
                 <a class="human-support-link" id="talk-to-human">
-                    <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">${talkToHumanText}</span>
+                    <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">Talk to a human concierge</span>
                 </a>
             `;
         }
@@ -930,28 +925,17 @@ function clearChat() {
     
     // Re-add the human support option with the talk-to-human content
     if (humanSupportOption) {
-        // Get current language from cookie or default to 'el'
-        const currentLang = getCookie('app_language') || 'el';
-        const talkToHumanText = currentLang === 'el' ? 'Μιλήστε με έναν υπάλληλο' : 'Talk to a human concierge';
-        
         humanSupportOption.innerHTML = `
             <a class="human-support-link" id="talk-to-human">
-                <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">${talkToHumanText}</span>
+                <i class="bi bi-person-circle"></i> <span data-i18n="talk_to_human">Talk to a human concierge</span>
             </a>
         `;
         chatMessages.appendChild(humanSupportOption);
     }
     
-    // Add welcome message based on current language
+    // Add welcome message
     setTimeout(() => {
-        // Get current language from cookie or default to 'el'
-        const currentLang = getCookie('app_language') || 'el';
-        
-        if (currentLang === 'el') {
-            addBotMessage("Γεια σας! Είμαι ο AI βοηθός σας. Πώς μπορώ να σας βοηθήσω κατά τη διάρκεια της διαμονής σας; Αν προτιμάτε να μιλήσετε με έναν ανθρώπινο υπάλληλο, κάντε κλικ στην επιλογή παρακάτω.");
-        } else {
-            addBotMessage("Hello! I'm your AI assistant. How can I help you during your stay? If you prefer to speak with a human concierge, click the option below.");
-        }
+        addBotMessage("Hello! I'm your AI assistant. How can I help you during your stay? If you prefer to speak with a human concierge, click the option below.");
     }, 300);
 }
 

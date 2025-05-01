@@ -9,8 +9,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-light: #4a88e0;
+            --primary-dark: #0d5bdd;
+            --secondary: #f8f9fa;
+            --light-gray: #f2f4f8;
+            --medium-gray: #e9ecef;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-blue: #ebf4ff;
+            --nav-hover: #eef5ff;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary);
+            color: var(--text-primary);
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            width: 260px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.03);
+        }
+        
+        .sidebar-logo {
+            height: 40px;
+        }
+        
+        .brand-logo {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 4px 12px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 12px;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--nav-hover);
+            color: var(--primary);
+        }
+        
+        .nav-link:hover i {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            background-color: var(--accent-blue);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-link.active i {
+            color: var(--primary);
+        }
+        
+        /* Main content styling */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px 32px;
+        }
+        
+        /* Card styling */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Button styling */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
         /* Ensure sustainability icon is visible */
         .nav-link[href="sustainability.html"] i.bi-tree-fill {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Ensure marketing suite icon is visible */
+        .nav-link[href="marketing-suite.html"] i.bi-megaphone {
             display: inline-block !important;
             visibility: visible !important;
             opacity: 1 !important;
@@ -22,15 +153,227 @@
             visibility: visible !important;
             opacity: 1 !important;
         }
+        
+        /* Mobile responsive styles */
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                padding: 0;
+            }
+            
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: none;
+            }
+            
+            .sidebar .nav-link {
+                justify-content: center;
+                padding: 12px;
+                margin: 4px 8px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+                padding: 16px;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 12px;
+            }
+            
+            .sidebar {
+                width: 0;
+                transform: translateX(-260px);
+                z-index: 1050;
+                padding-top: 60px; /* Make room for the toggle button */
+                background-color: white;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .sidebar.show {
+                width: 260px;
+                transform: translateX(0);
+            }
+            
+            /* Show text in sidebar on mobile when expanded */
+            .sidebar .nav-link span,
+            .sidebar .brand-logo {
+                display: inline-block;
+            }
+            
+            /* Fix sidebar item alignment */
+            .sidebar .nav-link {
+                justify-content: flex-start;
+                text-align: left;
+                padding: 12px 20px;
+                margin: 3px 10px;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 12px;
+            }
+            
+            /* Logo styling in sidebar */
+            .sidebar .p-3.border-bottom {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: white;
+                z-index: 1;
+            }
+            
+            /* Default position of toggle button */
+            .sidebar-toggle {
+                display: block;
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Position for open sidebar */
+            .sidebar-toggle.moved {
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Responsive header for settings page */
+            .d-flex.justify-content-between.align-items-center.mb-4 {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .d-flex.justify-content-between.align-items-center.mb-4 > div:last-child {
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+            
+            /* Make settings navigation full width on mobile */
+            .col-md-3.mb-4 {
+                margin-bottom: 15px;
+            }
+            
+            /* Center header on mobile */
+            .dashboard-header .col-12 {
+                text-align: center;
+            }
+        }
+        
+        /* Small phone adjustments */
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 10px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            /* Improve list group item display on small screens */
+            .list-group-item {
+                padding: 0.75rem;
+            }
+            
+            /* Improve form display on small screens */
+            .form-label {
+                font-size: 0.875rem;
+            }
+            
+            .form-control, .form-select {
+                font-size: 0.875rem;
+                padding: 0.375rem 0.5rem;
+            }
+            
+            /* Center header on mobile */
+            .dashboard-header .col-12 {
+                text-align: center;
+            }
+        }
+        
+        /* Toggle sidebar button */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1060;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                padding-top: 60px; /* Make room for the toggle button */
+            }
+            
+            /* Position the toggle button inside the sidebar when it's open */
+            .sidebar.show + .sidebar-toggle {
+                color: white;
+                left: 220px;
+                transition: left 0.3s ease;
+            }
+            
+            /* Move sidebar toggle back when sidebar is closed */
+            .sidebar:not(.show) + .sidebar-toggle {
+                left: 10px;
+                transition: left 0.3s ease;
+            }
+        }
+        
+        /* Overlay for mobile sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <!-- Sidebar Toggle Button for Mobile -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="bi bi-list" id="toggleIcon"></i>
+    </button>
+
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="p-3 border-bottom">
             <div class="d-flex align-items-center">
-                <img src="img/e-philoxenia-logo.png" alt="e-Philoxenia Logo" class="sidebar-logo me-2">
-                <h4 class="brand-logo mb-0">e-Philoxenia</h4>
+                <div style="border: 2px dashed #ccc; padding: 5px 10px; border-radius: 5px; font-size: 12px; color: #666; background-color: #f9f9f9; text-align: center;">Your Logo Here</div>
             </div>
         </div>
         <div class="pt-3">
@@ -84,12 +427,12 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h2 class="mb-0">Settings</h2>
-                <p class="text-muted">Configure your e-Philoxenia experience</p>
-            </div>
-            <div>
+        <div class="dashboard-header mb-4">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <h2 class="mb-0 fw-bold">Settings</h2>
+                    <p class="text-muted">Configure your e-Philoxenia experience</p>
+                </div>
             </div>
         </div>
 
@@ -199,6 +542,72 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile sidebar toggle
+            initializeSidebarToggle();
+        });
+        
+        // Initialize sidebar toggle for mobile
+        function initializeSidebarToggle() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    
+                    // Toggle the moved class for the button position
+                    sidebarToggle.classList.toggle('moved');
+                    
+                    // Change icon based on sidebar state
+                    if (sidebar.classList.contains('show')) {
+                        toggleIcon.classList.remove('bi-list');
+                        toggleIcon.classList.add('bi-x-lg');
+                    } else {
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                    }
+                    
+                    // Add overlay when sidebar is shown on mobile
+                    let overlay = document.querySelector('.sidebar-overlay');
+                    
+                    if (sidebar.classList.contains('show')) {
+                        if (!overlay) {
+                            overlay = document.createElement('div');
+                            overlay.className = 'sidebar-overlay';
+                            document.body.appendChild(overlay);
+                            
+                            // Close sidebar when overlay is clicked
+                            overlay.addEventListener('click', function() {
+                                sidebar.classList.remove('show');
+                                sidebarToggle.classList.remove('moved');
+                                toggleIcon.classList.remove('bi-x-lg');
+                                toggleIcon.classList.add('bi-list');
+                                overlay.remove();
+                            });
+                        }
+                    } else if (overlay) {
+                        overlay.remove();
+                    }
+                });
+                
+                // Close sidebar on window resize if it's in mobile view
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('show');
+                        sidebarToggle.classList.remove('moved');
+                        toggleIcon.classList.remove('bi-x-lg');
+                        toggleIcon.classList.add('bi-list');
+                        const overlay = document.querySelector('.sidebar-overlay');
+                        if (overlay) {
+                            overlay.remove();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html> 
